@@ -1,0 +1,66 @@
+{
+  "id": "repertoire",
+  "type": "SharedSlice",
+  "name": "Repertoire",
+  "description": "Repertoire",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "background_image": {
+          "type": "Image",
+          "config": {
+            "label": "Background Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em"
+          }
+        },
+        "repertoire_carousel": {
+          "type": "Group",
+          "config": {
+            "label": "Repertoire Carousel",
+            "repeat": true,
+            "fields": {
+              "artist": {
+                "type": "Text",
+                "config": {
+                  "label": "Artist",
+                  "placeholder": ""
+                }
+              },
+              "song": {
+                "type": "Text",
+                "config": {
+                  "label": "Song",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

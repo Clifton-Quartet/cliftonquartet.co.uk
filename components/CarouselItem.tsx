@@ -9,10 +9,10 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ artist, song }) => {
   return (
     <div className="flex gap-6 items-center">
       <div className="flex flex-col items-center">
-        <p className="text-center text-white text-3xl whitespace-nowrap select-none">
+        <p className="text-center text-white text-xl md:text-3xl whitespace-nowrap select-none">
           {artist}
         </p>
-        <p className="text-center text-white text-6xl whitespace-nowrap select-none">
+        <p className="text-center text-white text-3xl md:text-6xl whitespace-nowrap select-none">
           {song}
         </p>
       </div>

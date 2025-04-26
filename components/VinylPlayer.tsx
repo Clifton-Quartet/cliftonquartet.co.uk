@@ -67,6 +67,8 @@ export function VinylPlayer() {
   const vinylDraggableRef = useRef<DraggableInstance | null>(null);
   const volumeKnobDraggableRef = useRef<DraggableInstance | null>(null);
 
+  console.log(recordScratch);
+
   // Helper functions
   const setupNeedleArmDraggable = useCallback(() => {
     if (!needleArmRef.current) return;

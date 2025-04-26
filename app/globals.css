@@ -57,6 +57,7 @@ body {
   font-family: var(--font-instrument-serif);
 }
 
+/* Website Main Title for mobile */
 .title-mobile {
   width: 190px;
 }

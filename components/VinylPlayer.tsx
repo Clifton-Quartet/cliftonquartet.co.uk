@@ -25,7 +25,11 @@ type DraggableInstance = {
   target: HTMLElement | SVGElement;
 };
 
-export function VinylPlayer() {
+type VinylPlayerProps = {
+  song: string;
+};
+
+export function VinylPlayer({ song }: VinylPlayerProps) {
   // State
   const [spinState, setSpinState] = useState<number>(0); // 0 = not spinning, 1 = spinning
   const [needleState, setNeedleState] = useState<number>(0); // 0 = off, 1 = on record, 2 = manual handling
@@ -313,20 +317,37 @@ export function VinylPlayer() {
   // Initialize audio elements
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const audio = new Audio("/violin.mp3");
-      audio.loop = false;
+      if (song) {
+        const audio = new Audio(song);
+        audio.loop = false;
 
-      // Make sure audio is properly loaded
-      audio.addEventListener("loadedmetadata", () => {
-        console.log("Audio loaded, duration:", audio.duration);
-      });
+        // Make sure audio is properly loaded
+        audio.addEventListener("loadedmetadata", () => {
+          console.log("Audio loaded, duration:", audio.duration);
+        });
 
-      // Handle any errors
-      audio.addEventListener("error", (e) => {
-        console.error("Audio error:", e);
-      });
+        // Handle any errors
+        audio.addEventListener("error", (e) => {
+          console.error("Audio error:", e);
+        });
 
-      setAudioElement(audio);
+        setAudioElement(audio);
+      } else {
+        const audio = new Audio("/Canon.mp3");
+        audio.loop = false;
+
+        // Make sure audio is properly loaded
+        audio.addEventListener("loadedmetadata", () => {
+          console.log("Audio loaded, duration:", audio.duration);
+        });
+
+        // Handle any errors
+        audio.addEventListener("error", (e) => {
+          console.error("Audio error:", e);
+        });
+
+        setAudioElement(audio);
+      }
 
       const scratchAudio = new Audio("/record_scratch.mp3");
       scratchAudio.loop = true;

@@ -1,14 +1,33 @@
 "use client";
 
-import React, { useEffect, useRef, FC } from "react";
+import React, { useEffect, useRef, FC, Suspense } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import CarouselItem from "@/components/CarouselItem";
+// import CarouselItem from "@/components/CarouselItem";
 import gsap from "gsap";
 import VinylPlayer from "@/components/VinylPlayer";
 
 /**
- * Props for `Repertoire`.
+ * Type definitions for MP3 files and repertoire items
+ */
+interface MP3AudioFile {
+  link_type: string;
+  key: string;
+  kind: string;
+  id: string;
+  url: string;
+  name: string;
+  size: string;
+  text: string;
+}
+
+interface RepertoireItem {
+  artist: string;
+  song: string;
+}
+
+/**
+ * Type for the component props using Prismic's SliceComponentProps
  */
 export type RepertoireProps = SliceComponentProps<Content.RepertoireSlice>;
 
@@ -18,7 +37,15 @@ export type RepertoireProps = SliceComponentProps<Content.RepertoireSlice>;
 const Repertoire: FC<RepertoireProps> = ({ slice }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const items = slice.primary.repertoire_carousel;
+  // Safely access the repertoire items with type assertion
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const items =
+    ((slice.primary as any)?.repertoire_carousel as RepertoireItem[]) || [];
+
+  // Extract song URLs
+  const songUrl: string = (slice.primary.mp3_song as MP3AudioFile).url;
+
+  console.log("Song:", songUrl);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -59,41 +86,45 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
   }, [items.length]);
 
   // Double the items to create a seamless loop
-  const allItems = [...items, ...items];
+  // const allItems = [...items, ...items];
 
   return (
-    <section
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-      className="relative min-h-[100vh] w-full overflow-hidden bg-cover bg-center flex flex-col justify-center items-center p-8"
-      style={{
-        backgroundImage: `url(${slice.primary.background_image.url})`,
-      }}
-    >
-      <div className="absolute min-h-[100vh] inset-0 bg-slate-950 opacity-40" />
-      <div className="relative flex flex-col items-center w-full justify-center">
-        <div className="lg:w-2/3">
-          <h2 className="relative text-white text-center text-7xl mb-6">
-            {slice.primary.title}
-          </h2>
-          <div className="relative text-white text-center mb-12 max-w-4xl text-2xl">
-            <PrismicRichText field={slice.primary.text} />
+    <Suspense fallback={<div>...loading</div>}>
+      <section
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+        className="relative min-h-[100vh] w-full overflow-hidden bg-cover bg-center flex flex-col justify-center items-center p-8"
+        style={{
+          backgroundImage: `url(${slice.primary.background_image.url})`,
+        }}
+      >
+        <div className="absolute min-h-[100vh] inset-0 bg-slate-950 opacity-40" />
+        <div className="relative flex flex-col items-center w-full justify-center">
+          <div className="lg:w-2/3">
+            <h2 className="relative text-white text-center text-7xl mb-6">
+              {slice.primary.title}
+            </h2>
+            <div className="relative text-white text-center mb-12 max-w-4xl text-2xl">
+              <PrismicRichText field={slice.primary.text} />
+            </div>
+          </div>
+          <div className="w-[150%] md:w-[100%] lg:w-[80%]">
+            <VinylPlayer song={songUrl} />
           </div>
         </div>
-        <div className="w-[150%] md:w-[100%] lg:w-[80%]">
-          <VinylPlayer />
+        {/* 
+        <div
+          className="flex items-start py-6"
+          ref={containerRef}
+          style={{ willChange: "transform" }}
+        >
+          {allItems.map((item, index) => (
+            <CarouselItem key={index} artist={item.artist} song={item.song} />
+          ))}
         </div>
-      </div>
-      <div
-        className="flex items-start py-6"
-        ref={containerRef}
-        style={{ willChange: "transform" }}
-      >
-        {allItems.map((item, index) => (
-          <CarouselItem key={index} artist={item.artist} song={item.song} />
-        ))}
-      </div>
-    </section>
+        */}
+      </section>
+    </Suspense>
   );
 };
 

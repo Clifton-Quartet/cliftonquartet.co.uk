@@ -68,31 +68,18 @@
 					}
 				]
 			},
-			"mp3_songs": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"song",
-								{
-									"__TYPE__": "LinkContent",
-									"key": "cca65ae3-a55c-4bcc-aa72-e2f43ef140e5",
-									"value": {
-										"__TYPE__": "FileLink",
-										"id": "mock_Media_link",
-										"kind": "file",
-										"name": "mock_name",
-										"url": "https://source.unsplash.com/daily",
-										"size": "0",
-										"text": "region"
-									}
-								}
-							]
-						]
-					}
-				]
+			"mp3_song": {
+				"key": "95d387c7-366e-466e-bad5-2172bd28fd6b",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "FileLink",
+					"id": "mock_Media_link",
+					"kind": "file",
+					"name": "mock_name",
+					"url": "https://source.unsplash.com/daily",
+					"size": "0",
+					"text": "order"
+				}
 			}
 		},
 		"items": []

@@ -197,21 +197,6 @@ export interface RepertoireSliceDefaultPrimaryRepertoireCarouselItem {
 }
 
 /**
- * Item in *Repertoire → Default → Primary → mp3 songs*
- */
-export interface RepertoireSliceDefaultPrimaryMp3SongsItem {
-  /**
-   * Song field in *Repertoire → Default → Primary → mp3 songs*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: mp3 audio file
-   * - **API ID Path**: repertoire.default.primary.mp3_songs[].song
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  song: prismic.LinkToMediaField<prismic.FieldState, never>;
-}
-
-/**
  * Primary content in *Repertoire → Default → Primary*
  */
 export interface RepertoireSliceDefaultPrimary {
@@ -246,6 +231,16 @@ export interface RepertoireSliceDefaultPrimary {
   text: prismic.RichTextField;
 
   /**
+   * MP3 Song field in *Repertoire → Default → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: mp3 audio file
+   * - **API ID Path**: repertoire.default.primary.mp3_song
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  mp3_song: prismic.LinkToMediaField<prismic.FieldState, never>;
+
+  /**
    * Repertoire Carousel field in *Repertoire → Default → Primary*
    *
    * - **Field Type**: Group
@@ -255,18 +250,6 @@ export interface RepertoireSliceDefaultPrimary {
    */
   repertoire_carousel: prismic.GroupField<
     Simplify<RepertoireSliceDefaultPrimaryRepertoireCarouselItem>
-  >;
-
-  /**
-   * mp3 songs field in *Repertoire → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: repertoire.default.primary.mp3_songs[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  mp3_songs: prismic.GroupField<
-    Simplify<RepertoireSliceDefaultPrimaryMp3SongsItem>
   >;
 }
 
@@ -335,7 +318,6 @@ declare module "@prismicio/client" {
       HeroSliceDefault,
       RepertoireSlice,
       RepertoireSliceDefaultPrimaryRepertoireCarouselItem,
-      RepertoireSliceDefaultPrimaryMp3SongsItem,
       RepertoireSliceDefaultPrimary,
       RepertoireSliceVariation,
       RepertoireSliceDefault,

@@ -58,6 +58,24 @@
               }
             }
           }
+        },
+        "mp3_songs": {
+          "type": "Group",
+          "config": {
+            "label": "mp3 songs",
+            "repeat": true,
+            "fields": {
+              "song": {
+                "type": "Link",
+                "config": {
+                  "label": "Song",
+                  "placeholder": "mp3 audio file",
+                  "select": "media",
+                  "allowText": true
+                }
+              }
+            }
+          }
         }
       },
       "items": {}

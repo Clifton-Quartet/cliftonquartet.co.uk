@@ -60,6 +60,7 @@ body {
 /* Website Main Title for mobile */
 .title-mobile {
   width: 190px;
+  text-shadow: #111 1px 1px 25px;
 }
 
 @media screen and (min-width: 900px) {

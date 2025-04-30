@@ -62,7 +62,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       ></div>
       <div
         ref={titleRef}
-        className="absolute title-mobile bottom-8 left-8 text-8xl xl:text-9xl select-none"
+        className="absolute title-mobile bottom-8 left-8 text-8xl xl:text-9xl select-none text-shadow-neutral-950"
         style={{
           opacity: 0,
         }}

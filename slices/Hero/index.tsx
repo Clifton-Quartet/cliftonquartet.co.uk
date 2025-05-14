@@ -4,6 +4,7 @@ import { FC, useEffect, useRef } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import gsap from "gsap";
+import { Navigation } from "@/components/Navigation";
 
 /**
  * Props for `Hero`.
@@ -62,12 +63,15 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       ></div>
       <div
         ref={titleRef}
-        className="absolute title-mobile bottom-8 left-8 text-8xl xl:text-9xl select-none text-shadow-neutral-950"
+        className="absolute title-mobile bottom-8 left-8 text-8xl xl:text-9xl select-none"
         style={{
           opacity: 0,
         }}
       >
         {slice.primary.title}
+      </div>
+      <div className="absolute -right-3 top-[50%] -translate-y-[50%]">
+        <Navigation />
       </div>
     </section>
   );

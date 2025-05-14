@@ -19,8 +19,8 @@ export default function RootLayout({
       <ReactLenis root>
         <body className={`${instrumentSerif.variable} antialiased`}>
           {children}
+          <Footer />
         </body>
-        <Footer />
       </ReactLenis>
     </html>
   );

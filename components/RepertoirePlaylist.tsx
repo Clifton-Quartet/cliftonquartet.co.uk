@@ -1,5 +1,15 @@
-import React, { useState, useMemo } from "react";
-import { Search, Filter, Music, Plus, X, Download } from "lucide-react";
+import React, { useState, useMemo, useEffect } from "react";
+import {
+  Search,
+  Filter,
+  Music,
+  Plus,
+  X,
+  Download,
+  FileText,
+  Edit2,
+  Check,
+} from "lucide-react";
 
 // Define the Song interface
 interface Song {
@@ -366,13 +376,44 @@ Wrecking Ball - Miley Cyrus
   return repertoire;
 };
 
-const RepertoirePlaylist: React.FC = () => {
+const RepertoirePage: React.FC = () => {
   const songs = useMemo(() => parseRepertoireData(), []);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [playlist, setPlaylist] = useState<Song[]>([]);
   const [showPlaylist, setShowPlaylist] = useState(false);
+  const [playlistTitle, setPlaylistTitle] = useState("Favourite Songs");
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [tempTitle, setTempTitle] = useState(playlistTitle);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const savedPlaylist = localStorage.getItem("stringQuartetPlaylist");
+    const savedTitle = localStorage.getItem("stringQuartetPlaylistTitle");
+
+    if (savedPlaylist) {
+      try {
+        setPlaylist(JSON.parse(savedPlaylist));
+      } catch (e) {
+        console.error("Error loading playlist from localStorage:", e);
+      }
+    }
+
+    if (savedTitle) {
+      setPlaylistTitle(savedTitle);
+      setTempTitle(savedTitle);
+    }
+  }, []);
+
+  // Save to localStorage whenever playlist or title changes
+  useEffect(() => {
+    localStorage.setItem("stringQuartetPlaylist", JSON.stringify(playlist));
+  }, [playlist]);
+
+  useEffect(() => {
+    localStorage.setItem("stringQuartetPlaylistTitle", playlistTitle);
+  }, [playlistTitle]);
 
   const categories = useMemo(() => {
     const cats = ["all", ...new Set(songs.map((song) => song.category))];
@@ -406,64 +447,79 @@ const RepertoirePlaylist: React.FC = () => {
     setPlaylist(playlist.filter((s) => s.id !== songId));
   };
 
+  const startEditingTitle = () => {
+    setIsEditingTitle(true);
+    setTempTitle(playlistTitle);
+  };
+
+  const saveTitle = () => {
+    setPlaylistTitle(tempTitle);
+    setIsEditingTitle(false);
+  };
+
+  const cancelEditingTitle = () => {
+    setTempTitle(playlistTitle);
+    setIsEditingTitle(false);
+  };
+
   const exportToPDF = () => {
     // Create a printable version of the playlist
     const printContent = `
-      <html>
-        <head>
-          <title>String Quartet Playlist</title>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              margin: 40px;
-            }
-            h1 {
-              color: #333;
-              border-bottom: 2px solid #333;
-              padding-bottom: 10px;
-            }
-            .song {
-              margin: 10px 0;
-              padding: 10px;
-              border-bottom: 1px solid #eee;
-            }
-            .song-title {
-              font-weight: bold;
-              font-size: 16px;
-            }
-            .song-composer {
-              color: #666;
-              font-size: 14px;
-            }
-            .song-category {
-              color: #999;
-              font-size: 12px;
-              font-style: italic;
-            }
-            @media print {
-              body { margin: 20px; }
-            }
-          </style>
-        </head>
-        <body>
-          <h1>Custom String Quartet Playlist</h1>
-          <p>Date: ${new Date().toLocaleDateString()}</p>
-          <p>Total Songs: ${playlist.length}</p>
-          <hr />
-          ${playlist
-            .map(
-              (song, index) => `
-            <div class="song">
-              <div class="song-title">${index + 1}. ${song.title}</div>
-              <div class="song-composer">${song.composer}</div>
-              <div class="song-category">${song.category}</div>
-            </div>
-          `
-            )
-            .join("")}
-        </body>
-      </html>
-    `;
+    <html>
+      <head>
+        <title>${playlistTitle}</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+          }
+          h1 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+          }
+          .song {
+            margin: 10px 0;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+          }
+          .song-title {
+            font-weight: bold;
+            font-size: 16px;
+          }
+          .song-composer {
+            color: #666;
+            font-size: 14px;
+          }
+          .song-category {
+            color: #999;
+            font-size: 12px;
+            font-style: italic;
+          }
+          @media print {
+            body { margin: 20px; }
+          }
+        </style>
+      </head>
+      <body>
+        <h1>${playlistTitle}</h1>
+        <p>Date: ${new Date().toLocaleDateString()}</p>
+        <p>Total Songs: ${playlist.length}</p>
+        <hr />
+        ${playlist
+          .map(
+            (song, index) => `
+          <div class="song">
+            <div class="song-title">${index + 1}. ${song.title}</div>
+            <div class="song-composer">${song.composer}</div>
+            <div class="song-category">${song.category}</div>
+          </div>
+        `
+          )
+          .join("")}
+      </body>
+    </html>
+  `;
 
     const printWindow = window.open("", "_blank");
     if (printWindow) {
@@ -476,6 +532,98 @@ const RepertoirePlaylist: React.FC = () => {
         printWindow.close();
       }, 250);
     }
+  };
+
+  const exportToWord = () => {
+    // Create Word document content with proper formatting
+    const wordContent = `
+      <html xmlns:o='urn:schemas-microsoft-com:office:office' 
+            xmlns:w='urn:schemas-microsoft-com:office:word' 
+            xmlns='http://www.w3.org/TR/REC-html40'>
+        <head>
+          <meta charset='utf-8'>
+          <title>${playlistTitle}</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              margin: 40px;
+            }
+            h1 {
+              color: #333;
+              font-size: 24pt;
+              font-weight: bold;
+              margin-bottom: 20px;
+            }
+            .info {
+              color: #666;
+              font-size: 12pt;
+              margin-bottom: 20px;
+            }
+            .song {
+              margin: 15px 0;
+              page-break-inside: avoid;
+            }
+            .song-number {
+              font-weight: bold;
+              font-size: 12pt;
+              color: #333;
+            }
+            .song-title {
+              font-weight: bold;
+              font-size: 14pt;
+              color: #000;
+              margin-bottom: 5px;
+            }
+            .song-composer {
+              font-size: 12pt;
+              color: #666;
+              font-style: italic;
+            }
+            .song-category {
+              font-size: 10pt;
+              color: #999;
+              margin-top: 3px;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>${playlistTitle}</h1>
+          <div class="info">
+            <p>String Quartet Repertoire Playlist</p>
+            <p>Date: ${new Date().toLocaleDateString()}</p>
+            <p>Total Songs: ${playlist.length}</p>
+          </div>
+          <hr />
+          ${playlist
+            .map(
+              (song, index) => `
+            <div class="song">
+              <span class="song-number">${index + 1}.</span>
+              <div class="song-title">${song.title}</div>
+              <div class="song-composer">Composer: ${song.composer}</div>
+              <div class="song-category">Category: ${song.category}</div>
+            </div>
+          `
+            )
+            .join("")}
+        </body>
+      </html>
+    `;
+
+    // Create blob with Word-specific MIME type
+    const blob = new Blob([wordContent], {
+      type: "application/msword",
+    });
+
+    // Create download link
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${playlistTitle.replace(/[^a-z0-9]/gi, "_").toLowerCase()}_playlist.doc`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -518,7 +666,7 @@ const RepertoirePlaylist: React.FC = () => {
 
           <button
             onClick={() => setShowPlaylist(!showPlaylist)}
-            className="ml-auto flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+            className="ml-auto flex items-center gap-2 px-4 py-2 bg-green-500 rounded-lg hover:bg-green-600 transition-colors"
           >
             <Music size={20} />
             Playlist ({playlist.length})
@@ -538,7 +686,9 @@ const RepertoirePlaylist: React.FC = () => {
             key={song.id}
             className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
           >
-            <h3 className="text-xl font-semibold mb-2">{song.title}</h3>
+            <h3 className="text-xl text-gray-600 font-semibold mb-2">
+              {song.title}
+            </h3>
             <p className="text-gray-600 mb-2">{song.composer}</p>
             <p className="text-sm text-gray-500 mb-4">{song.category}</p>
             <button
@@ -560,10 +710,45 @@ const RepertoirePlaylist: React.FC = () => {
         <div className="fixed right-0 top-0 h-full w-96 bg-white shadow-xl z-50 overflow-y-auto">
           <div className="p-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold">Your Playlist</h2>
+              <div className="flex items-center gap-2 flex-1 text-black">
+                {isEditingTitle ? (
+                  <>
+                    <input
+                      type="text"
+                      value={tempTitle}
+                      onChange={(e) => setTempTitle(e.target.value)}
+                      className="flex-1 px-2 py-1 border  border-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      onKeyPress={(e) => e.key === "Enter" && saveTitle()}
+                      placeholder="Favourite Songs"
+                    />
+                    <button
+                      onClick={saveTitle}
+                      className="text-green-500 hover:text-green-700"
+                    >
+                      <Check size={20} />
+                    </button>
+                    <button
+                      onClick={cancelEditingTitle}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      <X size={20} />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="text-2xl font-bold">{playlistTitle}</h2>
+                    <button
+                      onClick={startEditingTitle}
+                      className="text-gray-500 hover:text-gray-700"
+                    >
+                      <Edit2 size={20} />
+                    </button>
+                  </>
+                )}
+              </div>
               <button
                 onClick={() => setShowPlaylist(false)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 hover:text-gray-700 ml-2"
               >
                 <X size={24} />
               </button>
@@ -585,7 +770,9 @@ const RepertoirePlaylist: React.FC = () => {
                         {index + 1}.
                       </span>
                       <div className="flex-1">
-                        <h4 className="font-semibold">{song.title}</h4>
+                        <h4 className="font-semibold text-gray-600">
+                          {song.title}
+                        </h4>
                         <p className="text-sm text-gray-600">{song.composer}</p>
                         <p className="text-xs text-gray-500">{song.category}</p>
                       </div>
@@ -599,13 +786,23 @@ const RepertoirePlaylist: React.FC = () => {
                   ))}
                 </div>
 
-                <button
-                  onClick={exportToPDF}
-                  className="w-full flex items-center justify-center gap-2 bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors"
-                >
-                  <Download size={20} />
-                  Export to PDF
-                </button>
+                <div className="space-y-3">
+                  <button
+                    onClick={exportToPDF}
+                    className="w-full flex items-center justify-center gap-2 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors"
+                  >
+                    <Download size={20} />
+                    Export to PDF
+                  </button>
+
+                  <button
+                    onClick={exportToWord}
+                    className="w-full flex items-center justify-center gap-2 bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors"
+                  >
+                    <FileText size={20} />
+                    Export to Word
+                  </button>
+                </div>
               </>
             )}
           </div>
@@ -615,4 +812,4 @@ const RepertoirePlaylist: React.FC = () => {
   );
 };
 
-export default RepertoirePlaylist;
+export default RepertoirePage;

@@ -158,6 +158,231 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *String Quartet Repertoire → Classical*
+ */
+export interface StringQuartetRepertoireDocumentDataClassicalItem {
+  /**
+   * Composer field in *String Quartet Repertoire → Classical*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.classical[].composer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  composer: prismic.KeyTextField;
+
+  /**
+   * Song Title field in *String Quartet Repertoire → Classical*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.classical[].song_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_title: prismic.KeyTextField;
+}
+
+/**
+ * Item in *String Quartet Repertoire → Popular*
+ */
+export interface StringQuartetRepertoireDocumentDataPopularItem {
+  /**
+   * Song Title field in *String Quartet Repertoire → Popular*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.popular[].song_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_title: prismic.KeyTextField;
+}
+
+/**
+ * Item in *String Quartet Repertoire → Beatles*
+ */
+export interface StringQuartetRepertoireDocumentDataBeatlesItem {
+  /**
+   * Song Title field in *String Quartet Repertoire → Beatles*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.beatles[].song_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_title: prismic.KeyTextField;
+}
+
+/**
+ * Item in *String Quartet Repertoire → Rags*
+ */
+export interface StringQuartetRepertoireDocumentDataRagsItem {
+  /**
+   * Song Title field in *String Quartet Repertoire → Rags*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.rags[].song_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_title: prismic.KeyTextField;
+}
+
+/**
+ * Item in *String Quartet Repertoire → Jazz Classics*
+ */
+export interface StringQuartetRepertoireDocumentDataJazzClassicsItem {
+  /**
+   * Song Title field in *String Quartet Repertoire → Jazz Classics*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.jazz_classics[].song_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_title: prismic.KeyTextField;
+}
+
+/**
+ * Item in *String Quartet Repertoire → Film and Show*
+ */
+export interface StringQuartetRepertoireDocumentDataFilmAndShowItem {
+  /**
+   * Song Title field in *String Quartet Repertoire → Film and Show*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.film_and_show[].song_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_title: prismic.KeyTextField;
+}
+
+/**
+ * Item in *String Quartet Repertoire → Rock and Pop*
+ */
+export interface StringQuartetRepertoireDocumentDataRockAndPopItem {
+  /**
+   * Composer field in *String Quartet Repertoire → Rock and Pop*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.rock_and_pop[].composer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  composer: prismic.KeyTextField;
+
+  /**
+   * Song Title field in *String Quartet Repertoire → Rock and Pop*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.rock_and_pop[].song_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_title: prismic.KeyTextField;
+}
+
+/**
+ * Content for String Quartet Repertoire documents
+ */
+interface StringQuartetRepertoireDocumentData {
+  /**
+   * Classical field in *String Quartet Repertoire*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.classical[]
+   * - **Tab**: Classical
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  classical: prismic.GroupField<
+    Simplify<StringQuartetRepertoireDocumentDataClassicalItem>
+  > /**
+   * Popular field in *String Quartet Repertoire*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.popular[]
+   * - **Tab**: Popular
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  popular: prismic.GroupField<
+    Simplify<StringQuartetRepertoireDocumentDataPopularItem>
+  > /**
+   * Beatles field in *String Quartet Repertoire*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.beatles[]
+   * - **Tab**: Beatles
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  beatles: prismic.GroupField<
+    Simplify<StringQuartetRepertoireDocumentDataBeatlesItem>
+  > /**
+   * Rags field in *String Quartet Repertoire*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.rags[]
+   * - **Tab**: Rags
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  rags: prismic.GroupField<
+    Simplify<StringQuartetRepertoireDocumentDataRagsItem>
+  > /**
+   * Jazz Classics field in *String Quartet Repertoire*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.jazz_classics[]
+   * - **Tab**: Jazz Classics
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  jazz_classics: prismic.GroupField<
+    Simplify<StringQuartetRepertoireDocumentDataJazzClassicsItem>
+  > /**
+   * Film and Show field in *String Quartet Repertoire*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.film_and_show[]
+   * - **Tab**: Film and Show
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  film_and_show: prismic.GroupField<
+    Simplify<StringQuartetRepertoireDocumentDataFilmAndShowItem>
+  > /**
+   * Rock and Pop field in *String Quartet Repertoire*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_quartet_repertoire.rock_and_pop[]
+   * - **Tab**: Rock and Pop
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  rock_and_pop: prismic.GroupField<
+    Simplify<StringQuartetRepertoireDocumentDataRockAndPopItem>
+  >;
+}
+
+/**
+ * String Quartet Repertoire document from Prismic
+ *
+ * - **API ID**: `string_quartet_repertoire`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type StringQuartetRepertoireDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<StringQuartetRepertoireDocumentData>,
+    "string_quartet_repertoire",
+    Lang
+  >;
+
 type ThePlayersDocumentDataSlicesSlice = HeroSlice;
 
 /**
@@ -356,6 +581,7 @@ export type WeddingsAndEventsDocument<Lang extends string = string> =
 export type AllDocumentTypes =
   | CliftonQuartetHomepageDocument
   | SettingsDocument
+  | StringQuartetRepertoireDocument
   | ThePlayersDocument
   | TheRepertoireDocument
   | WeddingsAndEventsDocument;
@@ -596,6 +822,15 @@ declare module "@prismicio/client" {
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataNavigationItem,
+      StringQuartetRepertoireDocument,
+      StringQuartetRepertoireDocumentData,
+      StringQuartetRepertoireDocumentDataClassicalItem,
+      StringQuartetRepertoireDocumentDataPopularItem,
+      StringQuartetRepertoireDocumentDataBeatlesItem,
+      StringQuartetRepertoireDocumentDataRagsItem,
+      StringQuartetRepertoireDocumentDataJazzClassicsItem,
+      StringQuartetRepertoireDocumentDataFilmAndShowItem,
+      StringQuartetRepertoireDocumentDataRockAndPopItem,
       ThePlayersDocument,
       ThePlayersDocumentData,
       ThePlayersDocumentDataSlicesSlice,

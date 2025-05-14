@@ -1,0 +1,149 @@
+{
+  "format": "custom",
+  "id": "string_quartet_repertoire",
+  "label": "String Quartet Repertoire",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Classical": {
+      "classical": {
+        "type": "Group",
+        "config": {
+          "label": "Classical",
+          "repeat": true,
+          "fields": {
+            "composer": {
+              "type": "Text",
+              "config": {
+                "label": "Composer",
+                "placeholder": ""
+              }
+            },
+            "song_title": {
+              "type": "Text",
+              "config": {
+                "label": "Song Title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "Popular": {
+      "popular": {
+        "type": "Group",
+        "config": {
+          "label": "Popular",
+          "repeat": true,
+          "fields": {
+            "song_title": {
+              "type": "Text",
+              "config": {
+                "label": "Song Title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "Beatles": {
+      "beatles": {
+        "type": "Group",
+        "config": {
+          "label": "Beatles",
+          "repeat": true,
+          "fields": {
+            "song_title": {
+              "type": "Text",
+              "config": {
+                "label": "Song Title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "Rags": {
+      "rags": {
+        "type": "Group",
+        "config": {
+          "label": "Rags",
+          "repeat": true,
+          "fields": {
+            "song_title": {
+              "type": "Text",
+              "config": {
+                "label": "Song Title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "Jazz Classics": {
+      "jazz_classics": {
+        "type": "Group",
+        "config": {
+          "label": "Jazz Classics",
+          "repeat": true,
+          "fields": {
+            "song_title": {
+              "type": "Text",
+              "config": {
+                "label": "Song Title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "Film and Show": {
+      "film_and_show": {
+        "type": "Group",
+        "config": {
+          "label": "Film and Show",
+          "repeat": true,
+          "fields": {
+            "song_title": {
+              "type": "Text",
+              "config": {
+                "label": "Song Title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "Rock and Pop": {
+      "rock_and_pop": {
+        "type": "Group",
+        "config": {
+          "label": "Rock and Pop",
+          "repeat": true,
+          "fields": {
+            "composer": {
+              "type": "Text",
+              "config": {
+                "label": "Composer",
+                "placeholder": ""
+              }
+            },
+            "song_title": {
+              "type": "Text",
+              "config": {
+                "label": "Song Title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

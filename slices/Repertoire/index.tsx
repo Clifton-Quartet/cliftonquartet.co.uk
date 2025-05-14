@@ -6,6 +6,7 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import CarouselItem from "@/components/CarouselItem";
 import gsap from "gsap";
 import VinylPlayer from "@/components/VinylPlayer";
+import RepertoirePlaylist from "@/components/RepertoirePlaylist";
 
 /**
  * Type definitions for MP3 files and repertoire items
@@ -166,6 +167,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
             </div>
           ))}
         </div>
+        <RepertoirePlaylist />
       </div>
     </section>
   );

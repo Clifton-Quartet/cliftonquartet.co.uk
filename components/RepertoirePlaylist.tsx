@@ -11,6 +11,8 @@ import {
   FileText,
   Edit2,
   Check,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { Content } from "@prismicio/client";
 
@@ -102,6 +104,8 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
   const [playlistTitle, setPlaylistTitle] = useState("Favourite Songs");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [tempTitle, setTempTitle] = useState(playlistTitle);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 30;
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -152,6 +156,18 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       return matchesSearch && matchesCategory;
     });
   }, [songs, searchTerm, selectedCategory]);
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredSongs.length / itemsPerPage);
+  const paginatedSongs = filteredSongs.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedCategory]);
 
   const addToPlaylist = (song: Song) => {
     if (!playlist.find((s) => s.id === song.id)) {
@@ -373,7 +389,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
               {categories.map((cat) => (
-                <option key={cat} value={cat} className="text-black">
+                <option key={cat} value={cat}>
                   {cat === "all" ? "All Categories" : cat}
                 </option>
               ))}
@@ -391,13 +407,15 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       </div>
 
       {/* Results Count */}
-      <p className="mb-4 text-gray-300">
-        Showing {filteredSongs.length} of {songs.length} songs
+      <p className="mb-4 text-gray-600">
+        Showing {(currentPage - 1) * itemsPerPage + 1}-
+        {Math.min(currentPage * itemsPerPage, filteredSongs.length)} of{" "}
+        {filteredSongs.length} songs
       </p>
 
       {/* Songs Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {filteredSongs.map((song) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mb-8">
+        {paginatedSongs.map((song) => (
           <div
             key={song.id}
             className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
@@ -420,6 +438,85 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
           </div>
         ))}
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-2 mb-8">
+          <button
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="flex items-center gap-1 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronLeft size={16} />
+            Previous
+          </button>
+
+          <div className="flex gap-1">
+            {/* Always show first page */}
+            {currentPage > 3 && (
+              <>
+                <button
+                  onClick={() => setCurrentPage(1)}
+                  className="px-3 py-2 rounded-lg hover:bg-gray-100"
+                >
+                  1
+                </button>
+                {currentPage > 4 && <span className="px-2 py-2">...</span>}
+              </>
+            )}
+
+            {/* Show pages around current page */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter((page) => {
+                return (
+                  page === currentPage ||
+                  page === currentPage - 1 ||
+                  page === currentPage + 1 ||
+                  page === currentPage - 2 ||
+                  page === currentPage + 2
+                );
+              })
+              .filter((page) => page > 0 && page <= totalPages)
+              .map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-3 py-2 rounded-lg ${
+                    page === currentPage
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+
+            {/* Always show last page */}
+            {currentPage < totalPages - 2 && (
+              <>
+                {currentPage < totalPages - 3 && (
+                  <span className="px-2 py-2">...</span>
+                )}
+                <button
+                  onClick={() => setCurrentPage(totalPages)}
+                  className="px-3 py-2 rounded-lg hover:bg-gray-100"
+                >
+                  {totalPages}
+                </button>
+              </>
+            )}
+          </div>
+
+          <button
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="flex items-center gap-1 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Next
+            <ChevronRight size={16} />
+          </button>
+        </div>
+      )}
 
       {/* Playlist Sidebar */}
       {showPlaylist && (

@@ -23,6 +23,7 @@ const TheRepertoire: FC<TheRepertoireProps> = ({ slice, context }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="bg-amber-50"
     >
       <RepertoirePlaylist repertoire={repertoire} />
     </section>

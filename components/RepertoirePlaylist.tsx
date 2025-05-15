@@ -13,6 +13,7 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
+  Minus,
 } from "lucide-react";
 import { Content } from "@prismicio/client";
 
@@ -73,26 +74,28 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       film_and_show: "Various",
     };
 
-    repertoire.forEach((doc) => {
-      const data = doc.data as RepertoireData;
+    if (repertoire) {
+      repertoire.forEach((doc) => {
+        const data = doc.data as RepertoireData;
 
-      // Iterate through each category in the data
-      Object.entries(data).forEach(([categoryKey, songs]) => {
-        if (Array.isArray(songs)) {
-          songs.forEach((song) => {
-            if (song.song_title) {
-              allSongs.push({
-                id: `${categoryKey}-${idCounter++}`,
-                title: song.song_title,
-                composer:
-                  song.composer || defaultComposers[categoryKey] || "Various",
-                category: categoryMap[categoryKey] || categoryKey,
-              });
-            }
-          });
-        }
+        // Iterate through each category in the data
+        Object.entries(data).forEach(([categoryKey, songs]) => {
+          if (Array.isArray(songs)) {
+            songs.forEach((song) => {
+              if (song.song_title) {
+                allSongs.push({
+                  id: `${categoryKey}-${idCounter++}`,
+                  title: song.song_title,
+                  composer:
+                    song.composer || defaultComposers[categoryKey] || "Various",
+                  category: categoryMap[categoryKey] || categoryKey,
+                });
+              }
+            });
+          }
+        });
       });
-    });
+    }
 
     return allSongs;
   }, [repertoire]);
@@ -360,51 +363,59 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8 text-center">
+      <h1 className="text-4xl font-bold mb-8 text-center text-slate-900">
         String Quartet Repertoire
       </h1>
 
-      {/* Search and Filter Section */}
-      <div className="mb-8 space-y-4">
-        <div className="relative">
-          <Search
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-            size={20}
-          />
-          <input
-            type="text"
-            placeholder="Search by title or composer..."
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+      {songs.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-gray-500">Loading repertoire...</p>
         </div>
+      ) : (
+        <>
+          {/* Search and Filter Section */}
+          <div className="mb-8 space-y-4">
+            <div className="relative w-full lg:w-1/3 mx-auto">
+              <Search
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-900"
+                size={20}
+              />
+              <input
+                type="text"
+                placeholder="Search by title or composer..."
+                className="w-full pl-10 pr-4 py-2 border text-slate-900 border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
 
-        <div className="flex flex-wrap gap-4 items-center">
-          <div className="flex items-center gap-2">
-            <Filter size={20} className="text-gray-600" />
-            <select
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat === "all" ? "All Categories" : cat}
-                </option>
-              ))}
-            </select>
+            <div className="flex flex-wrap gap-4 items-center">
+              <div className="flex items-center gap-2">
+                <Filter size={20} className="text-slate-400" />
+                <select
+                  className="px-4 py-2 border border-gray-300 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 cursor-pointer"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat === "all" ? "All Categories" : cat}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <button
+                onClick={() => setShowPlaylist(!showPlaylist)}
+                className="ml-auto flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fdfe6c]"
+              >
+                <Music size={20} />
+                Playlist ({playlist.length})
+              </button>
+            </div>
           </div>
-
-          <button
-            onClick={() => setShowPlaylist(!showPlaylist)}
-            className="ml-auto flex items-center gap-2 px-4 py-2 bg-green-500 rounded-lg hover:bg-green-600 transition-colors"
-          >
-            <Music size={20} />
-            Playlist ({playlist.length})
-          </button>
-        </div>
-      </div>
+        </>
+      )}
 
       {/* Results Count */}
       <p className="mb-4 text-gray-600">
@@ -427,12 +438,16 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
             <p className="text-sm text-gray-500 mb-4">{song.category}</p>
             <button
               onClick={() => addToPlaylist(song)}
-              className="w-full flex items-center justify-center gap-2 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
+              className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-2 rounded-lg hover:bg-slate-500 transition-colors "
               disabled={playlist.find((s) => s.id === song.id) !== undefined}
             >
-              <Plus size={16} />
+              {playlist.find((s) => s.id === song.id) ? (
+                <Minus size={16} />
+              ) : (
+                <Plus size={16} />
+              )}
               {playlist.find((s) => s.id === song.id)
-                ? "Added to Playlist"
+                ? "Remove"
                 : "Add to Playlist"}
             </button>
           </div>
@@ -445,7 +460,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
           <button
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 1}
-            className="flex items-center gap-1 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-1 px-3 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 disabled:bg-slate-300 disabled:cursor-not-allowed cursor-pointer"
           >
             <ChevronLeft size={16} />
             Previous
@@ -457,11 +472,13 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               <>
                 <button
                   onClick={() => setCurrentPage(1)}
-                  className="px-3 py-2 rounded-lg hover:bg-gray-100"
+                  className="px-3 py-2 rounded-lg bg-slate-500 hover:bg-slate-900 text-white"
                 >
                   1
                 </button>
-                {currentPage > 4 && <span className="px-2 py-2">...</span>}
+                {currentPage > 4 && (
+                  <span className="px-2 py-2 text-slate-900">...</span>
+                )}
               </>
             )}
 
@@ -481,10 +498,10 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-2 rounded-lg ${
+                  className={`px-3 py-2 rounded-lg cursor-pointer ${
                     page === currentPage
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-gray-100"
+                      ? "bg-slate-900 text-white"
+                      : "text-slate-900 hover:bg-slate-300 hover:text-white"
                   }`}
                 >
                   {page}
@@ -510,7 +527,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
           <button
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="flex items-center gap-1 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-1 px-3 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 disabled:bg-slate-300 disabled:cursor-not-allowed cursor-pointer"
           >
             Next
             <ChevronRight size={16} />
@@ -530,7 +547,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                       type="text"
                       value={tempTitle}
                       onChange={(e) => setTempTitle(e.target.value)}
-                      className="flex-1 px-2 py-1 border  border-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="flex-1 px-2 py-1 border  border-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-slate-500"
                       onKeyPress={(e) => e.key === "Enter" && saveTitle()}
                       placeholder="Favourite Songs"
                     />

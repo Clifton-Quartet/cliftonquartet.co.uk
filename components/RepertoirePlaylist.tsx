@@ -68,8 +68,8 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
     // Default composers for certain categories
     const defaultComposers: Record<string, string> = {
       beatles: "Beatles",
-      rags: "Scott Joplin",
-      popular: "Traditional/Various",
+      rags: "Various",
+      popular: "Various",
       jazz_classics: "Various",
       film_and_show: "Various",
     };

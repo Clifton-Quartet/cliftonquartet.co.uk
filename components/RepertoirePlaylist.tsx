@@ -429,13 +429,15 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
         {paginatedSongs.map((song) => (
           <div
             key={song.id}
-            className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+            className="bg-white flex flex-col justify-between rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
           >
-            <h3 className="text-xl text-gray-600 font-semibold mb-2">
-              {song.title}
-            </h3>
-            <p className="text-gray-600 mb-2">{song.composer}</p>
-            <p className="text-sm text-gray-500 mb-4">{song.category}</p>
+            <div>
+              <h3 className="text-xl text-gray-600 font-semibold mb-2">
+                {song.title}
+              </h3>
+              <p className="text-gray-600 mb-2">{song.composer}</p>
+              <p className="text-sm text-gray-500 mb-4">{song.category}</p>
+            </div>
             <button
               onClick={() => addToPlaylist(song)}
               className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-2 rounded-lg hover:bg-slate-500 transition-colors "

@@ -3,7 +3,7 @@
 import { ArrowBigUp } from "lucide-react";
 
 const Footer = () => {
-  const scrollToTop = (e) => {
+  const scrollToTop = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     window.scrollTo({
       top: 0,

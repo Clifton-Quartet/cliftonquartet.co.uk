@@ -1,16 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/prismicio";
 import { PrismicNextLink } from "@prismicio/next";
 import type { Content } from "@prismicio/client";
+import gsap from "gsap";
 
 export function Navigation() {
   const [settings, setSettings] = useState<Content.SettingsDocument | null>(
     null
   );
   const pathname = usePathname();
+  const navRef = useRef<HTMLUListElement>(null);
+  const navItemsRef = useRef<HTMLLIElement[]>([]);
 
   useEffect(() => {
     async function fetchSettings() {
@@ -21,10 +24,39 @@ export function Navigation() {
     fetchSettings();
   }, []);
 
+  useEffect(() => {
+    // Animation runs after settings are loaded and navigation items are rendered
+    if (settings && navRef.current) {
+      // Get all list items for the animation
+      const navItems = navRef.current.querySelectorAll("li");
+
+      // Set initial state - positioned outside the screen
+      gsap.set(navItems, {
+        x: 200, // Start from right (outside the viewport)
+        immediateRender: true,
+      });
+
+      // Animate each item in with a stagger effect
+      gsap.to(navItems, {
+        x: 0, // Move to original position
+        duration: 1, // Animation duration
+        stagger: 0.3, // 300ms between each animation
+        delay: 1.6,
+        ease: "power3.out", // Smooth easing function
+      });
+    }
+  }, [settings]); // Run animation when settings are loaded
+
+  const addToNavItemsRef = (el: HTMLLIElement | null, index: number) => {
+    if (el && !navItemsRef.current.includes(el)) {
+      navItemsRef.current[index] = el;
+    }
+  };
+
   if (!settings) return null;
 
   return (
-    <ul className="">
+    <ul className="" ref={navRef}>
       {/* Use type assertion to access navigation array */}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       {(settings.data as any).navigation.map((item: any, index: number) => {
@@ -47,7 +79,11 @@ export function Navigation() {
           (linkUrl !== "/" && pathname.startsWith(linkUrl));
 
         return (
-          <li key={`nav-${index}`} className="relative glass m-2 p-4">
+          <li
+            key={`nav-${index}`}
+            className="relative glass m-2 p-4"
+            ref={(el) => addToNavItemsRef(el, index)}
+          >
             <PrismicNextLink
               field={item.navigation_link}
               className={`relative text-white m-2 p-4 z-10 text-center ${

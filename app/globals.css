@@ -104,6 +104,7 @@ svg#main {
   cursor: pointer;
 }
 
+/* Navigation styling */
 .glass {
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -127,4 +128,26 @@ svg#main {
 .glass::after {
   border: 1px solid var(--primary500);
   mask-image: linear-gradient(135deg, var(--white0) 50%, var(--white));
+}
+
+/* Songs cards */
+.song-card {
+  background-image: url("/images/playing_violin.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  border: 3px solid rgba(253, 254, 108, 0.65);
+}
+
+.song-gradient {
+  background: rgba(51, 50, 50, 10);
+  background: linear-gradient(
+    45deg,
+    rgba(51, 50, 50, 1) 0%,
+    rgba(199, 162, 87, 0.55) 75%,
+    rgba(253, 254, 108, 0.55) 100%
+  );
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
 }

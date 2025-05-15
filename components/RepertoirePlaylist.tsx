@@ -429,29 +429,31 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
         {paginatedSongs.map((song) => (
           <div
             key={song.id}
-            className="bg-white flex flex-col justify-between rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+            className="song-card shadow-md hover:shadow-lg transition-shadow"
           >
-            <div>
-              <h3 className="text-xl text-gray-600 font-semibold mb-2">
-                {song.title}
-              </h3>
-              <p className="text-gray-600 mb-2">{song.composer}</p>
-              <p className="text-sm text-gray-500 mb-4">{song.category}</p>
+            <div className="song-gradient flex flex-col justify-between p-6">
+              <div>
+                <h3 className="text-xl text-gray-100 font-semibold mb-2">
+                  {song.title}
+                </h3>
+                <p className="text-gray-100 mb-2">{song.composer}</p>
+                <p className="text-sm text-gray-100 mb-4">{song.category}</p>
+              </div>
+              <button
+                onClick={() => addToPlaylist(song)}
+                className="w-full flex items-center justify-center gap-2 bg-[#fdfe6c] text-slate-900 py-2 rounded-lg hover:opacity-80 transition-colors cursor-pointer"
+                disabled={playlist.find((s) => s.id === song.id) !== undefined}
+              >
+                {playlist.find((s) => s.id === song.id) ? (
+                  <Minus size={16} />
+                ) : (
+                  <Plus size={16} />
+                )}
+                {playlist.find((s) => s.id === song.id)
+                  ? "Remove"
+                  : "Add to Playlist"}
+              </button>
             </div>
-            <button
-              onClick={() => addToPlaylist(song)}
-              className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-2 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer"
-              disabled={playlist.find((s) => s.id === song.id) !== undefined}
-            >
-              {playlist.find((s) => s.id === song.id) ? (
-                <Minus size={16} />
-              ) : (
-                <Plus size={16} />
-              )}
-              {playlist.find((s) => s.id === song.id)
-                ? "Remove"
-                : "Add to Playlist"}
-            </button>
           </div>
         ))}
       </div>
@@ -539,7 +541,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
       {/* Playlist Sidebar */}
       {showPlaylist && (
-        <div className="fixed right-0 top-0 h-full w-96 bg-white shadow-xl z-50 overflow-y-auto">
+        <div className="fixed right-0 top-0 h-full w-96 bg-amber-50 shadow-xl z-50 overflow-y-auto">
           <div className="p-6">
             <div className="flex justify-between items-center mb-6">
               <div className="flex items-center gap-2 flex-1 text-black">
@@ -555,13 +557,13 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                     />
                     <button
                       onClick={saveTitle}
-                      className="text-green-500 hover:text-green-700"
+                      className="text-green-500 hover:text-green-700 cursor-pointer"
                     >
                       <Check size={20} />
                     </button>
                     <button
                       onClick={cancelEditingTitle}
-                      className="text-red-500 hover:text-red-700"
+                      className="text-red-500 hover:text-red-700 cursor-pointer"
                     >
                       <X size={20} />
                     </button>
@@ -571,7 +573,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                     <h2 className="text-2xl font-bold">{playlistTitle}</h2>
                     <button
                       onClick={startEditingTitle}
-                      className="text-gray-500 hover:text-gray-700"
+                      className="text-gray-500 hover:text-gray-700 cursor-pointer"
                     >
                       <Edit2 size={20} />
                     </button>
@@ -580,7 +582,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               </div>
               <button
                 onClick={() => setShowPlaylist(false)}
-                className="text-gray-500 hover:text-gray-700 ml-2"
+                className="text-gray-500 hover:text-gray-700 ml-2 cursor-pointer"
               >
                 <X size={24} />
               </button>
@@ -610,7 +612,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                       </div>
                       <button
                         onClick={() => removeFromPlaylist(song.id)}
-                        className="text-red-500 hover:text-red-700"
+                        className="text-red-500 hover:text-red-700 cursor-pointer"
                       >
                         <X size={20} />
                       </button>
@@ -621,7 +623,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                 <div className="space-y-3">
                   <button
                     onClick={exportToPDF}
-                    className="w-full flex items-center justify-center gap-2 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer"
                   >
                     <Download size={20} />
                     Export to PDF
@@ -629,7 +631,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
                   <button
                     onClick={exportToWord}
-                    className="w-full flex items-center justify-center gap-2 bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer"
                   >
                     <FileText size={20} />
                     Export to Word

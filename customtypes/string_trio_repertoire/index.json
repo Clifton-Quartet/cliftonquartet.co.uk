@@ -1,0 +1,84 @@
+{
+  "format": "custom",
+  "id": "string_trio_repertoire",
+  "label": "String Trio Repertoire",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Classical": {
+      "classical": {
+        "type": "Group",
+        "config": {
+          "label": "Classical",
+          "repeat": true,
+          "fields": {
+            "composer": {
+              "type": "Text",
+              "config": {
+                "label": "Composer",
+                "placeholder": ""
+              }
+            },
+            "song_title": {
+              "type": "Text",
+              "config": {
+                "label": "Song Title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "Popular Songs": {
+      "popular_songs": {
+        "type": "Group",
+        "config": {
+          "label": "Popular Songs",
+          "repeat": true,
+          "fields": {
+            "composer": {
+              "type": "Text",
+              "config": {
+                "label": "Composer",
+                "placeholder": ""
+              }
+            },
+            "song_title": {
+              "type": "Text",
+              "config": {
+                "label": "Song Title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "Lighter Repertoire": {
+      "lighter_repertoire": {
+        "type": "Group",
+        "config": {
+          "label": "Lighter Repertoire",
+          "repeat": true,
+          "fields": {
+            "composer": {
+              "type": "Text",
+              "config": {
+                "label": "Composer",
+                "placeholder": ""
+              }
+            },
+            "song_title": {
+              "type": "Text",
+              "config": {
+                "label": "Song Title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

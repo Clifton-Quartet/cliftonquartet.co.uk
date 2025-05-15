@@ -384,6 +384,137 @@ export type StringQuartetRepertoireDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *String Trio Repertoire → Classical*
+ */
+export interface StringTrioRepertoireDocumentDataClassicalItem {
+  /**
+   * Composer field in *String Trio Repertoire → Classical*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_trio_repertoire.classical[].composer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  composer: prismic.KeyTextField;
+
+  /**
+   * Song Title field in *String Trio Repertoire → Classical*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_trio_repertoire.classical[].song_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_title: prismic.KeyTextField;
+}
+
+/**
+ * Item in *String Trio Repertoire → Popular Songs*
+ */
+export interface StringTrioRepertoireDocumentDataPopularSongsItem {
+  /**
+   * Composer field in *String Trio Repertoire → Popular Songs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_trio_repertoire.popular_songs[].composer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  composer: prismic.KeyTextField;
+
+  /**
+   * Song Title field in *String Trio Repertoire → Popular Songs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_trio_repertoire.popular_songs[].song_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_title: prismic.KeyTextField;
+}
+
+/**
+ * Item in *String Trio Repertoire → Lighter Repertoire*
+ */
+export interface StringTrioRepertoireDocumentDataLighterRepertoireItem {
+  /**
+   * Composer field in *String Trio Repertoire → Lighter Repertoire*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_trio_repertoire.lighter_repertoire[].composer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  composer: prismic.KeyTextField;
+
+  /**
+   * Song Title field in *String Trio Repertoire → Lighter Repertoire*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_trio_repertoire.lighter_repertoire[].song_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_title: prismic.KeyTextField;
+}
+
+/**
+ * Content for String Trio Repertoire documents
+ */
+interface StringTrioRepertoireDocumentData {
+  /**
+   * Classical field in *String Trio Repertoire*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_trio_repertoire.classical[]
+   * - **Tab**: Classical
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  classical: prismic.GroupField<
+    Simplify<StringTrioRepertoireDocumentDataClassicalItem>
+  > /**
+   * Popular Songs field in *String Trio Repertoire*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_trio_repertoire.popular_songs[]
+   * - **Tab**: Popular Songs
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  popular_songs: prismic.GroupField<
+    Simplify<StringTrioRepertoireDocumentDataPopularSongsItem>
+  > /**
+   * Lighter Repertoire field in *String Trio Repertoire*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: string_trio_repertoire.lighter_repertoire[]
+   * - **Tab**: Lighter Repertoire
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  lighter_repertoire: prismic.GroupField<
+    Simplify<StringTrioRepertoireDocumentDataLighterRepertoireItem>
+  >;
+}
+
+/**
+ * String Trio Repertoire document from Prismic
+ *
+ * - **API ID**: `string_trio_repertoire`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type StringTrioRepertoireDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<StringTrioRepertoireDocumentData>,
+    "string_trio_repertoire",
+    Lang
+  >;
+
 type ThePlayersDocumentDataSlicesSlice = HeroSlice;
 
 /**
@@ -583,6 +714,7 @@ export type AllDocumentTypes =
   | CliftonQuartetHomepageDocument
   | SettingsDocument
   | StringQuartetRepertoireDocument
+  | StringTrioRepertoireDocument
   | ThePlayersDocument
   | TheRepertoireDocument
   | WeddingsAndEventsDocument;
@@ -1135,6 +1267,11 @@ declare module "@prismicio/client" {
       StringQuartetRepertoireDocumentDataJazzClassicsItem,
       StringQuartetRepertoireDocumentDataFilmAndShowItem,
       StringQuartetRepertoireDocumentDataRockAndPopItem,
+      StringTrioRepertoireDocument,
+      StringTrioRepertoireDocumentData,
+      StringTrioRepertoireDocumentDataClassicalItem,
+      StringTrioRepertoireDocumentDataPopularSongsItem,
+      StringTrioRepertoireDocumentDataLighterRepertoireItem,
       ThePlayersDocument,
       ThePlayersDocumentData,
       ThePlayersDocumentDataSlicesSlice,

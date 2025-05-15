@@ -19,7 +19,7 @@ import { Content } from "@prismicio/client";
 
 // Define types for props
 interface RepertoirePlaylistProps {
-  repertoire: Content.StringQuartetRepertoireDocument[];
+  trioRepertoire: Content.StringTrioRepertoireDocument[];
 }
 
 // Define the Song interface
@@ -38,16 +38,12 @@ interface RepertoireSong {
 
 interface RepertoireData {
   classical?: RepertoireSong[];
-  popular?: RepertoireSong[];
-  beatles?: RepertoireSong[];
-  rags?: RepertoireSong[];
-  jazz_classics?: RepertoireSong[];
-  film_and_show?: RepertoireSong[];
-  rock_and_pop?: RepertoireSong[];
+  popular_songs?: RepertoireSong[];
+  lighter_repertoire?: RepertoireSong[];
 }
 
-const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
-  repertoire,
+const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
+  trioRepertoire,
 }) => {
   // Transform the repertoire documents into the Song format
   const songs = useMemo(() => {
@@ -57,25 +53,12 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
     // Category mapping for better display names
     const categoryMap: Record<string, string> = {
       classical: "Classical",
-      popular: "Popular Arrangements",
-      beatles: "Beatles",
-      rags: "Rags",
-      jazz_classics: "Jazz Classics",
-      film_and_show: "Film and Show Songs",
-      rock_and_pop: "Rock & Pop",
+      popular_songs: "Popular Songs",
+      lighter_repertoire: "Lighter Repertoire",
     };
 
-    // Default composers for certain categories
-    const defaultComposers: Record<string, string> = {
-      beatles: "Beatles",
-      rags: "",
-      popular: "",
-      jazz_classics: "",
-      film_and_show: "",
-    };
-
-    if (repertoire) {
-      repertoire.forEach((doc) => {
+    if (trioRepertoire) {
+      trioRepertoire.forEach((doc) => {
         const data = doc.data as RepertoireData;
 
         // Iterate through each category in the data
@@ -86,8 +69,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                 allSongs.push({
                   id: `${categoryKey}-${idCounter++}`,
                   title: song.song_title,
-                  composer:
-                    song.composer || defaultComposers[categoryKey] || "",
+                  composer: song.composer || "",
                   category: categoryMap[categoryKey] || categoryKey,
                 });
               }
@@ -98,7 +80,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
     }
 
     return allSongs;
-  }, [repertoire]);
+  }, [trioRepertoire]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -112,8 +94,8 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedPlaylist = localStorage.getItem("stringQuartetPlaylist");
-    const savedTitle = localStorage.getItem("stringQuartetPlaylistTitle");
+    const savedPlaylist = localStorage.getItem("stringTrioPlaylist");
+    const savedTitle = localStorage.getItem("stringTrioPlaylistTitle");
 
     if (savedPlaylist) {
       try {
@@ -131,11 +113,11 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
   // Save to localStorage whenever playlist or title changes
   useEffect(() => {
-    localStorage.setItem("stringQuartetPlaylist", JSON.stringify(playlist));
+    localStorage.setItem("stringTrioPlaylist", JSON.stringify(playlist));
   }, [playlist]);
 
   useEffect(() => {
-    localStorage.setItem("stringQuartetPlaylistTitle", playlistTitle);
+    localStorage.setItem("stringTrioPlaylistTitle", playlistTitle);
   }, [playlistTitle]);
 
   const categories = useMemo(() => {
@@ -238,7 +220,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       </head>
       <body>
         <h1>${playlistTitle}</h1>
-        <h2>String Quartet Repertoire</h2>
+        <h2>String Trio Repertoire</h2>
         <p>Date: ${new Date().toLocaleDateString()}</p>
         <p>Total Songs: ${playlist.length}</p>
         <hr />
@@ -324,6 +306,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
         </head>
         <body>
           <h1>${playlistTitle}</h1>
+          <h2>String Trio Repertoire</h2>
           <div class="info">
             <p>String Quartet Repertoire Playlist</p>
             <p>Date: ${new Date().toLocaleDateString()}</p>
@@ -365,7 +348,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-7xl font-bold mb-8 text-center text-slate-900">
-        String Quartet Repertoire
+        String Trio Repertoire
       </h1>
 
       {songs.length === 0 ? (
@@ -649,4 +632,4 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
   );
 };
 
-export default RepertoirePlaylist;
+export default TrioRepertoirePlaylist;

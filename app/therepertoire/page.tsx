@@ -8,9 +8,12 @@ import { components } from "@/slices";
 
 export default async function Page() {
   const client = createClient();
-  const [page, repertoire] = await Promise.all([
+  const [page, repertoire, trioRepertoire] = await Promise.all([
     client.getSingle("the_repertoire").catch(() => notFound()),
     client.getAllByType("string_quartet_repertoire", {
+      orderings: [{ field: "document.created_at", direction: "desc" }],
+    }),
+    client.getAllByType("string_trio_repertoire", {
       orderings: [{ field: "document.created_at", direction: "desc" }],
     }),
   ]);
@@ -19,7 +22,7 @@ export default async function Page() {
     <SliceZone
       slices={page.data.slices}
       components={components}
-      context={{ repertoire }}
+      context={{ repertoire, trioRepertoire }}
     />
   );
 }

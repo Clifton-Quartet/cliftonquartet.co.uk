@@ -87,7 +87,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                   id: `${categoryKey}-${idCounter++}`,
                   title: song.song_title,
                   composer:
-                    song.composer || defaultComposers[categoryKey] || "Various",
+                    song.composer || defaultComposers[categoryKey] || "",
                   category: categoryMap[categoryKey] || categoryKey,
                 });
               }

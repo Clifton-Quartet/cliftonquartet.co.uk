@@ -7,4 +7,5 @@ export const components = {
   hero: dynamic(() => import("./Hero")),
   repertoire: dynamic(() => import("./VinylPlayer")),
   the_repertoire: dynamic(() => import("./TheRepertoire")),
+  weddings: dynamic(() => import("./TextAndImageSection")),
 };

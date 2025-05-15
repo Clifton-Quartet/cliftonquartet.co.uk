@@ -393,12 +393,12 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               <div className="flex items-center gap-2">
                 <Filter size={20} className="text-slate-400" />
                 <select
-                  className="px-4 py-2 border border-gray-300 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 cursor-pointer"
+                  className="px-4 py-2 border border-slate-500 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 cursor-pointer"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                 >
                   {categories.map((cat) => (
-                    <option key={cat} value={cat}>
+                    <option key={cat} value={cat} className="bg-amber-50">
                       {cat === "all" ? "All Categories" : cat}
                     </option>
                   ))}
@@ -541,7 +541,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
       {/* Playlist Sidebar */}
       {showPlaylist && (
-        <div className="fixed right-0 top-0 h-full w-96 bg-amber-50 shadow-xl z-50 overflow-y-auto">
+        <div className="custom-scroll fixed right-0 top-0 h-full w-96 bg-amber-50 shadow-xl z-50 overflow-y-auto">
           <div className="p-6">
             <div className="flex justify-between items-center mb-6">
               <div className="flex items-center gap-2 flex-1 text-black">

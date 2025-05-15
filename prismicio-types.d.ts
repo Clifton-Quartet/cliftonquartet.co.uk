@@ -448,7 +448,7 @@ export type ThePlayersDocument<Lang extends string = string> =
     Lang
   >;
 
-type TheRepertoireDocumentDataSlicesSlice = HeroSlice;
+type TheRepertoireDocumentDataSlicesSlice = TheRepertoireSlice | HeroSlice;
 
 /**
  * Content for The Repertoire documents
@@ -684,11 +684,11 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
- * Item in *Repertoire → Default → Primary → Repertoire Carousel*
+ * Item in *VinylPlayer → Default → Primary → Repertoire Carousel*
  */
 export interface RepertoireSliceDefaultPrimaryRepertoireCarouselItem {
   /**
-   * Artist field in *Repertoire → Default → Primary → Repertoire Carousel*
+   * Artist field in *VinylPlayer → Default → Primary → Repertoire Carousel*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -698,7 +698,7 @@ export interface RepertoireSliceDefaultPrimaryRepertoireCarouselItem {
   artist: prismic.KeyTextField;
 
   /**
-   * Song field in *Repertoire → Default → Primary → Repertoire Carousel*
+   * Song field in *VinylPlayer → Default → Primary → Repertoire Carousel*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -709,11 +709,11 @@ export interface RepertoireSliceDefaultPrimaryRepertoireCarouselItem {
 }
 
 /**
- * Primary content in *Repertoire → Default → Primary*
+ * Primary content in *VinylPlayer → Default → Primary*
  */
 export interface RepertoireSliceDefaultPrimary {
   /**
-   * Background Image field in *Repertoire → Default → Primary*
+   * Background Image field in *VinylPlayer → Default → Primary*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -723,7 +723,7 @@ export interface RepertoireSliceDefaultPrimary {
   background_image: prismic.ImageField<never>;
 
   /**
-   * Title field in *Repertoire → Default → Primary*
+   * Title field in *VinylPlayer → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -733,7 +733,7 @@ export interface RepertoireSliceDefaultPrimary {
   title: prismic.KeyTextField;
 
   /**
-   * Text field in *Repertoire → Default → Primary*
+   * Text field in *VinylPlayer → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -743,7 +743,7 @@ export interface RepertoireSliceDefaultPrimary {
   text: prismic.RichTextField;
 
   /**
-   * MP3 Song field in *Repertoire → Default → Primary*
+   * MP3 Song field in *VinylPlayer → Default → Primary*
    *
    * - **Field Type**: Link to Media
    * - **Placeholder**: mp3 audio file
@@ -753,7 +753,7 @@ export interface RepertoireSliceDefaultPrimary {
   mp3_song: prismic.LinkToMediaField<prismic.FieldState, never>;
 
   /**
-   * Repertoire Carousel field in *Repertoire → Default → Primary*
+   * Repertoire Carousel field in *VinylPlayer → Default → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -766,7 +766,7 @@ export interface RepertoireSliceDefaultPrimary {
 }
 
 /**
- * Default variation for Repertoire Slice
+ * Default variation for VinylPlayer Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -779,12 +779,12 @@ export type RepertoireSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *Repertoire*
+ * Slice variation for *VinylPlayer*
  */
 type RepertoireSliceVariation = RepertoireSliceDefault;
 
 /**
- * Repertoire Shared Slice
+ * VinylPlayer Shared Slice
  *
  * - **API ID**: `repertoire`
  * - **Description**: Repertoire
@@ -793,6 +793,36 @@ type RepertoireSliceVariation = RepertoireSliceDefault;
 export type RepertoireSlice = prismic.SharedSlice<
   "repertoire",
   RepertoireSliceVariation
+>;
+
+/**
+ * Default variation for TheRepertoire Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TheRepertoireSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *TheRepertoire*
+ */
+type TheRepertoireSliceVariation = TheRepertoireSliceDefault;
+
+/**
+ * TheRepertoire Shared Slice
+ *
+ * - **API ID**: `the_repertoire`
+ * - **Description**: TheRepertoire
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TheRepertoireSlice = prismic.SharedSlice<
+  "the_repertoire",
+  TheRepertoireSliceVariation
 >;
 
 declare module "@prismicio/client" {
@@ -854,6 +884,9 @@ declare module "@prismicio/client" {
       RepertoireSliceDefaultPrimary,
       RepertoireSliceVariation,
       RepertoireSliceDefault,
+      TheRepertoireSlice,
+      TheRepertoireSliceVariation,
+      TheRepertoireSliceDefault,
     };
   }
 }

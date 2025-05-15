@@ -8,9 +8,20 @@ import { components } from "@/slices";
 
 export default async function Page() {
   const client = createClient();
-  const page = await client.getSingle("the_repertoire").catch(() => notFound());
+  const [page, repertoire] = await Promise.all([
+    client.getSingle("the_repertoire").catch(() => notFound()),
+    client.getAllByType("string_quartet_repertoire", {
+      orderings: [{ field: "document.created_at", direction: "desc" }],
+    }),
+  ]);
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return (
+    <SliceZone
+      slices={page.data.slices}
+      components={components}
+      context={{ repertoire }}
+    />
+  );
 }
 
 export async function generateMetadata(): Promise<Metadata> {

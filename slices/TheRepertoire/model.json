@@ -1,0 +1,16 @@
+{
+  "id": "the_repertoire",
+  "type": "SharedSlice",
+  "name": "TheRepertoire",
+  "description": "TheRepertoire",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": ""
+    }
+  ]
+}

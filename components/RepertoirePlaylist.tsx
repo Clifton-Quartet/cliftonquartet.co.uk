@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useMemo, useEffect } from "react";
 import {
   Search,
@@ -10,6 +12,12 @@ import {
   Edit2,
   Check,
 } from "lucide-react";
+import { Content } from "@prismicio/client";
+
+// Define types for props
+interface RepertoirePlaylistProps {
+  repertoire: Content.StringQuartetRepertoireDocument[];
+}
 
 // Define the Song interface
 interface Song {
@@ -19,365 +27,73 @@ interface Song {
   id: string;
 }
 
-// Parse the repertoire data
-const parseRepertoireData = (): Song[] => {
-  const repertoire: Song[] = [];
-  let id = 0;
+// Define types for the repertoire data structure
+interface RepertoireSong {
+  song_title: string;
+  composer?: string;
+}
 
-  // Classical Section
-  const classicalData = `
-Albeniz - Tango
-Bach - Air on a G String, Arioso, Wachet Auf, Jesu Joy of Man's Desiring, Sheep may safely graze, Brandenburg Concerto No 3 & No 4, Concerto for two violins, Badinerie
-Beethoven - Ode to Joy, Adagio Cantabile (Pathetique Sonata), Minuet
-Bizet - Prelude to Carmen, Entracte from Carmen
-Boccherini - Minuet and Trio, La Musica notturna di Madrid
-Borodin - Polotsvian Dances
-Boyce - Symphonies
-Charpentier - Prelude to Te Deum
-Clarke - Trumpet Voluntary
-Corelli - Concerto Grossi, Christmas Concerto
-Debussy - Gollywoggs Cake-walk
-Delibes - Flower Duet from Lakme, Copelia Medley
-Dvorak - Humoresque
-Elgar - Nimrod, Salut D'Amour, Chanson de Matin
-Franck - Panis Angelicus
-Gershwin - I Got Rhythm, Rhapsody in Blue, American in Paris
-Grainger - Molly on the Shore
-Grieg - Wedding Day at Troldhaugen, Morning from 'Peer Gynt', Norwegian Dance No 3
-Handel - Aria from Xerxes, Arrival of the Queen of Sheba, Departure of the Queen of Sheba, Water Music Suite, Sirens Song from Rinaldo, All we like sheep
-Haydn - Various String Quartets
-Jenkins - Palladio
-Liszt - Liebestraum
-Mascagni - Cavalira Rusticana
-Massenet - Meditation
-Mendelssohn - Wedding March
-Monti - Czardas
-Mouret - Rondeau
-Mozart - Three Divertimento, Eine Kleine Nachtmusik, Laudate Dominum, Sull' aria, Various String Quartets, Andante from Piano Concerto 21, Alleluja from Exultate Jubilate, A Musical Joke, Ave Verum, Various String Quartets, Il Seraglio Overture
-Offenbach - Barcarolle
-Pachelbel - Canon and Gigue
-Ponchelli - Dance of the Hours
-Purcell - Chaconny, Trumpet Tune, Dido's Lament, Music for a While, Rondeaux
-Puccini - O mio babinno caro
-Rachmaninoff - Vocalise
-Saint-Saens - The Swan
-Satie - Gymnopedie
-Schubert - Ave Maria, Standchen, Moment Musicale
-Schumann - Traumeri
-Strauss - Pizzicato Polka, Radetzky March, Wine Women & Song
-Sullivan - Three Little Maids from School
-Tavener - The Lamb
-Tchaikovsky - Music from Nutcracker Suite, Sleeping Beauty Waltz
-Verdi - La Forza del Destino, Libiamo from La Traviata
-Vivaldi - Four Seasons
-Vivaldi arr Richter - Spring
-Wagner - Wedding March
-`;
+interface RepertoireData {
+  classical?: RepertoireSong[];
+  popular?: RepertoireSong[];
+  beatles?: RepertoireSong[];
+  rags?: RepertoireSong[];
+  jazz_classics?: RepertoireSong[];
+  film_and_show?: RepertoireSong[];
+  rock_and_pop?: RepertoireSong[];
+}
 
-  // Parse classical pieces
-  classicalData
-    .trim()
-    .split("\n")
-    .forEach((line) => {
-      const [composer, pieces] = line.split(" - ");
-      if (composer && pieces) {
-        pieces.split(", ").forEach((piece) => {
-          repertoire.push({
-            id: `classical-${id++}`,
-            title: piece.trim(),
-            composer: composer.trim(),
-            category: "Classical",
-          });
-        });
-      }
-    });
+const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
+  repertoire,
+}) => {
+  // Transform the repertoire documents into the Song format
+  const songs = useMemo(() => {
+    const allSongs: Song[] = [];
+    let idCounter = 0;
 
-  // Popular Arrangements
-  const popularData = `
-The Girl from Ipanema
-Palladio
-I do like to be beside the seaside
-Greensleeves
-Reel Fiddlin' (Folk Medley)
-English Country Gardens
-Irish Sherry (Irish Medley)
-Cock Linnet (Cockney Medley)
-Carpenters Selection
-Annie's Song
-Gabriel's Oboe
-Fiddle Faddle
-Plink, Plank, Plunk
-The Typewriter
-Blue Tango
-Love and Marriage
-Moondance
-Ashokan Farewell
-By the sleepy lagoon
-As Time goes by
-Morenita do Brazil
-Scarborough Fair
-Jerome Kern Medley
-Just another Rhumba
-Unchained Melody
-Bridge over troubled water
-Charade
-You've got a friend
-Food Glorious Food
-Your Song
-A fine romance
-Abba Medley
-Moonlight and Roses
-Kalinka
-Speak softly love
-For he's a jolly good fellow
-Happy Birthday
-Various Christmas Carols
-White Christmas
-`;
+    // Category mapping for better display names
+    const categoryMap: Record<string, string> = {
+      classical: "Classical",
+      popular: "Popular Arrangements",
+      beatles: "Beatles",
+      rags: "Rags",
+      jazz_classics: "Jazz Classics",
+      film_and_show: "Film and Show Songs",
+      rock_and_pop: "Rock & Pop",
+    };
 
-  // Parse popular arrangements
-  popularData
-    .trim()
-    .split("\n")
-    .forEach((line) => {
-      if (line.trim()) {
-        repertoire.push({
-          id: `popular-${id++}`,
-          title: line.trim(),
-          composer: "Traditional/Various",
-          category: "Popular Arrangements",
-        });
-      }
-    });
+    // Default composers for certain categories
+    const defaultComposers: Record<string, string> = {
+      beatles: "Beatles",
+      rags: "Scott Joplin",
+      popular: "Traditional/Various",
+      jazz_classics: "Various",
+      film_and_show: "Various",
+    };
 
-  // Beatles section
-  const beatlesData = `
-Yesterday
-Eleanor Rigby
-When I'm 64
-Norwegian Wood
-Michelle
-Here comes the Sun
-All you need is love
-`;
+    repertoire.forEach((doc) => {
+      const data = doc.data as RepertoireData;
 
-  beatlesData
-    .trim()
-    .split("\n")
-    .forEach((line) => {
-      if (line.trim()) {
-        repertoire.push({
-          id: `beatles-${id++}`,
-          title: line.trim(),
-          composer: "Beatles",
-          category: "Beatles",
-        });
-      }
-    });
-
-  // Rags section
-  const ragsData = `
-Peacherine Rag
-Roseleaf Rag
-Entertainer
-Country Club
-Paragon Rag
-`;
-
-  ragsData
-    .trim()
-    .split("\n")
-    .forEach((line) => {
-      if (line.trim()) {
-        repertoire.push({
-          id: `rags-${id++}`,
-          title: line.trim(),
-          composer: "Scott Joplin",
-          category: "Rags",
-        });
-      }
-    });
-
-  // Jazz Classics
-  const jazzData = `
-Makin' Whoopee
-Lullaby of Birdland
-Let's do it
-Fly me to the Moon
-Gershwin – The Man I Love, But not for me, Embraceable you
-Anything Goes
-Every time we say goodbye
-Cole Porter - You're the top
-Misty
-Don't get around much anymore
-Everytime We Say Goodbye
-`;
-
-  jazzData
-    .trim()
-    .split("\n")
-    .forEach((line) => {
-      if (line.trim()) {
-        const specialGershwin = line.includes("Gershwin");
-        const specialPorter = line.includes("Cole Porter");
-
-        if (specialGershwin) {
-          const songs = line.split("–")[1].split(",");
+      // Iterate through each category in the data
+      Object.entries(data).forEach(([categoryKey, songs]) => {
+        if (Array.isArray(songs)) {
           songs.forEach((song) => {
-            repertoire.push({
-              id: `jazz-${id++}`,
-              title: song.trim(),
-              composer: "Gershwin",
-              category: "Jazz Classics",
-            });
-          });
-        } else if (specialPorter) {
-          repertoire.push({
-            id: `jazz-${id++}`,
-            title: "You're the top",
-            composer: "Cole Porter",
-            category: "Jazz Classics",
-          });
-        } else {
-          repertoire.push({
-            id: `jazz-${id++}`,
-            title: line.trim(),
-            composer: "Various",
-            category: "Jazz Classics",
+            if (song.song_title) {
+              allSongs.push({
+                id: `${categoryKey}-${idCounter++}`,
+                title: song.song_title,
+                composer:
+                  song.composer || defaultComposers[categoryKey] || "Various",
+                category: categoryMap[categoryKey] || categoryKey,
+              });
+            }
           });
         }
-      }
+      });
     });
 
-  // Film and Show Songs
-  const filmShowData = `
-James Bond Theme
-Somewhere over the rainbow
-Jeeves and Wooster Theme Tune
-My Heart will go on
-Meggie's theme from the Thorn Birds
-Theme form Love Story
-The music of the night
-Selection from My Fair Lady
-Theme from Fawlty Towers
-Selections from 'Pirates of Penzance'
-Selections from 'Mikado'
-I Know Him So Well
-I Dreamed a Dream
-A Whole New World
-Don't Cry For Me Argentina
-Schindler's List
-Theme from E.T.
-Speak Softly Love (theme from The Godfather)
-All I ask of You
-Moon River
-The Kiss – Last of the Mohicans
-Theme from Jurassic Park
-Tonight & Somewhere (West Side Story)
-I don't know how to love him
-Everybody wants to be a cat
-Imperial March (Star Wars)
-The Ludlows (Legends of the fall)
-Somewhere my love (Lara's theme)
-Somewhere in time (Barry)
-Kissing you (Romeo & Juliet)
-Brave medley
-Home alone medley
-Now we are free (Gladiator)
-Pirates of the Carribean medley
-Game of Thrones theme
-Downton Abbey theme
-`;
-
-  filmShowData
-    .trim()
-    .split("\n")
-    .forEach((line) => {
-      if (line.trim()) {
-        repertoire.push({
-          id: `film-${id++}`,
-          title: line.trim(),
-          composer: "Various",
-          category: "Film and Show Songs",
-        });
-      }
-    });
-
-  // Rock & Pop section
-  const rockPopData = `
-Shine - Take That
-Nothing Else Matters - Metallica
-I'm yours - Mraz
-Bittersweet Symphony - The Verve
-Viva la Vida - Coldplay
-Your song - Elton John
-Don't stop believin' - Journey
-Hoppipolla - Sigur Ros
-Kissing you - Des'ree
-Clocks - Coldplay
-Hallelujah - Cohen
-Imagine - Lennon
-Can't help falling in love - Weiss
-The one I love - David Gray
-Ho Hey - The Lumineers
-Better together - Johnson
-God only knows - Beach boys
-On the nature of daylight - Richter
-All you need is love - Beatles
-You've got a friend - Carole King
-Marry you - Bruno Mars
-Best day of my life - American Authors
-Stand by me - King
-A thousand years - Perri
-To build a home - Cinematic orchestra
-Stay with me - Sam Smith
-Nightswimming - REM
-Sky full of stars - Coldplay
-Cowboy take me away - The Chicks
-Bad Guy - Billie Eilish
-Beautiful Day - U2
-Chasing Cars - Snow Patrol
-City of Stars from la La Land - Hurwitz, Pasek, Paul
-Dance the night away - Dua Lipa
-Fly me to the moon - Frank Sinatra
-Friday I'm in love - The Cure
-Get Lucky - Daft Punk
-Halo - Beyonce
-How long will I love you - Ellie Goulding
-If I ain't got you - Alicia Keys
-I will always love you - Whitney Houston
-Karma - Taylor Swift
-Levitating - Dua Lipa
-Love on top - Beyonce
-Material girl - Madonna
-Murder on the dance floor - Sophie Ellis-Bextor
-Sign of the times - Harry Styles
-Skyfall - Adele
-A sky full of stars - Coldplay
-Wildest Dreams - Taylor Swift
-Wrecking Ball - Miley Cyrus
-`;
-
-  rockPopData
-    .trim()
-    .split("\n")
-    .forEach((line) => {
-      if (line.trim()) {
-        const [title, artist] = line.split(" - ");
-        repertoire.push({
-          id: `rock-${id++}`,
-          title: title.trim(),
-          composer: artist ? artist.trim() : "Various",
-          category: "Rock & Pop",
-        });
-      }
-    });
-
-  return repertoire;
-};
-
-const RepertoirePage: React.FC = () => {
-  const songs = useMemo(() => parseRepertoireData(), []);
+    return allSongs;
+  }, [repertoire]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -657,7 +373,7 @@ const RepertoirePage: React.FC = () => {
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
               {categories.map((cat) => (
-                <option key={cat} value={cat}>
+                <option key={cat} value={cat} className="text-black">
                   {cat === "all" ? "All Categories" : cat}
                 </option>
               ))}
@@ -675,7 +391,7 @@ const RepertoirePage: React.FC = () => {
       </div>
 
       {/* Results Count */}
-      <p className="mb-4 text-gray-600">
+      <p className="mb-4 text-gray-300">
         Showing {filteredSongs.length} of {songs.length} songs
       </p>
 
@@ -812,4 +528,4 @@ const RepertoirePage: React.FC = () => {
   );
 };
 
-export default RepertoirePage;
+export default RepertoirePlaylist;

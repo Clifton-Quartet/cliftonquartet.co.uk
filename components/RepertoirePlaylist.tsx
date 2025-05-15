@@ -440,7 +440,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
             </div>
             <button
               onClick={() => addToPlaylist(song)}
-              className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-2 rounded-lg hover:bg-slate-500 transition-colors "
+              className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-2 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer"
               disabled={playlist.find((s) => s.id === song.id) !== undefined}
             >
               {playlist.find((s) => s.id === song.id) ? (

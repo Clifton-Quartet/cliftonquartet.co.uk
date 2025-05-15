@@ -476,12 +476,14 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               <>
                 <button
                   onClick={() => setCurrentPage(1)}
-                  className="px-3 py-2 rounded-lg bg-slate-500 hover:bg-slate-900 text-white"
+                  className="px-3 py-2 rounded-lg bg-slate-500 hover:bg-slate-900 text-white cursor-pointer"
                 >
                   1
                 </button>
                 {currentPage > 4 && (
-                  <span className="px-2 py-2 text-slate-900">...</span>
+                  <span className="px-2 py-2 text-slate-900 cursor-pointer">
+                    ...
+                  </span>
                 )}
               </>
             )}
@@ -516,11 +518,11 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
             {currentPage < totalPages - 2 && (
               <>
                 {currentPage < totalPages - 3 && (
-                  <span className="px-2 py-2">...</span>
+                  <span className="px-2 py-2 text-slate-900">...</span>
                 )}
                 <button
                   onClick={() => setCurrentPage(totalPages)}
-                  className="px-3 py-2 rounded-lg hover:bg-gray-100"
+                  className="px-3 py-2 rounded-lg text-slate-900 hover:bg-slate-300 cursor-pointer"
                 >
                   {totalPages}
                 </button>

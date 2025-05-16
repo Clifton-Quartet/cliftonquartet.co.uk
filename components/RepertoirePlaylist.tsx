@@ -324,6 +324,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
         </head>
         <body>
           <h1>${playlistTitle}</h1>
+          <h2>String Quartet Repertoire</h2>
           <div class="info">
             <p>String Quartet Repertoire Playlist</p>
             <p>Date: ${new Date().toLocaleDateString()}</p>
@@ -363,7 +364,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 min-h-[100dvh]">
       <h1 className="text-7xl font-bold mb-8 text-center text-slate-900">
         String Quartet Repertoire
       </h1>

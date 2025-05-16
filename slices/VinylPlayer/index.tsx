@@ -127,7 +127,6 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
         backgroundImage: `url(${slice.primary.background_image.url})`,
       }}
     >
-      <div className="absolute min-h-[100vh] inset-0 bg-slate-950 opacity-40" />
       <div className="relative flex flex-col items-center w-full justify-center">
         <div className="lg:w-2/3">
           <h2 className="relative text-white text-center text-7xl mb-6">
@@ -141,7 +140,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
           <VinylPlayer song={songUrl} />
         </div>
       </div>
-      <div className="relative w-[100vw] overflow-hidden">
+      <div className="relative w-[100vw] overflow-hidden mt-6">
         <div
           className="flex items-start py-6 md:hidden"
           ref={containerRef}

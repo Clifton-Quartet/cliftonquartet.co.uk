@@ -199,3 +199,11 @@ svg#main {
   color: transparent;
   border-radius: 8px;
 }
+
+.vinyl-player {
+  background-image: url("/images/TableTop.jpg");
+  background-size: contain;
+  background-position: center;
+
+  box-shadow: 14px 14px 18px rgba(0, 0, 0, 0.5);
+}

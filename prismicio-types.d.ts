@@ -959,11 +959,11 @@ export type TheRepertoireSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *TextAndImageSection → ImageOnTheRight → Primary*
+ * Primary content in *AboutUs → Default → Primary*
  */
 export interface WeddingsSliceDefaultPrimary {
   /**
-   * Title field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Title field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -973,7 +973,7 @@ export interface WeddingsSliceDefaultPrimary {
   title: prismic.RichTextField;
 
   /**
-   * Paragraph 1 field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Paragraph 1 field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -983,7 +983,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_1: prismic.RichTextField;
 
   /**
-   * Paragraph 2 field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Paragraph 2 field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -993,7 +993,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_2: prismic.RichTextField;
 
   /**
-   * Paragraph 3 field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Paragraph 3 field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1003,7 +1003,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_3: prismic.RichTextField;
 
   /**
-   * Paragraph 4 field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Paragraph 4 field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1013,7 +1013,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_4: prismic.RichTextField;
 
   /**
-   * Paragraph 5 field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Paragraph 5 field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1023,7 +1023,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_5: prismic.RichTextField;
 
   /**
-   * Paragraph 6 field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Paragraph 6 field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1033,7 +1033,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_6: prismic.RichTextField;
 
   /**
-   * Paragraph 7 field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Paragraph 7 field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1043,7 +1043,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_7: prismic.RichTextField;
 
   /**
-   * Paragraph 8 field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Paragraph 8 field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1053,7 +1053,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_8: prismic.RichTextField;
 
   /**
-   * Background Image field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Background Image field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -1063,7 +1063,7 @@ export interface WeddingsSliceDefaultPrimary {
   background_image: prismic.ImageField<never>;
 
   /**
-   * Background Color field in *TextAndImageSection → ImageOnTheRight → Primary*
+   * Background Color field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Color
    * - **Placeholder**: *None*
@@ -1071,10 +1071,30 @@ export interface WeddingsSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#color
    */
   background_color: prismic.ColorField;
+
+  /**
+   * Image 1 field in *AboutUs → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: weddings.default.primary.image_1
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_1: prismic.ImageField<never>;
+
+  /**
+   * Image 2 field in *AboutUs → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: weddings.default.primary.image_2
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_2: prismic.ImageField<never>;
 }
 
 /**
- * ImageOnTheRight variation for TextAndImageSection Slice
+ * Default variation for AboutUs Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -1087,140 +1107,12 @@ export type WeddingsSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Primary content in *TextAndImageSection → ImageOnTheLeft → Primary*
+ * Slice variation for *AboutUs*
  */
-export interface WeddingsSliceImageAtLeftPrimary {
-  /**
-   * Title field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-
-  /**
-   * Paragraph 1 field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.paragraph_1
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph_1: prismic.RichTextField;
-
-  /**
-   * Paragraph 2 field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.paragraph_2
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph_2: prismic.RichTextField;
-
-  /**
-   * Paragraph 3 field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.paragraph_3
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph_3: prismic.RichTextField;
-
-  /**
-   * Paragraph 4 field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.paragraph_4
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph_4: prismic.RichTextField;
-
-  /**
-   * Paragraph 5 field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.paragraph_5
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph_5: prismic.RichTextField;
-
-  /**
-   * Paragraph 6 field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.paragraph_6
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph_6: prismic.RichTextField;
-
-  /**
-   * Paragraph 7 field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.paragraph_7
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph_7: prismic.RichTextField;
-
-  /**
-   * Paragraph 8 field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.paragraph_8
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph_8: prismic.RichTextField;
-
-  /**
-   * Background Color field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Color
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#color
-   */
-  background_color: prismic.ColorField;
-
-  /**
-   * Background Image field in *TextAndImageSection → ImageOnTheLeft → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.imageAtLeft.primary.background_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  background_image: prismic.ImageField<never>;
-}
+type WeddingsSliceVariation = WeddingsSliceDefault;
 
 /**
- * ImageOnTheLeft variation for TextAndImageSection Slice
- *
- * - **API ID**: `imageAtLeft`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type WeddingsSliceImageAtLeft = prismic.SharedSliceVariation<
-  "imageAtLeft",
-  Simplify<WeddingsSliceImageAtLeftPrimary>,
-  never
->;
-
-/**
- * Slice variation for *TextAndImageSection*
- */
-type WeddingsSliceVariation = WeddingsSliceDefault | WeddingsSliceImageAtLeft;
-
-/**
- * TextAndImageSection Shared Slice
+ * AboutUs Shared Slice
  *
  * - **API ID**: `weddings`
  * - **Description**: Weddings
@@ -1300,10 +1192,8 @@ declare module "@prismicio/client" {
       TheRepertoireSliceDefault,
       WeddingsSlice,
       WeddingsSliceDefaultPrimary,
-      WeddingsSliceImageAtLeftPrimary,
       WeddingsSliceVariation,
       WeddingsSliceDefault,
-      WeddingsSliceImageAtLeft,
     };
   }
 }

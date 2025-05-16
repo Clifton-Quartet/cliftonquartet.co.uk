@@ -36,7 +36,7 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
                 <PrismicRichText field={slice.primary.paragraph_1} />
                 <PrismicRichText field={slice.primary.paragraph_2} />
               </div>
-              <div className="bg-white p-2 pb-10 rotate-3 mx-auto h-[230px] xl:h-[330px] my-10">
+              <div className="photos-polaroid bg-white p-2 pb-10 rotate-3 mx-auto h-[230px] xl:h-[330px] my-10 shadow-2xl shadow-slate-900">
                 <div
                   className="w-[250px] h-[160px] xl:w-[300px] xl:h-[220px] bg-cover bg-center bg-no-repeat"
                   style={{
@@ -46,7 +46,7 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
               </div>
             </div>
             <div className="flex flex-col-reverse lg:flex-row justify-center items-center">
-              <div className="bg-white p-2 pb-10 -rotate-3 mx-auto h-[230px] xl:h-[330px] my-10">
+              <div className="photos-polaroid bg-white p-2 pb-10 -rotate-3 mx-auto h-[230px] xl:h-[330px] my-10 shadow-2xl shadow-slate-900">
                 <div
                   className="w-[250px] h-[160px] xl:w-[300px] xl:h-[220px] bg-cover bg-center bg-no-repeat"
                   style={{

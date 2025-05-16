@@ -47,6 +47,42 @@
             }
           }
         }
+      },
+      "contact_us_text": {
+        "type": "Text",
+        "config": {
+          "label": "Contact us text",
+          "placeholder": ""
+        }
+      },
+      "phone_number": {
+        "type": "Link",
+        "config": {
+          "label": "Phone number",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
+      "email": {
+        "type": "Link",
+        "config": {
+          "label": "Email",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
+      "footer_copyrights": {
+        "type": "Text",
+        "config": {
+          "label": "Footer copyrights",
+          "placeholder": ""
+        }
       }
     }
   }

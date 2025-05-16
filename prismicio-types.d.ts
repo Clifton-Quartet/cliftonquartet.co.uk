@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type CliftonQuartetHomepageDocumentDataSlicesSlice =
+  | ContactUsSlice
   | WeddingsSlice
   | RepertoireSlice
   | AnimatedInstrumentsSlice
@@ -141,6 +142,56 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   navigation: prismic.GroupField<Simplify<SettingsDocumentDataNavigationItem>>;
+
+  /**
+   * Contact us text field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.contact_us_text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  contact_us_text: prismic.KeyTextField;
+
+  /**
+   * Phone number field in *Settings*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.phone_number
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  phone_number: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Email field in *Settings*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.email
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  email: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Footer copyrights field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.footer_copyrights
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  footer_copyrights: prismic.KeyTextField;
 }
 
 /**
@@ -515,7 +566,7 @@ export type StringTrioRepertoireDocument<Lang extends string = string> =
     Lang
   >;
 
-type ThePlayersDocumentDataSlicesSlice = HeroSlice;
+type ThePlayersDocumentDataSlicesSlice = ContactUsSlice | HeroSlice;
 
 /**
  * Content for The Players documents
@@ -580,7 +631,10 @@ export type ThePlayersDocument<Lang extends string = string> =
     Lang
   >;
 
-type TheRepertoireDocumentDataSlicesSlice = TheRepertoireSlice | HeroSlice;
+type TheRepertoireDocumentDataSlicesSlice =
+  | WeddingsSlice
+  | TheRepertoireSlice
+  | HeroSlice;
 
 /**
  * Content for The Repertoire documents
@@ -645,7 +699,10 @@ export type TheRepertoireDocument<Lang extends string = string> =
     Lang
   >;
 
-type WeddingsAndEventsDocumentDataSlicesSlice = WeddingsSlice | HeroSlice;
+type WeddingsAndEventsDocumentDataSlicesSlice =
+  | ContactUsSlice
+  | WeddingsSlice
+  | HeroSlice;
 
 /**
  * Content for Weddings & Events documents
@@ -762,6 +819,77 @@ type AnimatedInstrumentsSliceVariation = AnimatedInstrumentsSliceDefault;
 export type AnimatedInstrumentsSlice = prismic.SharedSlice<
   "animated_instruments",
   AnimatedInstrumentsSliceVariation
+>;
+
+/**
+ * Primary content in *ContactUs → Default → Primary*
+ */
+export interface ContactUsSliceDefaultPrimary {
+  /**
+   * Text field in *ContactUs → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_us.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
+
+  /**
+   * Phone number field in *ContactUs → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_us.default.primary.phone_number
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  phone_number: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Email field in *ContactUs → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_us.default.primary.email
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  email: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Default variation for ContactUs Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactUsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContactUsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContactUs*
+ */
+type ContactUsSliceVariation = ContactUsSliceDefault;
+
+/**
+ * ContactUs Shared Slice
+ *
+ * - **API ID**: `contact_us`
+ * - **Description**: ContactUs
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactUsSlice = prismic.SharedSlice<
+  "contact_us",
+  ContactUsSliceVariation
 >;
 
 /**
@@ -1219,6 +1347,10 @@ declare module "@prismicio/client" {
       AnimatedInstrumentsSliceDefaultPrimary,
       AnimatedInstrumentsSliceVariation,
       AnimatedInstrumentsSliceDefault,
+      ContactUsSlice,
+      ContactUsSliceDefaultPrimary,
+      ContactUsSliceVariation,
+      ContactUsSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 
 export const components = {
   animated_instruments: dynamic(() => import("./AnimatedInstruments")),
+  contact_us: dynamic(() => import("./ContactUs")),
   hero: dynamic(() => import("./Hero")),
   repertoire: dynamic(() => import("./VinylPlayer")),
   the_repertoire: dynamic(() => import("./TheRepertoire")),

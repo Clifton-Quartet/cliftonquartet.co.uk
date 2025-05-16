@@ -37,7 +37,7 @@ export default function Footer({ footerData }: FooterProps) {
         <p className="text-center text-white text-sm">
           &copy; {new Date().getFullYear()} {footerData.footer_copyrights}
         </p>
-        <p className="text-center md:text-right text-white text-sm">
+        <p className="text-center md:text-right mt-2 md:mt-0 text-white text-sm">
           Designed and Developed by{" "}
           <a
             href="https://www.sergiocorreia.dev"
@@ -49,7 +49,7 @@ export default function Footer({ footerData }: FooterProps) {
         </p>
         <button
           onClick={scrollToTop}
-          className="absolute right-4 bottom-12 w-10 h-10 bg-slate-900 text-[#fcf2bd] flex justify-center items-center rounded-full hover:bg-slate-500 cursor-pointer"
+          className="absolute right-4 bottom-16 w-10 h-10 bg-slate-900 text-[#fcf2bd] flex justify-center items-center rounded-full hover:bg-slate-500 cursor-pointer"
           aria-label="Scroll to top"
         >
           <ArrowBigUp size={24} />

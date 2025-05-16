@@ -122,7 +122,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="relative min-h-[100vh] w-full overflow-hidden bg-cover bg-center flex flex-col justify-center items-center p-8"
+      className="relative min-h-[100vh] w-full overflow-hidden bg-cover bg-center flex flex-col justify-center items-center p-8 md:p-20"
       style={{
         backgroundImage: `url(${slice.primary.background_image.url})`,
       }}

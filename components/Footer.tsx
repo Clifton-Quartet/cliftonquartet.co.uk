@@ -22,10 +22,10 @@ export default function Footer({ footerData }: FooterProps) {
   return (
     <>
       <div className="flex flex-col justify-center items-center bg-[#fdfe6c] my-10 p-10">
-        <h3 className="text-3xl text-slate-900">
+        <h3 className="text-3xl text-slate-900 text-center">
           {footerData.contact_us_text}
         </h3>
-        <div className="flex gap-8 mt-6">
+        <div className="flex flex-col md:flex-row gap-8 mt-6">
           <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fdfe6c]">
             <PrismicNextLink field={footerData.phone_number} />
           </button>

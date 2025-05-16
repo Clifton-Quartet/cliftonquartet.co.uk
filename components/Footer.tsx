@@ -17,8 +17,6 @@ export default function Footer({ footerData }: FooterProps) {
     });
   };
 
-  console.log("Footer data: ", footerData);
-
   return (
     <>
       <div className="flex flex-col justify-center items-center bg-[#fdfe6c] my-10 p-10">

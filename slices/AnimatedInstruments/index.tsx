@@ -56,7 +56,7 @@ const AnimatedInstruments: FC<AnimatedInstrumentsProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="flex justify-center"
     >
-      <div className="relative h-[75vh] xl:h-[100vh] w-full xl:w-[75vw] max-w-[1920px] ~p-10/16">
+      <div className="relative h-[75vh] xl:h-[100vh] w-full xl:w-[75vw] max-w-[1920px] ~p-10/16 md:my-16">
         <PrismicNextImage
           field={slice.primary.background_image}
           alt=""

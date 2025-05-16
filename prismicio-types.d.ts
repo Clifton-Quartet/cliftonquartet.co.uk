@@ -929,6 +929,47 @@ export type RepertoireSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *TheRepertoire → Default → Primary*
+ */
+export interface TheRepertoireSliceDefaultPrimary {
+  /**
+   * Text field in *TheRepertoire → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: the_repertoire.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
+
+  /**
+   * Phone Number field in *TheRepertoire → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: the_repertoire.default.primary.phone_number
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  phone_number: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Email field in *TheRepertoire → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: the_repertoire.default.primary.email
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  email: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
  * Default variation for TheRepertoire Slice
  *
  * - **API ID**: `default`
@@ -937,7 +978,7 @@ export type RepertoireSlice = prismic.SharedSlice<
  */
 export type TheRepertoireSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<TheRepertoireSliceDefaultPrimary>,
   never
 >;
 
@@ -1188,6 +1229,7 @@ declare module "@prismicio/client" {
       RepertoireSliceVariation,
       RepertoireSliceDefault,
       TheRepertoireSlice,
+      TheRepertoireSliceDefaultPrimary,
       TheRepertoireSliceVariation,
       TheRepertoireSliceDefault,
       WeddingsSlice,

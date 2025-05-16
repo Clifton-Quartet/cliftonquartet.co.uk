@@ -2,7 +2,31 @@
 	{
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
-		"primary": {},
+		"primary": {
+			"text": {
+				"__TYPE__": "FieldContent",
+				"value": "larger",
+				"type": "Text"
+			},
+			"phone_number": {
+				"key": "81575fb9-5cdf-40b9-8dcf-dbfa3039770a",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev",
+					"text": "outside"
+				}
+			},
+			"email": {
+				"__TYPE__": "LinkContent",
+				"key": "242e5c39-732b-4d27-8ab9-20e4fcc9d597",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "tight"
+				}
+			}
+		},
 		"items": []
 	}
 ]

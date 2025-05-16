@@ -32,24 +32,30 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
             <PrismicRichText field={slice.primary.title} />
           </div>
           <div className="text-slate-800 text-2xl leading-10 mt-16">
-            <div className="flex flex-col md:flex-row justify-center items-center mb-6">
-              <div className="md:w-1/2">
+            <div className="flex flex-col lg:flex-row justify-center items-center mb-6">
+              <div className="lg:w-1/2">
                 <PrismicRichText field={slice.primary.paragraph_1} />
                 <PrismicRichText field={slice.primary.paragraph_2} />
               </div>
-              <div className="bg-white p-2 pb-10 rotate-3 mx-auto min-h-[230px] max-h-[260px] my-10">
-                <div className="min-w-[250px] max-w-[300px]">
-                  <PrismicNextImage field={slice.primary.image_1} />
-                </div>
+              <div className="bg-white p-2 pb-10 rotate-3 mx-auto h-[230px] xl:h-[330px] my-10">
+                <div
+                  className="w-[250px] h-[160px] xl:w-[300px] xl:h-[220px] bg-cover bg-center bg-no-repeat"
+                  style={{
+                    backgroundImage: `url(${slice.primary.image_1.url})`,
+                  }}
+                ></div>
               </div>
             </div>
-            <div className="flex flex-col-reverse md:flex-row justify-center items-center">
-              <div className="bg-white p-2 pb-10 -rotate-3 mx-auto min-h-[230px] max-h-[260px] my-10">
-                <div className="min-w-[250px] max-w-[300px]">
-                  <PrismicNextImage field={slice.primary.image_2} />
-                </div>
+            <div className="flex flex-col-reverse lg:flex-row justify-center items-center">
+              <div className="bg-white p-2 pb-10 -rotate-3 mx-auto h-[230px] xl:h-[330px] my-10">
+                <div
+                  className="w-[250px] h-[160px] xl:w-[300px] xl:h-[220px] bg-cover bg-center bg-no-repeat"
+                  style={{
+                    backgroundImage: `url(${slice.primary.image_2.url})`,
+                  }}
+                ></div>
               </div>
-              <div className="md:w-1/2">
+              <div className="lg:w-1/2">
                 <PrismicRichText field={slice.primary.paragraph_3} />
                 <PrismicRichText field={slice.primary.paragraph_4} />
                 <PrismicRichText field={slice.primary.paragraph_5} />

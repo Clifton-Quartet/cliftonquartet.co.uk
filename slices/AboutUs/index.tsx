@@ -25,7 +25,9 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
       }}
     >
       <div className="container mx-auto px-4 md:px-12 py-8 min-h-[100vh] flex justify-center items-center my-32">
-        <div className="glass-bright w-full p-4 md:p-12">
+        <div
+          className={`w-full p-4 md:p-12 ${slice.primary.background_image ? "glass-bright" : ""}`}
+        >
           <div className="text-6xl tracking-widest text-slate-800 mt-4">
             <PrismicRichText field={slice.primary.title} />
           </div>

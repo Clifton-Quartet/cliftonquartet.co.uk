@@ -31,15 +31,15 @@ const TheRepertoire: FC<TheRepertoireProps> = ({ slice, context }) => {
       className="bg-amber-100"
     >
       <RepertoirePlaylist repertoire={repertoire} />
-      <div className="flex flex-col justify-center items-center bg-[#fdfe6c] my-10 p-10">
+      <div className="flex flex-col justify-center items-center bg-[#fcf2bd] my-10 p-10">
         <h3 className="text-3xl text-slate-900 text-center">
           {slice.primary.text}
         </h3>
         <div className="flex flex-col md:flex-row gap-8 mt-6">
-          <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fdfe6c]">
+          <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fcf2bd]">
             <PrismicNextLink field={slice.primary.phone_number} />
           </button>
-          <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fdfe6c]">
+          <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fcf2bd]">
             <PrismicNextLink field={slice.primary.email} />
           </button>
         </div>

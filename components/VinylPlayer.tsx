@@ -11,7 +11,7 @@ if (typeof window !== "undefined") {
 
 // Constants
 const SG_COLOR_OFF = "#4d4d4d";
-const SG_COLOR_ON = "#FDFE6C";
+const SG_COLOR_ON = "#fcf2bd";
 
 // Types
 type DraggableInstance = {
@@ -667,7 +667,7 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
 
             {/* Blue glow when record is playing */}
             <g opacity=".7" id="play-state-ring" ref={recordPlateLightRef}>
-              <circle cx="262.818" cy="218.245" r="175" fill="#FDFE6C" />
+              <circle cx="262.818" cy="218.245" r="175" fill="#fcf2bd" />
             </g>
 
             {/* Main vinyl record */}
@@ -714,7 +714,7 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
                 cx="262.818"
                 cy="218.245"
                 r="60.93"
-                fill="#FDFE6C"
+                fill="#fcf2bd"
               />
 
               {/* Record grooves */}
@@ -1001,7 +1001,7 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
                 id="knob-light"
                 ref={volumeKnobLightRef}
                 fill="none"
-                stroke="#FDFE6C"
+                stroke="#fcf2bd"
                 strokeWidth="2"
                 d="M518 383h35"
               />
@@ -1027,7 +1027,7 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
               <path
                 id="light-level"
                 ref={volumeLightLevelRef}
-                fill="#FDFE6C"
+                fill="#fcf2bd"
                 d="M559 329h18v105h-18z"
               />
             </g>

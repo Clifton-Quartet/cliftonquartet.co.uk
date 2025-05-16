@@ -19,15 +19,15 @@ export default function Footer({ footerData }: FooterProps) {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-[#fdfe6c] my-10 p-10">
+      <div className="flex flex-col justify-center items-center bg-[#fcf2bd] my-10 p-10">
         <h3 className="text-3xl text-slate-900 text-center">
           {footerData.contact_us_text}
         </h3>
         <div className="flex flex-col md:flex-row gap-8 mt-6">
-          <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fdfe6c]">
+          <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fcf2bd]">
             <PrismicNextLink field={footerData.phone_number} />
           </button>
-          <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fdfe6c]">
+          <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fcf2bd]">
             <PrismicNextLink field={footerData.email} />
           </button>
         </div>
@@ -42,14 +42,14 @@ export default function Footer({ footerData }: FooterProps) {
           <a
             href="https://www.sergiocorreia.dev"
             target="_blank"
-            className="text-[#fdfe6c]"
+            className="text-[#fcf2bd]"
           >
             Sergio Correia
           </a>
         </p>
         <button
           onClick={scrollToTop}
-          className="absolute right-4 bottom-12 w-10 h-10 bg-slate-900 text-[#fdfe6c] flex justify-center items-center rounded-full hover:bg-slate-500 cursor-pointer"
+          className="absolute right-4 bottom-12 w-10 h-10 bg-slate-900 text-[#fcf2bd] flex justify-center items-center rounded-full hover:bg-slate-500 cursor-pointer"
           aria-label="Scroll to top"
         >
           <ArrowBigUp size={24} />

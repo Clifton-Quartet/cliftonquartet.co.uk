@@ -77,12 +77,12 @@ html.lenis body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #fdfe6c;
+  background: #fcf2bd;
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #fcd66a;
+  background: #fddb90;
   border-radius: 2px;
 }
 

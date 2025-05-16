@@ -22,7 +22,9 @@ export default function Footer({ footerData }: FooterProps) {
   return (
     <>
       <div className="flex flex-col justify-center items-center bg-[#fdfe6c] my-10 p-10">
-        <h3 className="text-3xl text-slate-900">{footerData.text}</h3>
+        <h3 className="text-3xl text-slate-900">
+          {footerData.contact_us_text}
+        </h3>
         <div className="flex gap-8 mt-6">
           <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fdfe6c]">
             <PrismicNextLink field={footerData.phone_number} />
@@ -35,7 +37,7 @@ export default function Footer({ footerData }: FooterProps) {
       <div className="relative grid grid-cols-1 md:grid-cols-3 items-center m-4">
         <div></div>
         <p className="text-center text-white text-sm">
-          {footerData.footer_copyrigts}
+          &copy; {new Date().getFullYear()} {footerData.footer_copyrights}
         </p>
         <p className="text-right text-white text-sm">
           Designed and Developed by{" "}

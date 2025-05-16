@@ -132,7 +132,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
           <h2 className="relative text-white text-center text-7xl mb-6">
             {slice.primary.title}
           </h2>
-          <div className="relative text-white text-center mb-12 max-w-4xl text-2xl">
+          <div className="relative text-white text-center mb-12 max-w-4xl text-2xl mx-auto">
             <PrismicRichText field={slice.primary.text} />
           </div>
         </div>

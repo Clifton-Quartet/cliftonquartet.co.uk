@@ -565,7 +565,7 @@ export type StringTrioRepertoireDocument<Lang extends string = string> =
     Lang
   >;
 
-type ThePlayersDocumentDataSlicesSlice = HeroSlice;
+type ThePlayersDocumentDataSlicesSlice = WeddingsSlice | HeroSlice;
 
 /**
  * Content for The Players documents

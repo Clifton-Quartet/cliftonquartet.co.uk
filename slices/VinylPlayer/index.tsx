@@ -6,6 +6,7 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import CarouselItem from "@/components/CarouselItem";
 import gsap from "gsap";
 import VinylPlayer from "@/components/VinylPlayer";
+import { SlideIn } from "@/components/SlideIn";
 
 /**
  * Type definitions for MP3 files and repertoire items
@@ -127,16 +128,20 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
         backgroundImage: `url(${slice.primary.background_image.url})`,
       }}
     >
-      <div className="plant absolute top-[35%] left-4 w-[400px] h-[400px] 2xl:w-[500px] 2xl:h-[500px] hidden xl:block z-20"></div>
-      <div className="plant absolute top-[30%] right-4 w-[400px] h-[400px] 2xl:w-[500px] 2xl:h-[500px] hidden xl:block rotate-90 z-20"></div>
+      <div className="plant absolute top-[50%] 2xl:top-[35%] left-4 w-[300px] h-[300px] 2xl:w-[500px] 2xl:h-[500px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block z-20"></div>
+      <div className="plant absolute top-[45%] 2xl:top-[30%] right-4 w-[300px] h-[300px] 2xl:w-[500px] 2xl:h-[500px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block rotate-90 z-20"></div>
       <div className="relative flex flex-col items-center w-full justify-center">
         <div className="lg:w-2/3">
-          <h2 className="relative text-white text-center text-7xl mb-6">
-            {slice.primary.title}
-          </h2>
-          <div className="relative text-white text-center mb-12 max-w-4xl text-2xl mx-auto">
-            <PrismicRichText field={slice.primary.text} />
-          </div>
+          <SlideIn>
+            <h2 className="relative text-white text-center text-7xl mb-6">
+              {slice.primary.title}
+            </h2>
+          </SlideIn>
+          <SlideIn>
+            <div className="relative text-white text-center mb-12 max-w-4xl text-2xl mx-auto">
+              <PrismicRichText field={slice.primary.text} />
+            </div>
+          </SlideIn>
         </div>
         <div className="w-[150%] md:w-[100%] lg:w-[80%]">
           <VinylPlayer song={songUrl} />

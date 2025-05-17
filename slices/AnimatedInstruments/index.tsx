@@ -54,7 +54,7 @@ const AnimatedInstruments: FC<AnimatedInstrumentsProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="flex justify-center"
+      className="flex justify-center bg-slate-900"
     >
       <div className="relative h-[75vh] xl:h-[100vh] w-full xl:w-[75vw] max-w-[1920px] ~p-10/16 md:my-16">
         <PrismicNextImage

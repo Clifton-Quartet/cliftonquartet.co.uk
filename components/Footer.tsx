@@ -19,20 +19,20 @@ export default function Footer({ footerData }: FooterProps) {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-[#fcf2bd] my-10 p-10">
-        <h3 className="text-3xl text-slate-900 text-center">
+      <div className="flex flex-col justify-center items-center bg-slate-900 p-10">
+        <h3 className="text-3xl text-white text-center">
           {footerData.contact_us_text}
         </h3>
         <div className="flex flex-col md:flex-row gap-4 md:gap-8 mt-6">
-          <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fcf2bd]">
+          <button className="px-4 py-2 bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
             <PrismicNextLink field={footerData.phone_number} />
           </button>
-          <button className="px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fcf2bd]">
+          <button className="px-4 py-2 bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
             <PrismicNextLink field={footerData.email} />
           </button>
         </div>
       </div>
-      <div className="relative grid grid-cols-1 md:grid-cols-3 items-center m-4">
+      <div className="relative grid grid-cols-1 md:grid-cols-3 items-center p-4 bg-slate-900">
         <div></div>
         <p className="text-center text-white text-sm">
           &copy; {new Date().getFullYear()} {footerData.footer_copyrights}
@@ -49,7 +49,7 @@ export default function Footer({ footerData }: FooterProps) {
         </p>
         <button
           onClick={scrollToTop}
-          className="absolute right-4 bottom-16 w-10 h-10 bg-slate-900 text-[#fcf2bd] flex justify-center items-center rounded-full hover:bg-slate-500 cursor-pointer"
+          className="absolute right-4 bottom-16 w-10 h-10 bg-slate-900 border-2 border-[#fcf2bd] text-[#fcf2bd] flex justify-center items-center rounded-full hover:opacity-90 cursor-pointer"
           aria-label="Scroll to top"
         >
           <ArrowBigUp size={24} />

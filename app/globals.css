@@ -210,3 +210,9 @@ svg#main {
 .photos-polaroid {
   box-shadow: 14px 14px 18px rgba(0, 0, 0, 0.5);
 }
+
+.plant {
+  background-image: url("/images/plant.png");
+  background-size: contain;
+  background-position: center;
+}

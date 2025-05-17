@@ -127,6 +127,8 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
         backgroundImage: `url(${slice.primary.background_image.url})`,
       }}
     >
+      <div className="plant absolute top-[45%] left-4 w-[400px] h-[400px] 2xl:w-[500px] 2xl:h-[500px] hidden xl:block z-20"></div>
+      <div className="plant absolute top-[40%] right-4 w-[400px] h-[400px] 2xl:w-[500px] 2xl:h-[500px] hidden xl:block rotate-90 z-20"></div>
       <div className="relative flex flex-col items-center w-full justify-center">
         <div className="lg:w-2/3">
           <h2 className="relative text-white text-center text-7xl mb-6">

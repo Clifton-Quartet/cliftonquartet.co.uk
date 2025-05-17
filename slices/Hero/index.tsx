@@ -70,7 +70,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       >
         {slice.primary.title}
       </div>
-      <div className="absolute -right-11 top-[50%] -translate-y-[50%]">
+      <div className="absolute -right-11 top-[50%] -translate-y-[50%] z-10">
         <Navigation />
       </div>
     </section>

@@ -92,12 +92,12 @@ export function Navigation() {
         return (
           <li
             key={`nav-${index}`}
-            className="relative glass m-2 p-4 pr-11 translate-x-8 group cursor-pointer"
+            className="relative glass m-2 p-4 pr-11 backdrop-blur-sm translate-x-8 group cursor-pointer"
             ref={(el) => addToNavItemsRef(el, index)}
           >
             <PrismicNextLink
               field={item.navigation_link}
-              className={`relative text-white m-2 p-4 z-10 text-center ${
+              className={`relative text-white m-2 p-4 z-20 text-center ${
                 isActive ? "opacity-100" : "opacity-70 group-hover:opacity-90"
               }`}
             />

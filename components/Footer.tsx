@@ -24,11 +24,17 @@ export default function Footer({ footerData }: FooterProps) {
           {footerData.contact_us_text}
         </h3>
         <div className="flex flex-col md:flex-row gap-4 md:gap-8 mt-6">
-          <button className="px-4 py-2 bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
-            <PrismicNextLink field={footerData.phone_number} />
+          <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
+            <PrismicNextLink
+              field={footerData.phone_number}
+              className="px-4 py-2 block w-full h-full"
+            />
           </button>
-          <button className="px-4 py-2 bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
-            <PrismicNextLink field={footerData.email} />
+          <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
+            <PrismicNextLink
+              field={footerData.email}
+              className="px-4 py-2 block w-full h-full"
+            />
           </button>
         </div>
       </div>

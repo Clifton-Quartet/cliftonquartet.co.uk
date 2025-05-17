@@ -56,7 +56,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     >
       <div
         ref={backgroundRef}
-        className="relative h-full w-full bg-cover bg-no-repeat bg-left opacity-0"
+        className="relative h-full w-full bg-cover bg-no-repeat bg-center opacity-0"
         style={{
           backgroundImage: `url(${slice.primary.background_image.url})`,
         }}

@@ -215,4 +215,5 @@ svg#main {
   background-image: url("/images/plant.png");
   background-size: contain;
   background-position: center;
+  filter: drop-shadow(4px 15px 15px rgba(0, 0, 0, 0.75));
 }

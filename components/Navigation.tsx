@@ -25,7 +25,6 @@ export function Navigation() {
   }, []);
 
   useEffect(() => {
-    // Animation runs after settings are loaded and navigation items are rendered
     if (settings && navRef.current) {
       // Get all list items for the animation
       const navItems = navRef.current.querySelectorAll("li");
@@ -45,18 +44,55 @@ export function Navigation() {
         ease: "power3.out", // Smooth easing function
       });
 
-      navItems.forEach((item) => {
-        if (!item.classList.contains("active")) {
-          item.addEventListener("mouseenter", () => {
+      // Store event handler references to remove them later
+      const enterHandlers: (() => void)[] = [];
+      const leaveHandlers: (() => void)[] = [];
+
+      navItemsRef.current.forEach((item, index) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const link = (settings.data as any).navigation[index].navigation_link;
+        let itemLinkUrl = "/";
+
+        // Handle different link types
+        if (link.link_type === "Web" && link.url) {
+          itemLinkUrl = link.url;
+        } else if (link.link_type === "Document" && link.uid) {
+          itemLinkUrl =
+            link.type === "page" ? `/${link.uid}` : `/${link.type}/${link.uid}`;
+        }
+
+        // Check if this specific item is active
+        const isItemActive =
+          itemLinkUrl === pathname ||
+          (itemLinkUrl !== "/" && pathname.startsWith(itemLinkUrl));
+
+        if (!isItemActive) {
+          const enterHandler = () => {
             gsap.to(item, { x: -30, duration: 0.3 });
-          });
-          item.addEventListener("mouseleave", () => {
+          };
+          const leaveHandler = () => {
             gsap.to(item, { x: 0, duration: 0.3 });
-          });
+          };
+
+          item.addEventListener("mouseenter", enterHandler);
+          item.addEventListener("mouseleave", leaveHandler);
+
+          enterHandlers[index] = enterHandler;
+          leaveHandlers[index] = leaveHandler;
         }
       });
+
+      // Cleanup function
+      return () => {
+        navItemsRef.current.forEach((item, index) => {
+          if (enterHandlers[index])
+            item.removeEventListener("mouseenter", enterHandlers[index]);
+          if (leaveHandlers[index])
+            item.removeEventListener("mouseleave", leaveHandlers[index]);
+        });
+      };
     }
-  }, [settings]); // Run animation when settings are loaded
+  }, [settings, pathname]);
 
   const addToNavItemsRef = (el: HTMLLIElement | null, index: number) => {
     if (el && !navItemsRef.current.includes(el)) {
@@ -98,7 +134,7 @@ export function Navigation() {
             <PrismicNextLink
               field={item.navigation_link}
               className={`relative text-white m-2 px-6 py-2 w-full z-20 text-left pr-20 inline-block ${
-                isActive ? "opacity-100" : "opacity-70 group-hover:opacity-90"
+                isActive ? "opacity-100" : "opacity-50 group-hover:opacity-90"
               }`}
             />
           </li>

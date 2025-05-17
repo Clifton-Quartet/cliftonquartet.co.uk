@@ -129,7 +129,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
       }}
     >
       <div className="plant absolute top-[50%] 2xl:top-[35%] left-4 w-[300px] h-[300px] 2xl:w-[500px] 2xl:h-[500px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block z-20"></div>
-      <div className="plant absolute top-[45%] 2xl:top-[30%] right-4 w-[300px] h-[300px] 2xl:w-[500px] 2xl:h-[500px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block rotate-90 z-20"></div>
+      <div className="plant-with-flowers absolute top-[45%] 2xl:top-[30%] right-4 w-[300px] h-[300px] 2xl:w-[450px] 2xl:h-[450px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block rotate-90 z-20"></div>
       <div className="relative flex flex-col items-center w-full justify-center">
         <div className="lg:w-2/3">
           <SlideIn>

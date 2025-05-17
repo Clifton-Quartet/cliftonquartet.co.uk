@@ -32,7 +32,7 @@ export function Navigation() {
 
       // Set initial state - positioned outside the screen
       gsap.set(navItems, {
-        x: 200, // Start from right (outside the viewport)
+        x: 200,
         immediateRender: true,
       });
 
@@ -43,6 +43,17 @@ export function Navigation() {
         stagger: 0.3, // 300ms between each animation
         delay: 1.6,
         ease: "power3.out", // Smooth easing function
+      });
+
+      navItems.forEach((item) => {
+        if (!item.classList.contains("active")) {
+          item.addEventListener("mouseenter", () => {
+            gsap.to(item, { x: -30, duration: 0.3 });
+          });
+          item.addEventListener("mouseleave", () => {
+            gsap.to(item, { x: 0, duration: 0.3 });
+          });
+        }
       });
     }
   }, [settings]); // Run animation when settings are loaded
@@ -81,13 +92,13 @@ export function Navigation() {
         return (
           <li
             key={`nav-${index}`}
-            className="relative glass m-2 p-4"
+            className="relative glass m-2 p-4 pr-11 translate-x-8 group cursor-pointer"
             ref={(el) => addToNavItemsRef(el, index)}
           >
             <PrismicNextLink
               field={item.navigation_link}
               className={`relative text-white m-2 p-4 z-10 text-center ${
-                isActive ? "opacity-100" : "opacity-70 hover:opacity-90"
+                isActive ? "opacity-100" : "opacity-70 group-hover:opacity-90"
               }`}
             />
           </li>

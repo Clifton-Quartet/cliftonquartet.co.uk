@@ -169,7 +169,13 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
           onMouseLeave={() => setIsFlipped(false)}
         >
           <div
-            className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d -rotate-z-6 ${isFlipped ? "rotate-y-180" : ""}`}
+            className={
+              "relative w-full h-full transition-transform duration-700"
+            }
+            style={{
+              transformStyle: "preserve-3d",
+              transform: `rotateY(${isFlipped ? 180 : 0}deg) rotateZ(${isFlipped ? 3 : -12}deg)`,
+            }}
           >
             <div
               className="vinyl-shadow absolute w-full h-full backface-hidden shadow-xl rounded-lg overflow-hidden bg-cover"

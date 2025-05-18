@@ -567,6 +567,7 @@ export type StringTrioRepertoireDocument<Lang extends string = string> =
   >;
 
 type ThePlayersDocumentDataSlicesSlice =
+  | PlayersBioSlice
   | TestimonialsSlice
   | WeddingsSlice
   | HeroSlice;
@@ -877,6 +878,128 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Item in *PlayersBio → Default → Primary → Player bio*
+ */
+export interface PlayersBioSliceDefaultPrimaryPlayerBioItem {
+  /**
+   * Player photo field in *PlayersBio → Default → Primary → Player bio*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: players_bio.default.primary.player_bio[].player_photo
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  player_photo: prismic.ImageField<never>;
+
+  /**
+   * Player name field in *PlayersBio → Default → Primary → Player bio*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: players_bio.default.primary.player_bio[].player_name
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  player_name: prismic.RichTextField;
+
+  /**
+   * Player bio field in *PlayersBio → Default → Primary → Player bio*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: players_bio.default.primary.player_bio[].player_bio
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  player_bio: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *PlayersBio → Default → Primary*
+ */
+export interface PlayersBioSliceDefaultPrimary {
+  /**
+   * Title field in *PlayersBio → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: players_bio.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Sub heading field in *PlayersBio → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: players_bio.default.primary.sub_heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  sub_heading: prismic.RichTextField;
+
+  /**
+   * Background Image field in *PlayersBio → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: players_bio.default.primary.background_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  background_image: prismic.ImageField<never>;
+
+  /**
+   * Background Color field in *PlayersBio → Default → Primary*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: players_bio.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  background_color: prismic.ColorField;
+
+  /**
+   * Player bio field in *PlayersBio → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: players_bio.default.primary.player_bio[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  player_bio: prismic.GroupField<
+    Simplify<PlayersBioSliceDefaultPrimaryPlayerBioItem>
+  >;
+}
+
+/**
+ * Default variation for PlayersBio Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PlayersBioSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<PlayersBioSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *PlayersBio*
+ */
+type PlayersBioSliceVariation = PlayersBioSliceDefault;
+
+/**
+ * PlayersBio Shared Slice
+ *
+ * - **API ID**: `players_bio`
+ * - **Description**: PlayersBio
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PlayersBioSlice = prismic.SharedSlice<
+  "players_bio",
+  PlayersBioSliceVariation
+>;
 
 /**
  * Item in *VinylPlayer → Default → Primary → Repertoire Carousel*
@@ -1417,6 +1540,11 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      PlayersBioSlice,
+      PlayersBioSliceDefaultPrimaryPlayerBioItem,
+      PlayersBioSliceDefaultPrimary,
+      PlayersBioSliceVariation,
+      PlayersBioSliceDefault,
       RepertoireSlice,
       RepertoireSliceDefaultPrimaryRepertoireCarouselItem,
       RepertoireSliceDefaultPrimary,

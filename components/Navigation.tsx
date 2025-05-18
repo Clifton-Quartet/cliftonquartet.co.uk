@@ -35,13 +35,36 @@ export function Navigation() {
         immediateRender: true,
       });
 
-      // Animate each item in with a stagger effect
+      // Animate all items with the same stagger effect
+      // but with different end positions based on active state
       gsap.to(navItems, {
-        x: 0, // Move to original position
-        duration: 1, // Animation duration
-        stagger: 0.3, // 300ms between each animation
+        x: (index) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const link = (settings.data as any).navigation[index].navigation_link;
+          let itemLinkUrl = "/";
+
+          // Handle different link types
+          if (link.link_type === "Web" && link.url) {
+            itemLinkUrl = link.url;
+          } else if (link.link_type === "Document" && link.uid) {
+            itemLinkUrl =
+              link.type === "page"
+                ? `/${link.uid}`
+                : `/${link.type}/${link.uid}`;
+          }
+
+          // Check if this specific item is active
+          const isItemActive =
+            itemLinkUrl === pathname ||
+            (itemLinkUrl !== "/" && pathname.startsWith(itemLinkUrl));
+
+          // Return the target position based on active state
+          return isItemActive ? -30 : 0;
+        },
+        duration: 1,
+        stagger: 0.3, // Same stagger effect for all items
         delay: 1.6,
-        ease: "power3.out", // Smooth easing function
+        ease: "power3.out",
       });
 
       // Store event handler references to remove them later
@@ -66,6 +89,7 @@ export function Navigation() {
           itemLinkUrl === pathname ||
           (itemLinkUrl !== "/" && pathname.startsWith(itemLinkUrl));
 
+        // Only add hover animations to inactive items
         if (!isItemActive) {
           const enterHandler = () => {
             gsap.to(item, { x: -30, duration: 0.3 });

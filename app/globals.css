@@ -203,6 +203,23 @@ svg#main {
   }
 }
 
+/* Vinyl 3D cover */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+.vinyl-shadow {
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
 /* Other styles */
 .glass-bright {
   backdrop-filter: blur(15px);

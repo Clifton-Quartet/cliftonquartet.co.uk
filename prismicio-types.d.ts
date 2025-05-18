@@ -939,6 +939,26 @@ export interface RepertoireSliceDefaultPrimary {
   mp3_song: prismic.LinkToMediaField<prismic.FieldState, never>;
 
   /**
+   * Vinyl Cover field in *VinylPlayer → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: repertoire.default.primary.vinyl_cover
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  vinyl_cover: prismic.ImageField<never>;
+
+  /**
+   * Vinyl Back field in *VinylPlayer → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: repertoire.default.primary.vinyl_back
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  vinyl_back: prismic.ImageField<never>;
+
+  /**
    * Repertoire Carousel field in *VinylPlayer → Default → Primary*
    *
    * - **Field Type**: Group

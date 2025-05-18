@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, FC } from "react";
+import React, { useEffect, useRef, FC, useState } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import CarouselItem from "@/components/CarouselItem";
@@ -38,6 +38,7 @@ export type RepertoireProps = SliceComponentProps<Content.RepertoireSlice>;
 const Repertoire: FC<RepertoireProps> = ({ slice }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Timeline | null>(null);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   // Safely access the repertoire items with type assertion
   /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -162,15 +163,40 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
             />
           ))}
         </div>
-        <div className="hidden md:block text-center">
-          {items.map((item, index) => (
-            <div key={index} className="flex justify-center">
-              <p className="mr-1">{index + 1}.</p>
-              <p>
-                {item.artist} {item.artist ? "-" : ""} {item.song}
-              </p>
+        <div
+          className="vinyl-container hidden md:block w-[26%] p-6 lg:p-20 lg:w-[30%] aspect-square mx-auto perspective-1000 cursor-pointer"
+          onMouseEnter={() => setIsFlipped(true)}
+          onMouseLeave={() => setIsFlipped(false)}
+        >
+          <div
+            className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d -rotate-z-6 ${isFlipped ? "rotate-y-180" : ""}`}
+          >
+            <div
+              className="vinyl-shadow absolute w-full h-full backface-hidden shadow-xl rounded-lg overflow-hidden bg-cover"
+              style={{
+                backgroundImage: `url(${slice.primary.vinyl_cover.url})`,
+              }}
+            ></div>
+
+            <div
+              className="vinyl-shadow absolute w-full h-full backface-hidden shadow-lg rounded-lg bg-cover text-white rotate-y-180 p-2 overflow-y-auto"
+              style={{
+                backgroundImage: `url(${slice.primary.vinyl_back.url})`,
+              }}
+            >
+              <div className="p-1">
+                <p>Side A</p>
+                {items.map((item, index) => (
+                  <div key={index} className="flex text-sm xl:text-base w-1/2">
+                    <p className="mr-1">{index + 1}.</p>
+                    <p>
+                      {item.artist} {item.artist ? "-" : ""} {item.song}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

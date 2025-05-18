@@ -45,6 +45,22 @@
             "allowText": true
           }
         },
+        "vinyl_cover": {
+          "type": "Image",
+          "config": {
+            "label": "Vinyl Cover",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "vinyl_back": {
+          "type": "Image",
+          "config": {
+            "label": "Vinyl Back",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
         "repertoire_carousel": {
           "type": "Group",
           "config": {

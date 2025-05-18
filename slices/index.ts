@@ -6,6 +6,7 @@ export const components = {
   animated_instruments: dynamic(() => import("./AnimatedInstruments")),
   hero: dynamic(() => import("./Hero")),
   repertoire: dynamic(() => import("./VinylPlayer")),
+  testimonials: dynamic(() => import("./Testimonials")),
   the_repertoire: dynamic(() => import("./TheRepertoire")),
   weddings: dynamic(() => import("./AboutUs")),
 };

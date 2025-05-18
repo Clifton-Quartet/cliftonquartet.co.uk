@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type CliftonQuartetHomepageDocumentDataSlicesSlice =
+  | TestimonialsSlice
   | WeddingsSlice
   | RepertoireSlice
   | AnimatedInstrumentsSlice
@@ -634,6 +635,8 @@ export type ThePlayersDocument<Lang extends string = string> =
   >;
 
 type TheRepertoireDocumentDataSlicesSlice =
+  | RepertoireSlice
+  | TestimonialsSlice
   | WeddingsSlice
   | TheRepertoireSlice
   | HeroSlice;
@@ -701,7 +704,10 @@ export type TheRepertoireDocument<Lang extends string = string> =
     Lang
   >;
 
-type WeddingsAndEventsDocumentDataSlicesSlice = WeddingsSlice | HeroSlice;
+type WeddingsAndEventsDocumentDataSlicesSlice =
+  | TestimonialsSlice
+  | WeddingsSlice
+  | HeroSlice;
 
 /**
  * Content for Weddings & Events documents

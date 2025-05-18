@@ -32,7 +32,7 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
         </SlideIn>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full max-w-[960px] justify-center items-center text-slate-900 mt-12">
           {slice.primary.testimonial.map((item, index) => (
-            <div key={index} className="relative min-h-52">
+            <SlideIn key={index}>
               <div
                 style={{
                   backgroundImage: `url(${item.background_image.url})`,
@@ -42,7 +42,7 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
                 <PrismicRichText field={item.testimonial_message} />
                 <p className="italic text-sm mt-2">{item.author}</p>
               </div>
-            </div>
+            </SlideIn>
           ))}
         </div>
       </div>

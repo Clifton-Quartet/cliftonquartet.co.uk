@@ -181,6 +181,8 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
               className="vinyl-shadow absolute w-full h-full backface-hidden shadow-xl rounded-lg overflow-hidden bg-cover"
               style={{
                 backgroundImage: `url(${slice.primary.vinyl_cover.url})`,
+                transform: "translateZ(6px)",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.9)",
               }}
             ></div>
 
@@ -188,6 +190,8 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
               className="vinyl-shadow absolute w-full h-full backface-hidden shadow-lg rounded-lg bg-cover text-white rotate-y-180 p-2 overflow-y-auto"
               style={{
                 backgroundImage: `url(${slice.primary.vinyl_back.url})`,
+                transform: "rotateY(180deg) translateZ(6px)",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.9)",
               }}
             >
               <div className="p-1">

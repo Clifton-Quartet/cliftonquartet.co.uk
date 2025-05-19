@@ -24,9 +24,9 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
         backgroundColor: slice.primary.background_color || undefined,
       }}
     >
-      <div className="px-4 md:px-12 py-8 flex flex-col justify-center items-center py-32">
+      <div className="px-4 md:px-12 py-8 flex flex-col justify-center items-center">
         <SlideIn>
-          <div className="text-6xl tracking-widest uppercase font-serif font-bold mt-4">
+          <div className="text-5xl lg:text-7xl tracking-widest uppercase font-serif font-bold mt-4">
             <p>{slice.primary.title}</p>
           </div>
         </SlideIn>

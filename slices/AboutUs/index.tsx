@@ -21,11 +21,11 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
         backgroundColor: slice.primary.background_color || undefined,
       }}
     >
-      <div className="text-2xl">
+      <div className="text-xl lg:text-2xl">
         <div className="lg:grid lg:grid-cols-4 leading-loose tracking-wide items-center">
-          <div className="lg:col-span-3 bg-yellow-100 text-yellow-900 flex flex-col justify-center p-16">
+          <div className="lg:col-span-3 bg-yellow-100 text-yellow-900 flex flex-col justify-center p-6 lg:p-16">
             <SlideIn>
-              <div className="font-serif uppercase font-bold tracking-widest text-7xl mb-4">
+              <div className="font-serif uppercase font-bold tracking-widest text-5xl lg:text-7xl mb-4">
                 <PrismicRichText field={slice.primary.title} />
               </div>
             </SlideIn>
@@ -50,16 +50,8 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
             }}
           ></div>
         </div>
-        <div className="flex flex-col-reverse lg:grid lg:grid-cols-4 leading-loose tracking-wide items-center">
-          <div className="lg:col-span-1 bg-cover bg-center bg-no-repeat aspect-video">
-            <div
-              className="bg-cover bg-center bg-no-repeat h-full"
-              style={{
-                backgroundImage: `url(${slice.primary.image_2.url})`,
-              }}
-            ></div>
-          </div>
-          <div className="lg:col-span-3 bg-yellow-100 text-yellow-900 flex flex-col justify-center p-16">
+        <div className="lg:grid lg:grid-cols-4 leading-loose tracking-wide items-center">
+          <div className="order-2 lg:col-span-3 bg-yellow-100 text-yellow-900 flex flex-col justify-center p-6 lg:p-16">
             {slice.primary.paragraph_4 ? (
               <div>
                 <SlideIn>
@@ -106,6 +98,12 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
               <div></div>
             )}
           </div>
+          <div
+            className="order-1 lg:col-span-1 bg-cover bg-center bg-no-repeat aspect-video"
+            style={{
+              backgroundImage: `url(${slice.primary.image_2.url})`,
+            }}
+          ></div>
         </div>
       </div>
     </section>

@@ -427,7 +427,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       </p>
 
       {/* Songs Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-2 lg:gap-6 mb-8">
         {paginatedSongs.map((song) => (
           <div
             key={song.id}
@@ -443,7 +443,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               </div>
               <button
                 onClick={() => addToPlaylist(song)}
-                className="w-full flex items-center justify-center gap-2 bg-[#fcf2bd] text-slate-900 py-2 rounded-lg hover:opacity-80 transition-colors cursor-pointer"
+                className="w-full flex items-center justify-center gap-1 lg:gap-2 bg-[#fcf2bd] text-slate-900 py-2 rounded-lg hover:opacity-80 transition-colors cursor-pointer"
                 disabled={playlist.find((s) => s.id === song.id) !== undefined}
               >
                 {playlist.find((s) => s.id === song.id) ? (

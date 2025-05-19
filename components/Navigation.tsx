@@ -31,7 +31,7 @@ export function Navigation() {
 
       // Set initial state - positioned outside the screen
       gsap.set(navItems, {
-        x: 200,
+        x: 250,
         immediateRender: true,
       });
 

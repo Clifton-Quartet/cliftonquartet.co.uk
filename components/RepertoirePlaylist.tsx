@@ -364,8 +364,8 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-[100dvh]">
-      <h1 className="text-7xl font-bold mb-8 text-center text-slate-900">
+    <div className="container mx-auto px-4 py-8 min-h-[100dvh] font-sans">
+      <h1 className="text-3xl lg:text-6xl uppercase font-serif font-bold mb-8 text-center tracking-widest text-yellow-900">
         String Quartet Repertoire
       </h1>
 

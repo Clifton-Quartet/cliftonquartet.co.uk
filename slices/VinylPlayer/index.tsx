@@ -134,15 +134,17 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
       <div className="relative flex flex-col items-center w-full justify-center">
         <div className="lg:w-2/3">
           <SlideIn>
-            <h2 className="relative text-white text-center text-7xl mb-6">
+            <h2 className="relative uppercase font-bold tracking-widest text-white text-center text-7xl mb-6">
               {slice.primary.title}
             </h2>
           </SlideIn>
-          <SlideIn>
-            <div className="relative text-white text-center mb-12 max-w-4xl text-2xl mx-auto">
-              <PrismicRichText field={slice.primary.text} />
-            </div>
-          </SlideIn>
+          <div className="glass-bright p-10 mb-12 backdrop-blur-lg">
+            <SlideIn>
+              <div className="relative font-sans text-slate-900 text-center z-10 max-w-4xl text-2xl mx-auto">
+                <PrismicRichText field={slice.primary.text} />
+              </div>
+            </SlideIn>
+          </div>
         </div>
         <div className="w-[150%] md:w-[100%] lg:w-[80%]">
           <VinylPlayer song={songUrl} />
@@ -197,7 +199,10 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
               <div className="p-1">
                 <p>Side A</p>
                 {items.map((item, index) => (
-                  <div key={index} className="flex text-sm xl:text-base w-1/2">
+                  <div
+                    key={index}
+                    className="flex text-sm xl:text-base w-1/2 font-sans"
+                  >
                     <p className="mr-1">{index + 1}.</p>
                     <p>
                       {item.artist} {item.artist ? "-" : ""} {item.song}

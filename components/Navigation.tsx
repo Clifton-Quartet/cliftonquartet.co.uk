@@ -157,7 +157,7 @@ export function Navigation() {
           >
             <PrismicNextLink
               field={item.navigation_link}
-              className={`relative text-white m-2 px-6 py-2 w-full z-20 text-left pr-20 inline-block ${
+              className={`relative text-white font-sans m-2 px-6 py-2 w-full z-20 text-left pr-20 inline-block ${
                 isActive ? "opacity-100" : "opacity-50 group-hover:opacity-90"
               }`}
             />

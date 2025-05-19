@@ -1,4 +1,4 @@
-import { Instrument_Serif } from "next/font/google";
+import { Instrument_Serif, Inter } from "next/font/google";
 import "./globals.css";
 import { ReactLenis } from "@/utils/lenis";
 import Footer from "@/components/Footer";
@@ -9,6 +9,12 @@ const instrumentSerif = Instrument_Serif({
   weight: "400",
   variable: "--font-instrument-serif",
   subsets: ["latin"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export default async function RootLayout({
@@ -24,7 +30,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <ReactLenis root>
-        <body className={`${instrumentSerif.variable} antialiased`}>
+        <body
+          className={`${instrumentSerif.variable} ${inter.variable} antialiased`}
+        >
           {children}
           <Footer footerData={footerData.data} />
         </body>

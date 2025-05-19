@@ -28,10 +28,10 @@ const TheRepertoire: FC<TheRepertoireProps> = ({ slice, context }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-amber-100"
+      className="bg-yellow-100 font-sans"
     >
       <RepertoirePlaylist repertoire={repertoire} />
-      <div className="flex flex-col justify-center items-center bg-slate-900 my-10 p-10">
+      <div className="flex flex-col justify-center items-center font-sans bg-slate-900 my-10 p-10">
         <h3 className="text-3xl text-white text-center">
           {slice.primary.text}
         </h3>

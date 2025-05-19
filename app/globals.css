@@ -2,6 +2,8 @@
 
 :root {
   --font-instrument-serif: "Instrument Serif", serif;
+  --font-inter: var(--font-inter);
+
   --hue-primary: 23;
   --hue-secondary: 378;
   --primary500: hsl(var(--hue-primary), 90%, 50%);
@@ -144,8 +146,6 @@ svg#main {
 
 /* Navigation styling */
 .glass {
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
   background: rgba(48, 48, 48, 0.6);
   color: transparent;
   border-radius: 8px;
@@ -166,6 +166,14 @@ svg#main {
 .glass::after {
   border: 1px solid var(--primary500);
   mask-image: linear-gradient(135deg, var(--white0) 50%, var(--white));
+}
+
+.glass-bright {
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 /* Songs cards */
@@ -221,24 +229,12 @@ svg#main {
 }
 
 /* Other styles */
-.glass-bright {
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  background: rgba(211, 199, 163, 0.85);
-  color: transparent;
-  border-radius: 8px;
-}
-
 .vinyl-player {
   background-image: url("/images/leather.jpg");
   background-size: cover;
   background-position: center;
   box-shadow: 14px 14px 18px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-}
-
-.photos-polaroid {
-  box-shadow: 14px 14px 18px rgba(0, 0, 0, 0.5);
 }
 
 .plant {

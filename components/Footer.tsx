@@ -19,7 +19,7 @@ export default function Footer({ footerData }: FooterProps) {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-slate-900 p-10">
+      <div className="flex flex-col justify-center items-center bg-slate-900 p-10 border-t border-white font-sans">
         <h3 className="text-3xl text-white text-center">
           {footerData.contact_us_text}
         </h3>
@@ -38,7 +38,7 @@ export default function Footer({ footerData }: FooterProps) {
           </button>
         </div>
       </div>
-      <div className="relative grid grid-cols-1 md:grid-cols-3 items-center p-4 bg-slate-900">
+      <div className="relative grid grid-cols-1 md:grid-cols-3 items-center p-4 bg-slate-900 font-sans">
         <div></div>
         <p className="text-center text-white text-sm">
           &copy; {new Date().getFullYear()} {footerData.footer_copyrights}

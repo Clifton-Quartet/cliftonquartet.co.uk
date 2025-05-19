@@ -24,7 +24,7 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
         backgroundColor: slice.primary.background_color || undefined,
       }}
     >
-      <div className="px-4 md:px-12 py-8 flex flex-col justify-center items-center">
+      <div className="px-6 md:px-12 py-8 flex flex-col justify-center items-center">
         <SlideIn>
           <div className="text-5xl lg:text-7xl tracking-widest uppercase font-serif font-bold mt-4">
             <p>{slice.primary.title}</p>
@@ -37,7 +37,7 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
                 style={{
                   backgroundImage: `url(${item.background_image.url})`,
                 }}
-                className="flex flex-col justify-center bg-contain bg-no-repeat bg-center min-h-52 text-xl p-4"
+                className="flex flex-col justify-center bg-contain bg-no-repeat bg-center min-h-52 text-xl lg:p-4"
               >
                 <PrismicRichText field={item.testimonial_message} />
                 <p className="italic text-sm mt-2">{item.author}</p>

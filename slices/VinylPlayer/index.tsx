@@ -134,7 +134,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
       <div className="relative flex flex-col items-center w-full justify-center">
         <div className="lg:w-2/3">
           <SlideIn>
-            <h2 className="relative uppercase font-bold tracking-widest text-white text-center text-5xl lg:text-7xl mb-6">
+            <h2 className="relative uppercase font-bold tracking-widest text-yellow-100 text-center text-5xl lg:text-7xl mb-6">
               {slice.primary.title}
             </h2>
           </SlideIn>

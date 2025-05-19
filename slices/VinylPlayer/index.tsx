@@ -140,7 +140,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
           </SlideIn>
           <div className="glass-bright p-10 mb-12 backdrop-blur-lg">
             <SlideIn>
-              <div className="relative font-sans text-yellow-900 text-center z-10 max-w-4xl text-2xl mx-auto">
+              <div className="relative font-sans text-yellow-100 text-center z-10 max-w-4xl text-2xl mx-auto">
                 <PrismicRichText field={slice.primary.text} />
               </div>
             </SlideIn>

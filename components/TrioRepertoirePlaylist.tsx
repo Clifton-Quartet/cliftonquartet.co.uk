@@ -347,7 +347,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
   return (
     <div className="container mx-auto px-4 py-8 min-h-[100dvh]">
-      <h1 className="text-3xl lg:text-6xl uppercase font-serif font-bold mb-8 text-center text-yellow-900">
+      <h1 className="text-3xl my-8 lg:text-6xl uppercase font-serif font-bold text-center text-yellow-100">
         String Trio Repertoire
       </h1>
 
@@ -361,7 +361,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
           <div className="mb-8 space-y-4">
             <div className="relative w-full lg:w-1/3 mx-auto">
               <Search
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-900"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-100"
                 size={20}
               />
               <input
@@ -375,14 +375,14 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
             <div className="flex flex-wrap gap-4 items-center">
               <div className="flex items-center gap-2">
-                <Filter size={20} className="text-slate-400" />
+                <Filter size={20} className="text-yellow-100" />
                 <select
-                  className="px-4 py-2 border border-slate-500 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 cursor-pointer"
+                  className="px-4 py-2 border border-yellow-100 text-yellow-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 cursor-pointer"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                 >
                   {categories.map((cat) => (
-                    <option key={cat} value={cat} className="bg-amber-50">
+                    <option key={cat} value={cat} className="bg-slate-900">
                       {cat === "all" ? "All Categories" : cat}
                     </option>
                   ))}
@@ -391,7 +391,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
               <button
                 onClick={() => setShowPlaylist(!showPlaylist)}
-                className="ml-auto flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer text-[#fcf2bd]"
+                className="ml-auto flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-lg border-2 border-yellow-100 hover:bg-slate-500 transition-colors cursor-pointer text-yellow-100"
               >
                 <Music size={20} />
                 Playlist ({playlist.length})
@@ -402,14 +402,14 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       )}
 
       {/* Results Count */}
-      <p className="mb-4 text-gray-600">
+      <p className="mb-4 text-yellow-100">
         Showing {(currentPage - 1) * itemsPerPage + 1}-
         {Math.min(currentPage * itemsPerPage, filteredSongs.length)} of{" "}
         {filteredSongs.length} songs
       </p>
 
       {/* Songs Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-2 lg:gap-6 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 3xl:grid-cols-8 gap-2 lg:gap-6 mb-8">
         {paginatedSongs.map((song) => (
           <div
             key={song.id}
@@ -425,7 +425,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               </div>
               <button
                 onClick={() => addToPlaylist(song)}
-                className="w-full flex items-center justify-center gap-1 lg:gap-2 bg-[#fcf2bd] text-slate-900 py-2 rounded-lg hover:opacity-80 transition-colors cursor-pointer"
+                className="w-full flex items-center justify-center gap-1 lg:gap-2 bg-yellow-100 text-slate-900 py-2 rounded-lg hover:bg-yellow-200 transition-colors cursor-pointer"
                 disabled={playlist.find((s) => s.id === song.id) !== undefined}
               >
                 {playlist.find((s) => s.id === song.id) ? (
@@ -448,7 +448,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
           <button
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 1}
-            className="flex items-center gap-1 px-3 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 disabled:bg-slate-300 disabled:cursor-not-allowed cursor-pointer"
+            className="flex items-center gap-1 px-3 py-2 text-slate-900 bg-yellow-100 rounded-lg hover:bg-yellow-200 disabled:bg-yellow-50 disabled:text-slate-400 disabled:cursor-not-allowed cursor-pointer"
           >
             <ChevronLeft size={16} />
             Previous
@@ -460,12 +460,12 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               <>
                 <button
                   onClick={() => setCurrentPage(1)}
-                  className="px-3 py-2 rounded-lg bg-slate-500 hover:bg-slate-900 text-white cursor-pointer"
+                  className="px-3 py-2 rounded-lg hover:bg-yellow-100 hover:text-slate-900 text-yellow-100 cursor-pointer"
                 >
                   1
                 </button>
                 {currentPage > 4 && (
-                  <span className="px-2 py-2 text-slate-900 cursor-pointer">
+                  <span className="px-2 py-2 text-yellow-100 cursor-pointer">
                     ...
                   </span>
                 )}
@@ -490,8 +490,8 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                   onClick={() => setCurrentPage(page)}
                   className={`px-3 py-2 rounded-lg cursor-pointer ${
                     page === currentPage
-                      ? "bg-slate-900 text-white"
-                      : "text-slate-900 hover:bg-slate-300 hover:text-white"
+                      ? "bg-yellow-100 text-slate-900"
+                      : "text-yellow-100 hover:bg-yellow-100 hover:text-slate-900"
                   }`}
                 >
                   {page}
@@ -502,11 +502,11 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
             {currentPage < totalPages - 2 && (
               <>
                 {currentPage < totalPages - 3 && (
-                  <span className="px-2 py-2 text-slate-900">...</span>
+                  <span className="px-2 py-2 text-yellow-100">...</span>
                 )}
                 <button
                   onClick={() => setCurrentPage(totalPages)}
-                  className="px-3 py-2 rounded-lg text-slate-900 hover:bg-slate-300 cursor-pointer"
+                  className="px-3 py-2 rounded-lg text-yellow-100 hover:bg-yellow-100 hover:text-slate-900 cursor-pointer"
                 >
                   {totalPages}
                 </button>
@@ -517,7 +517,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
           <button
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="flex items-center gap-1 px-3 py-2 bg-slate-900 rounded-lg hover:bg-slate-500 disabled:bg-slate-300 disabled:cursor-not-allowed cursor-pointer"
+            className="flex items-center gap-1 px-3 py-2 bg-yellow-100 rounded-lg hover:bg-yellow-300 text-slate-900 disabled:bg-yellow-50 disabled:text-slate-400 disabled:cursor-not-allowed cursor-pointer"
           >
             Next
             <ChevronRight size={16} />

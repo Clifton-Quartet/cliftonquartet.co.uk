@@ -549,7 +549,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
       {/* Playlist Sidebar */}
       {showPlaylist && (
-        <div className="custom-scroll fixed right-0 top-0 h-full w-96 bg-yellow-50 shadow-xl z-50 overflow-y-auto">
+        <div className="custom-scroll fixed right-0 top-0 h-full w-96 bg-yellow-50 border-l border-yellow-300 shadow-xl z-50 overflow-y-auto">
           <div className="flex justify-between items-start mb-6 bg-slate-900">
             <div className="flex items-start justify-between gap-2 flex-1 text-yellow-100 p-2 w-8 overflow-hidden overflow-x-auto">
               {isEditingTitle ? (

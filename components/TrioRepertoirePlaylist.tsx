@@ -610,7 +610,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                 ))}
               </div>
 
-              <div className="space-y-3 mx-2">
+              <div className="space-y-3 mx-2 mb-6">
                 <button
                   onClick={exportToPDF}
                   className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer"

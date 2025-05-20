@@ -441,7 +441,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                 <p className="text-gray-100 mb-2">{song.composer}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-100 mb-4">{song.category}</p>
+                <p className="text-sm text-yellow-100 mb-4">{song.category}</p>
                 <button
                   onClick={() => addToPlaylist(song)}
                   className="w-full flex items-center justify-center gap-1 lg:gap-2 bg-yellow-100 text-slate-900 py-2 rounded-lg hover:bg-yellow-200 transition-colors cursor-pointer"

@@ -602,7 +602,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                     </div>
                     <button
                       onClick={() => removeFromPlaylist(song.id)}
-                      className="text-red-500 hover:text-red-700 cursor-pointer p-1"
+                      className="text-slate-500 hover:text-slate-700 cursor-pointer p-1"
                     >
                       <X size={20} />
                     </button>

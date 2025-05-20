@@ -531,105 +531,104 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
       {/* Playlist Sidebar */}
       {showPlaylist && (
-        <div className="custom-scroll fixed right-0 top-0 h-full w-96 bg-amber-50 shadow-xl z-50 overflow-y-auto">
-          <div className="p-6">
-            <div className="flex justify-between items-center mb-6">
-              <div className="flex items-center gap-2 flex-1 text-black">
-                {isEditingTitle ? (
-                  <>
-                    <input
-                      type="text"
-                      value={tempTitle}
-                      onChange={(e) => setTempTitle(e.target.value)}
-                      className="flex-1 px-2 py-1 border  border-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-slate-500"
-                      onKeyPress={(e) => e.key === "Enter" && saveTitle()}
-                      placeholder="Favourite Songs"
-                    />
+        <div className="custom-scroll fixed right-0 top-0 h-full w-96 bg-yellow-50 shadow-xl z-50 overflow-y-auto">
+          <div className="flex justify-between items-start mb-6 bg-slate-900">
+            <div className="flex items-start justify-between gap-2 flex-1 text-yellow-100 p-2 w-8 overflow-hidden overflow-x-auto">
+              {isEditingTitle ? (
+                <>
+                  <input
+                    type="text"
+                    value={tempTitle}
+                    onChange={(e) => setTempTitle(e.target.value)}
+                    className="flex-1 px-2 py-1 border-1 border-yellow-100 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    onKeyPress={(e) => e.key === "Enter" && saveTitle()}
+                    placeholder="Favourite Songs"
+                  />
+                  <button
+                    onClick={saveTitle}
+                    className="text-green-500 hover:text-green-700 cursor-pointer p-1"
+                  >
+                    <Check size={20} />
+                  </button>
+                  <button
+                    onClick={cancelEditingTitle}
+                    className="text-red-500 hover:text-red-700 cursor-pointer p-1"
+                  >
+                    <X size={20} />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-2xl font-bold">{playlistTitle}</h2>
+                  <button
+                    onClick={startEditingTitle}
+                    className="flex gap-1 text-white hover:text-slate-300 cursor-pointer p-1"
+                  >
+                    <Edit2 size={20} />
+                    <span>Edit</span>
+                  </button>
+                </>
+              )}
+            </div>
+            <button
+              onClick={() => setShowPlaylist(false)}
+              className="text-white hover:text-slate-300 p-2 cursor-pointer"
+            >
+              <X size={32} />
+            </button>
+          </div>
+
+          {playlist.length === 0 ? (
+            <p className="text-gray-500 text-center py-8">
+              No songs in playlist yet. Add songs from the repertoire.
+            </p>
+          ) : (
+            <>
+              <div className="space-y-3 mb-6">
+                {playlist.map((song, index) => (
+                  <div
+                    key={song.id}
+                    className="flex items-start gap-3 p-3 bg-white border border-yellow-300 rounded-lg mx-2"
+                  >
+                    <span className="text-gray-500 font-mono text-sm">
+                      {index + 1}.
+                    </span>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-slate-900">
+                        {song.title}
+                      </h4>
+                      <p className="text-sm text-slate-700">{song.composer}</p>
+                      <p className="text-xs text-gray-400">{song.category}</p>
+                    </div>
                     <button
-                      onClick={saveTitle}
-                      className="text-green-500 hover:text-green-700 cursor-pointer"
-                    >
-                      <Check size={20} />
-                    </button>
-                    <button
-                      onClick={cancelEditingTitle}
-                      className="text-red-500 hover:text-red-700 cursor-pointer"
+                      onClick={() => removeFromPlaylist(song.id)}
+                      className="text-red-500 hover:text-red-700 cursor-pointer p-1"
                     >
                       <X size={20} />
                     </button>
-                  </>
-                ) : (
-                  <>
-                    <h2 className="text-2xl font-bold">{playlistTitle}</h2>
-                    <button
-                      onClick={startEditingTitle}
-                      className="text-gray-500 hover:text-gray-700 cursor-pointer"
-                    >
-                      <Edit2 size={20} />
-                    </button>
-                  </>
-                )}
+                  </div>
+                ))}
               </div>
-              <button
-                onClick={() => setShowPlaylist(false)}
-                className="text-gray-500 hover:text-gray-700 ml-2 cursor-pointer"
-              >
-                <X size={24} />
-              </button>
-            </div>
 
-            {playlist.length === 0 ? (
-              <p className="text-gray-500 text-center py-8">
-                No songs in playlist yet. Add songs from the repertoire.
-              </p>
-            ) : (
-              <>
-                <div className="space-y-3 mb-6">
-                  {playlist.map((song, index) => (
-                    <div
-                      key={song.id}
-                      className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg"
-                    >
-                      <span className="text-gray-500 font-mono text-sm">
-                        {index + 1}.
-                      </span>
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-gray-600">
-                          {song.title}
-                        </h4>
-                        <p className="text-sm text-gray-600">{song.composer}</p>
-                        <p className="text-xs text-gray-500">{song.category}</p>
-                      </div>
-                      <button
-                        onClick={() => removeFromPlaylist(song.id)}
-                        className="text-red-500 hover:text-red-700 cursor-pointer"
-                      >
-                        <X size={20} />
-                      </button>
-                    </div>
-                  ))}
-                </div>
+              <div className="space-y-3 mx-2">
+                <button
+                  onClick={exportToPDF}
+                  className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer"
+                >
+                  <Download size={20} />
+                  Export to PDF
+                </button>
 
-                <div className="space-y-3">
-                  <button
-                    onClick={exportToPDF}
-                    className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer"
-                  >
-                    <Download size={20} />
-                    Export to PDF
-                  </button>
-
-                  <button
-                    onClick={exportToWord}
-                    className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer"
-                  >
-                    <FileText size={20} />
-                    Export to Word
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
+                <button
+                  onClick={exportToWord}
+                  className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer"
+                >
+                  <FileText size={20} />
+                  Export to Word doc
+                </button>
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

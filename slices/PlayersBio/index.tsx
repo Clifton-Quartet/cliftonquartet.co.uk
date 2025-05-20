@@ -29,7 +29,7 @@ const PlayersBio: FC<PlayersBioProps> = ({ slice }) => {
           </div>
         </SlideIn>
         <SlideIn>
-          <div className="text-2xl lg:text-4xl">
+          <div className="text-2xl lg:text-3xl">
             <PrismicRichText field={slice.primary.sub_heading} />
           </div>
         </SlideIn>

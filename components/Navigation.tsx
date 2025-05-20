@@ -6,6 +6,10 @@ import { createClient } from "@/prismicio";
 import { PrismicNextLink } from "@prismicio/next";
 import type { Content } from "@prismicio/client";
 import gsap from "gsap";
+import CustomEase from "gsap/CustomEase";
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create("hop", "0.9, 0.3, 0.4, 0.8");
 
 export function Navigation() {
   const [settings, setSettings] = useState<Content.SettingsDocument | null>(
@@ -61,10 +65,10 @@ export function Navigation() {
           // Return the target position based on active state
           return isItemActive ? -30 : 0;
         },
-        duration: 1,
+        duration: 1.5,
         stagger: 0.3, // Same stagger effect for all items
-        delay: 1.6,
-        ease: "power3.out",
+        delay: 1.3,
+        ease: "hop",
       });
 
       // Store event handler references to remove them later

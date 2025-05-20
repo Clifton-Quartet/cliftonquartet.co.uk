@@ -4,7 +4,7 @@ import { ReactLenis } from "@/utils/lenis";
 import Footer from "@/components/Footer";
 import { createClient } from "@/prismicio";
 import { Content } from "@prismicio/client";
-import { TransitionLayout } from "@/components/TransitionLayout";
+import PageTransitionOverlay from "@/components/PageTransitionOverlay";
 
 const instrumentSerif = Instrument_Serif({
   weight: "400",
@@ -34,10 +34,9 @@ export default async function RootLayout({
         <body
           className={`${instrumentSerif.variable} ${inter.variable} antialiased`}
         >
-          <TransitionLayout>
-            {children}
-            <Footer footerData={footerData.data} />
-          </TransitionLayout>
+          <PageTransitionOverlay />
+          {children}
+          <Footer footerData={footerData.data} />
         </body>
       </ReactLenis>
     </html>

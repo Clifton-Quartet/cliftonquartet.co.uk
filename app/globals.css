@@ -228,52 +228,6 @@ svg#main {
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* Fade to black page transition */
-.page-transition-enter {
-  opacity: 0;
-}
-
-.page-transition-enter-active {
-  opacity: 1;
-  transition: opacity 300ms;
-}
-
-.page-transition-exit {
-  opacity: 1;
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transition: opacity 300ms;
-}
-
-/* Optional: Add a black overlay during transitions */
-.page-transition-exit-active::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: black;
-  z-index: 9999;
-  opacity: 0;
-  animation: fadeInOut 600ms ease-in-out forwards;
-  pointer-events: none;
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 /* Other styles */
 .vinyl-player {
   background-image: url("/images/leather.jpg");

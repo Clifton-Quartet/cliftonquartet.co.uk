@@ -3,10 +3,10 @@
 import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/prismicio";
-import { PrismicNextLink } from "@prismicio/next";
 import type { Content } from "@prismicio/client";
 import gsap from "gsap";
 import CustomEase from "gsap/CustomEase";
+import TransitionPrismicLink from "./TransitionPrismicLink";
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create("hop", "0.9, 0.3, 0.4, 0.8");
@@ -159,12 +159,13 @@ export function Navigation() {
             className="relative glass mx-2 my-4 backdrop-blur-sm translate-x-8 group cursor-pointer"
             ref={(el) => addToNavItemsRef(el, index)}
           >
-            <PrismicNextLink
+            <TransitionPrismicLink
               field={item.navigation_link}
               className={`relative text-white font-sans m-2 px-6 py-2 w-full z-20 text-left pr-20 inline-block ${
                 isActive ? "opacity-100" : "opacity-50 group-hover:opacity-90"
               }`}
-            />
+              isActive={isActive}
+            ></TransitionPrismicLink>
           </li>
         );
       })}

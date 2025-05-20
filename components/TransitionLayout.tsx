@@ -59,14 +59,14 @@ const TransitionOverlay: React.FC = () => {
       // Fade in animation
       gsap.set(overlay, { visibility: "visible" });
       gsap.to(overlay, {
-        duration: 0.5,
+        duration: 2,
         opacity: 1,
         ease: "power2.inOut",
         onComplete: () => {
           // Wait briefly before fading out
           setTimeout(() => {
             gsap.to(overlay, {
-              duration: 1,
+              duration: 0.2,
               opacity: 0,
               ease: "power2.inOut",
               onComplete: () => {

@@ -391,7 +391,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
               <button
                 onClick={() => setShowPlaylist(!showPlaylist)}
-                className="ml-auto flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-lg border-2 border-yellow-100 hover:bg-slate-500 transition-colors cursor-pointer text-yellow-100"
+                className="ml-auto flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-lg border-2 border-yellow-100 hover:bg-yellow-900 transition-colors cursor-pointer text-yellow-100"
               >
                 <Music size={20} />
                 Playlist ({playlist.length})

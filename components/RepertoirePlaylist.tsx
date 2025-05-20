@@ -439,22 +439,26 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                   {song.title}
                 </h3>
                 <p className="text-gray-100 mb-2">{song.composer}</p>
-                <p className="text-sm text-gray-100 mb-4">{song.category}</p>
               </div>
-              <button
-                onClick={() => addToPlaylist(song)}
-                className="w-full flex items-center justify-center gap-1 lg:gap-2 bg-yellow-100 text-slate-900 py-2 rounded-lg hover:bg-yellow-200 transition-colors cursor-pointer"
-                disabled={playlist.find((s) => s.id === song.id) !== undefined}
-              >
-                {playlist.find((s) => s.id === song.id) ? (
-                  <Minus size={16} />
-                ) : (
-                  <Plus size={16} />
-                )}
-                {playlist.find((s) => s.id === song.id)
-                  ? "Remove"
-                  : "Add to Playlist"}
-              </button>
+              <div>
+                <p className="text-sm text-gray-100 mb-4">{song.category}</p>
+                <button
+                  onClick={() => addToPlaylist(song)}
+                  className="w-full flex items-center justify-center gap-1 lg:gap-2 bg-yellow-100 text-slate-900 py-2 rounded-lg hover:bg-yellow-200 transition-colors cursor-pointer"
+                  disabled={
+                    playlist.find((s) => s.id === song.id) !== undefined
+                  }
+                >
+                  {playlist.find((s) => s.id === song.id) ? (
+                    <Minus size={16} />
+                  ) : (
+                    <Plus size={16} />
+                  )}
+                  {playlist.find((s) => s.id === song.id)
+                    ? "Remove"
+                    : "Add to Playlist"}
+                </button>
+              </div>
             </div>
           </div>
         ))}

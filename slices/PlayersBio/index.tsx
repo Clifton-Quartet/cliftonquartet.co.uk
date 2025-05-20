@@ -36,20 +36,22 @@ const PlayersBio: FC<PlayersBioProps> = ({ slice }) => {
       </div>
       <div className="p-8 lg:p-16 flex flex-col sm:grid sm:grid-cols-2 xl:grid-cols-4 justify-center gap-16">
         {slice.primary.player_bio.map((item, index) => (
-          <div key={index} className="flex flex-col gap-4 justify-center">
-            <div
-              className="w-full aspect-square bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url(${item.player_photo.url})`,
-              }}
-            ></div>
-            <div className="text-xl">
-              <div className="text-3xl font-bold">
-                <PrismicRichText field={item.player_name} />
+          <SlideIn key={index}>
+            <div className="flex flex-col gap-4 justify-center">
+              <div
+                className="w-full aspect-square bg-cover bg-center bg-no-repeat"
+                style={{
+                  backgroundImage: `url(${item.player_photo.url})`,
+                }}
+              ></div>
+              <div className="text-xl">
+                <div className="text-3xl font-bold">
+                  <PrismicRichText field={item.player_name} />
+                </div>
+                <PrismicRichText field={item.player_bio} />
               </div>
-              <PrismicRichText field={item.player_bio} />
             </div>
-          </div>
+          </SlideIn>
         ))}
       </div>
     </section>

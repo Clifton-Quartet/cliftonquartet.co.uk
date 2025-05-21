@@ -35,13 +35,19 @@ const TheRepertoire: FC<TheRepertoireProps> = ({ slice, context }) => {
         <h3 className="text-3xl text-white text-center">
           {slice.primary.text}
         </h3>
-        <div className="flex flex-col md:flex-row gap-4 md:gap-8 mt-6">
-          <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
-            <PrismicNextLink
-              field={slice.primary.phone_number}
-              className="px-4 py-2 block w-full h-full"
-            />
-          </button>
+        <div
+          className={`flex flex-col md:flex-row ${slice.primary.phone_number ? "gap-4 md:gap-8" : ""} mt-6`}
+        >
+          {slice.primary.phone_number.text ? (
+            <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
+              <PrismicNextLink
+                field={slice.primary.phone_number}
+                className="px-4 py-2 block w-full h-full"
+              />
+            </button>
+          ) : (
+            <div></div>
+          )}
           <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
             <PrismicNextLink
               field={slice.primary.email}

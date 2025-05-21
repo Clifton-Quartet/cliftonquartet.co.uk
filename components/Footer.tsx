@@ -24,7 +24,7 @@ export default function Footer({ footerData }: FooterProps) {
           {footerData.contact_us_text}
         </h3>
         <div
-          className={`flex flex-col md:flex-row ${footerData.phone_number ? "gap-4 md:gap-8" : ""} mt-6`}
+          className={`flex flex-col md:flex-row ${footerData.phone_number.text ? "gap-4 md:gap-8" : ""} mt-6`}
         >
           {footerData.phone_number.text ? (
             <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">

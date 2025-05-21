@@ -30,7 +30,7 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
             <p>{slice.primary.title}</p>
           </div>
         </SlideIn>
-        <div className="font-sans grid grid-cols-1 lg:grid-cols-2 gap-12 w-full justify-center items-start mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full justify-center items-start mt-12">
           {slice.primary.testimonial.map((item, index) => (
             <SlideIn key={index}>
               <div className="text-lg lg:p-4">

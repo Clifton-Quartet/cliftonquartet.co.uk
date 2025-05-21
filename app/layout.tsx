@@ -1,4 +1,4 @@
-import { Instrument_Serif, Inter } from "next/font/google";
+import { Instrument_Serif, Inter, League_Script } from "next/font/google";
 import "./globals.css";
 import { ReactLenis } from "@/utils/lenis";
 import Footer from "@/components/Footer";
@@ -18,6 +18,12 @@ const inter = Inter({
   display: "swap",
 });
 
+const leagueScript = League_Script({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-league-script",
+});
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -32,7 +38,7 @@ export default async function RootLayout({
     <html lang="en">
       <ReactLenis root>
         <body
-          className={`${instrumentSerif.variable} ${inter.variable} antialiased`}
+          className={`${instrumentSerif.variable} ${inter.variable} ${leagueScript.variable} antialiased`}
         >
           <PageTransitionOverlay />
           {children}

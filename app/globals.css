@@ -3,6 +3,7 @@
 :root {
   --font-instrument-serif: "Instrument Serif", serif;
   --font-inter: var(--font-inter);
+  --font-league-script: var(--font-league-script);
 
   --hue-primary: 23;
   --hue-secondary: 378;

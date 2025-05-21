@@ -16,7 +16,7 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-cover bg-center bg-no-repeat font-sans text-yellow-900 leading-loose tracking-wide"
+      className="font-script bg-cover bg-center bg-no-repeat bg-white text-yellow-900 leading-loose tracking-wide"
       style={{
         backgroundImage: slice.primary.background_image
           ? `url(${slice.primary.background_image.url})`
@@ -26,19 +26,14 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
     >
       <div className="px-6 md:px-12 py-8 flex flex-col justify-center items-center">
         <SlideIn>
-          <div className="text-5xl lg:text-7xl tracking-widest uppercase font-serif font-bold mt-4">
+          <div className="text-3xl lg:text-5xl tracking-widest uppercase font-serif font-bold mt-4">
             <p>{slice.primary.title}</p>
           </div>
         </SlideIn>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full justify-center items-center mt-12">
+        <div className="font-sans grid grid-cols-1 lg:grid-cols-2 gap-12 w-full justify-center items-start mt-12">
           {slice.primary.testimonial.map((item, index) => (
             <SlideIn key={index}>
-              <div
-                style={{
-                  backgroundImage: `url(${item.background_image.url})`,
-                }}
-                className="flex flex-col justify-center bg-contain bg-no-repeat bg-center min-h-52 text-xl lg:p-4"
-              >
+              <div className="text-lg lg:p-4">
                 <PrismicRichText field={item.testimonial_message} />
                 <p className="italic text-sm mt-2">{item.author}</p>
               </div>

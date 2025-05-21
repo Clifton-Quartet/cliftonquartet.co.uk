@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { SlideIn } from "@/components/SlideIn";
+import { PrismicNextImage } from "@prismicio/next";
 
 /**
  * Props for `Weddings`.
@@ -21,11 +22,25 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
         backgroundColor: slice.primary.background_color || undefined,
       }}
     >
-      <div className="text-xl lg:text-2xl">
+      <div className="flex">
+        <div className="w-full h-full">
+          <PrismicNextImage
+            field={slice.primary.image_1}
+            className="aspect-video h-full w-full"
+          />
+        </div>
+        <div className="w-full h-full">
+          <PrismicNextImage
+            field={slice.primary.image_2}
+            className="aspect-video h-full w-full"
+          />
+        </div>
+      </div>
+      <div className="text-lg">
         <div className="lg:grid lg:grid-cols-4 leading-loose tracking-wide items-center">
-          <div className="lg:col-span-3 bg-yellow-100 text-yellow-900 flex flex-col justify-center p-6 lg:p-16">
+          <div className="lg:col-span-3 bg-white text-yellow-900 flex flex-col justify-center p-6 lg:p-16">
             <SlideIn>
-              <div className="font-serif uppercase font-bold tracking-widest text-5xl lg:text-7xl mb-4">
+              <div className="font-serif uppercase font-bold tracking-widest text-3xl lg:text-5xl mb-4">
                 <PrismicRichText field={slice.primary.title} />
               </div>
             </SlideIn>
@@ -44,14 +59,16 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
             </div>
           </div>
           <div
-            className="lg:col-span-1 bg-cover bg-center bg-no-repeat aspect-video"
-            style={{
-              backgroundImage: `url(${slice.primary.image_1.url})`,
-            }}
+            className="lg:col-span-1 bg-yellow-100 w-full h-full"
+            style={
+              {
+                // backgroundImage: `url(${slice.primary.image_1.url})`,
+              }
+            }
           ></div>
         </div>
         <div className="lg:grid lg:grid-cols-4 leading-loose tracking-wide items-center">
-          <div className="order-2 lg:col-span-3 bg-yellow-100 text-yellow-900 flex flex-col justify-center p-6 lg:p-16">
+          <div className="order-2 lg:col-span-3 bg-white text-yellow-900 flex flex-col justify-center p-6 lg:p-16">
             {slice.primary.paragraph_4 ? (
               <div>
                 <SlideIn>
@@ -99,10 +116,12 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
             )}
           </div>
           <div
-            className="order-1 lg:col-span-1 bg-cover bg-center bg-no-repeat aspect-video"
-            style={{
-              backgroundImage: `url(${slice.primary.image_2.url})`,
-            }}
+            className="order-1 lg:col-span-1 bg-yellow-900 w-full h-full"
+            style={
+              {
+                // backgroundImage: `url(${slice.primary.image_2.url})`,
+              }
+            }
           ></div>
         </div>
       </div>

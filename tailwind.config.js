@@ -11,6 +11,8 @@ module.exports = {
         serif: ["var(--font-instrument-serif)"],
         sans: ["var(--font-inter)"],
         inter: ["var(--font-inter)"],
+        script: ["var(--font-league-script)"],
+        league: ["var(--font-league-script)"],
       },
     },
   },

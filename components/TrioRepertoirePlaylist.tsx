@@ -345,7 +345,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
   return (
     <div className="px-4 py-8 min-h-[100dvh]">
-      <h1 className="text-3xl my-8 lg:text-6xl uppercase font-serif font-bold text-center text-yellow-100">
+      <h1 className="text-2xl my-8 lg:text-5xl uppercase font-serif font-bold text-center text-yellow-100">
         String Trio Repertoire
       </h1>
 

@@ -5,7 +5,6 @@ import {
   Search,
   Filter,
   Music,
-  Plus,
   X,
   Download,
   FileText,
@@ -13,7 +12,6 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
-  Minus,
 } from "lucide-react";
 import { Content } from "@prismicio/client";
 

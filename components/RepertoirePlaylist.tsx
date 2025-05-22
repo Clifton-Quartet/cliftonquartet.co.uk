@@ -434,7 +434,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                       addToPlaylist(song);
                     }
                   }}
-                  className="flex items-center justify-center gap-1 lg:gap-2 font-semibold bg-yellow-400 text-yellow-900 py-2 rounded-lg hover:bg-yellow-500 transition-colors cursor-pointer px-3"
+                  className="flex items-center justify-center gap-1 lg:gap-2 font-semibold bg-yellow-100 text-yellow-900 py-2 rounded-lg hover:bg-yellow-200 transition-colors cursor-pointer px-3"
                 >
                   <span className="sm:hidden">
                     {playlist.find((s) => s.id === song.id) ? "Remove" : "Add"}

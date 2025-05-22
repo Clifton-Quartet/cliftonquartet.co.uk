@@ -31,7 +31,7 @@ const TheRepertoire: FC<TheRepertoireProps> = ({ slice, context }) => {
       className="bg-slate-900 font-sans"
     >
       <RepertoirePlaylist repertoire={repertoire} />
-      <div className="flex flex-col justify-center items-center border-y-1 border-white font-sans bg-yellow-950 my-10 p-10">
+      <div className="flex flex-col justify-center items-center font-sans bg-yellow-950 my-10 p-10">
         <h3 className="text-3xl text-white text-center">
           {slice.primary.text}
         </h3>

@@ -19,7 +19,7 @@ export default function Footer({ footerData }: FooterProps) {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-slate-900 p-10 border-t border-white font-sans">
+      <div className="flex flex-col justify-center items-center bg-slate-900 p-10 font-sans">
         <h3 className="text-3xl text-white text-center">
           {footerData.contact_us_text}
         </h3>

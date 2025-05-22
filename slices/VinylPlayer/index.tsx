@@ -165,7 +165,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
       <div className="relative flex flex-col items-center w-full justify-center">
         <div className="lg:w-2/3">
           <SlideIn>
-            <h2 className="relative uppercase font-bold tracking-widest text-yellow-100 text-center text-5xl lg:text-7xl mb-6">
+            <h2 className="relative uppercase font-bold tracking-widest text-yellow-100 text-center text-4xl lg:text-6xl mb-6">
               {slice.primary.title}
             </h2>
           </SlideIn>
@@ -180,7 +180,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
 
         {/* Song Selection Buttons */}
         <p className="text-2xl text-yellow-100 font-extralight font-sans mb-6 text-center">
-          Choose a song to play and press Start on the record player
+          Select a song and press Start on the record player to play it
         </p>
         <div className="flex flex-wrap gap-4 mb-8 justify-center font-sans">
           {items.map((item, index) => (

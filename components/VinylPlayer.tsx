@@ -26,10 +26,14 @@ type DraggableInstance = {
 };
 
 type VinylPlayerProps = {
-  song: string;
+  song: string | null;
+  isChangingSong?: boolean;
 };
 
-export function VinylPlayer({ song }: VinylPlayerProps) {
+export function VinylPlayer({
+  song,
+  isChangingSong = false,
+}: VinylPlayerProps) {
   // State
   const [spinState, setSpinState] = useState<number>(0); // 0 = not spinning, 1 = spinning
   const [needleState, setNeedleState] = useState<number>(0); // 0 = off, 1 = on record, 2 = manual handling
@@ -41,6 +45,9 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
   );
   const [scratchAudioElement, setScratchAudioElement] =
     useState<HTMLAudioElement | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  console.log(isLoading);
 
   // Constants
   const NEEDLE_SWINGDOW = 44 - 18; // 18 == outside edge of record, 44 == inside edge of record
@@ -70,8 +77,6 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
   const needleArmDraggableRef = useRef<DraggableInstance | null>(null);
   const vinylDraggableRef = useRef<DraggableInstance | null>(null);
   const volumeKnobDraggableRef = useRef<DraggableInstance | null>(null);
-
-  console.log(recordScratch);
 
   // Helper functions
   const setupNeedleArmDraggable = useCallback(() => {
@@ -252,26 +257,30 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
     }
   }, [audioElement, moveNeedleTo]);
 
+  const stopPlayer = useCallback((): void => {
+    // Stop spinning
+    gsap.killTweensOf(vinylRef.current);
+    gsap.set(startButtonLightRef.current, { stroke: SG_COLOR_OFF });
+    gsap.to(recordPlateLightRef.current, { duration: 2, autoAlpha: 0 });
+
+    // Stop audio
+    if (audioElement) {
+      audioElement.pause();
+      audioElement.currentTime = 0;
+    }
+
+    // Move needle off record
+    hangUpNeedle();
+    setSpinState(0);
+  }, [audioElement, hangUpNeedle]);
+
   const toggleStartStop = useCallback((): void => {
     if (spinState) {
-      // Currently spinning so stop it
-      gsap.killTweensOf(vinylRef.current);
-
-      gsap.set(startButtonLightRef.current, { stroke: SG_COLOR_OFF });
-      gsap.to(recordPlateLightRef.current, { duration: 2, autoAlpha: 0 });
-
-      // Stop the sound if necessary
-      if (audioElement) {
-        audioElement.pause();
-        // Reset audio to beginning
-        audioElement.currentTime = 0;
-      }
-
-      // Move the needle back to position 0 (off the record)
-      hangUpNeedle();
-
-      setSpinState(0);
+      stopPlayer();
     } else {
+      // Don't start if no song is selected or if changing songs
+      if (!song || isChangingSong) return;
+
       // Currently stopped so start it
       setVolumeLevel(volume);
 
@@ -305,50 +314,81 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
     }
   }, [
     spinState,
+    song,
+    isChangingSong,
     vinylDraggableRef,
     vinylRef,
-    audioElement,
     setVolumeLevel,
     volume,
     loadNeedle,
-    hangUpNeedle,
+    stopPlayer,
   ]);
 
-  // Initialize audio elements
+  // Handle song changes
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (song) {
-        const audio = new Audio(song);
-        audio.loop = false;
+    if (typeof window === "undefined") return;
 
-        // Make sure audio is properly loaded
-        audio.addEventListener("loadedmetadata", () => {
-          console.log("Audio loaded, duration:", audio.duration);
-        });
+    const loadNewSong = async () => {
+      setIsLoading(true);
 
-        // Handle any errors
-        audio.addEventListener("error", (e) => {
-          console.error("Audio error:", e);
-        });
-
-        setAudioElement(audio);
-      } else {
-        const audio = new Audio("/Canon.mp3");
-        audio.loop = false;
-
-        // Make sure audio is properly loaded
-        audio.addEventListener("loadedmetadata", () => {
-          console.log("Audio loaded, duration:", audio.duration);
-        });
-
-        // Handle any errors
-        audio.addEventListener("error", (e) => {
-          console.error("Audio error:", e);
-        });
-
-        setAudioElement(audio);
+      // Stop current playback
+      if (spinState === 1) {
+        stopPlayer();
       }
 
+      // Clean up existing audio
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.removeEventListener("loadedmetadata", () => {});
+        audioElement.removeEventListener("error", () => {});
+        audioElement.src = "";
+      }
+
+      // Load new song or default
+      let newAudio: HTMLAudioElement;
+
+      if (song) {
+        newAudio = new Audio(song);
+      } else {
+        newAudio = new Audio("/Canon.mp3");
+      }
+
+      newAudio.loop = false;
+
+      // Set up event listeners for the new audio
+      const handleLoadedMetadata = () => {
+        setIsLoading(false);
+      };
+
+      const handleError = (e: Event) => {
+        console.error("Audio error:", e);
+        setIsLoading(false);
+      };
+
+      newAudio.addEventListener("loadedmetadata", handleLoadedMetadata);
+      newAudio.addEventListener("error", handleError);
+
+      // Set the new audio element
+      setAudioElement(newAudio);
+
+      // Set volume on new audio
+      newAudio.volume = volume / 100;
+    };
+
+    loadNewSong();
+
+    // Cleanup function - clean up the audio when component unmounts or song changes
+    return () => {
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.src = "";
+      }
+    };
+  }, [song]); // Only depend on song, not audioElement to avoid infinite loops
+
+  // Initialize scratch audio (only once)
+  useEffect(() => {
+    if (typeof window !== "undefined" && !scratchAudioElement) {
       const scratchAudio = new Audio("/record_scratch.mp3");
       scratchAudio.loop = true;
       setScratchAudioElement(scratchAudio);
@@ -356,23 +396,22 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
 
     // Cleanup
     return () => {
-      if (audioElement) {
-        audioElement.pause();
-        audioElement.src = "";
-      }
       if (scratchAudioElement) {
         scratchAudioElement.pause();
         scratchAudioElement.src = "";
       }
     };
-  }, []);
+  }, []); // Empty dependency array for one-time initialization
 
   // Setup animations and draggables when component mounts
   useEffect(() => {
     if (!containerRef.current) return;
 
     // Initial setup for all elements
-    gsap.set(startButtonLightRef.current, { fill: SG_COLOR_OFF });
+    gsap.set(startButtonLightRef.current, {
+      fill: SG_COLOR_OFF,
+      stroke: SG_COLOR_OFF,
+    });
     gsap.set(volumeKnobRef.current, {
       y: "+=" + (volumeTrackRef.current?.getBBox().height || 0) / 2,
     });
@@ -539,7 +578,6 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
       if (needleArmDraggableRef.current) needleArmDraggableRef.current.kill();
       if (vinylDraggableRef.current) vinylDraggableRef.current.kill();
       if (volumeKnobDraggableRef.current) volumeKnobDraggableRef.current.kill();
-      if (needleArmDraggableRef.current) needleArmDraggableRef.current.kill();
 
       if (vinylTweenRef.current) vinylTweenRef.current.kill();
       if (volumeKnobTweenRef.current) volumeKnobTweenRef.current.kill();
@@ -572,7 +610,7 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
     // Listen for audio end
     const handleAudioEnd = () => {
       hangUpNeedle();
-      toggleStartStop();
+      stopPlayer();
     };
 
     audioElement.addEventListener("ended", handleAudioEnd);
@@ -585,7 +623,7 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
     audioElement,
     syncNeedleToAudioPosition,
     hangUpNeedle,
-    toggleStartStop,
+    stopPlayer,
     needleDrag,
   ]);
 
@@ -782,10 +820,10 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
               cx="98.461"
               cy="400.582"
               r="36.154"
-              stroke="#0A0A0A"
+              stroke="#fcf2bd"
               strokeWidth="2"
             />
-            <g id="start-stop-text" opacity=".8" fill="#999">
+            <g id="start-stop-text" opacity="1" fill="#fcf2bd">
               <path d="M83.893 403.62c.352.224.855.395 1.396.395.8 0 1.27-.423 1.27-1.035 0-.558-.325-.89-1.145-1.197-.99-.36-1.603-.882-1.603-1.73 0-.944.784-1.646 1.963-1.646.612 0 1.07.145 1.333.297l-.216.64c-.19-.117-.594-.288-1.143-.288-.83 0-1.145.495-1.145.91 0 .566.37.846 1.207 1.17 1.026.395 1.54.89 1.54 1.782 0 .937-.685 1.755-2.116 1.755-.585 0-1.225-.18-1.55-.396l.207-.658z" />
               <path d="M89.33 399.172v1.044h1.133v.604H89.33v2.35c0 .54.152.846.593.846.216 0 .342-.018.46-.054l.035.604c-.153.054-.396.107-.702.107-.37 0-.666-.126-.855-.333-.215-.243-.305-.63-.305-1.143v-2.377h-.675v-.604h.675v-.81l.774-.234z" />
               <path d="M94.415 403.53c0 .377.018.746.063 1.043h-.71l-.064-.55h-.027c-.243.343-.71.648-1.333.648-.882 0-1.333-.62-1.333-1.25 0-1.054.938-1.63 2.62-1.62v-.09c0-.352-.098-1.01-.99-1-.414 0-.836.117-1.143.324l-.18-.53c.36-.226.89-.38 1.44-.38 1.333 0 1.657.91 1.657 1.774v1.63zm-.766-1.18c-.865-.018-1.846.135-1.846.98 0 .523.342.757.738.757.576 0 .945-.36 1.07-.73.028-.09.037-.18.037-.25v-.757z" />
@@ -803,7 +841,7 @@ export function VinylPlayer({ song }: VinylPlayerProps) {
               cy="401.582"
               r="4"
               opacity=".94"
-              fill="#0A0A0A"
+              fill="#fcf2bd"
               stroke="#0A0A0A"
             />
           </g>

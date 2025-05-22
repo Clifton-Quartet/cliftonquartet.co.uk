@@ -25,6 +25,7 @@ interface MP3AudioFile {
 interface RepertoireItem {
   artist: string;
   song: string;
+  mp3_file: MP3AudioFile;
 }
 
 /**
@@ -39,16 +40,13 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Timeline | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [currentSong, setCurrentSong] = useState<string | null>(null);
+  const [isChangingSong, setIsChangingSong] = useState(false);
 
   // Safely access the repertoire items with type assertion
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const items =
     ((slice.primary as any)?.repertoire_carousel as RepertoireItem[]) || [];
-
-  // Extract song URLs
-  const songUrl: string = (slice.primary.mp3_song as MP3AudioFile).url;
-
-  console.log("Song:", songUrl);
 
   useEffect(() => {
     if (!containerRef.current || items.length === 0) return;
@@ -120,17 +118,50 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
     };
   }, [items.length]);
 
+  const handleSongSelect = async (songUrl: string) => {
+    if (currentSong === songUrl) return; // Don't change if same song
+
+    setIsChangingSong(true);
+
+    // Wait for vinyl player to animate out if there's a current song
+    if (currentSong) {
+      await new Promise((resolve) => setTimeout(resolve, 800)); // Wait for animation
+    }
+
+    setCurrentSong(songUrl);
+    setIsChangingSong(false);
+  };
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="relative min-h-[100vh] w-full overflow-hidden bg-cover bg-center flex flex-col justify-center items-center p-8 md:p-20"
       style={{
-        backgroundImage: `url(${slice.primary.background_image.url})`,
+        backgroundImage: slice.primary.background_image
+          ? `url(${slice.primary.background_image.url})`
+          : "",
+        backgroundColor: slice.primary.background_color
+          ? `${slice.primary.background_color}`
+          : "",
       }}
     >
-      <div className="plant absolute top-[50%] 2xl:top-[35%] left-4 w-[300px] h-[300px] 2xl:w-[500px] 2xl:h-[500px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block z-20"></div>
-      <div className="plant-with-flowers absolute top-[45%] 2xl:top-[30%] right-4 w-[300px] h-[300px] 2xl:w-[450px] 2xl:h-[450px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block rotate-90 z-20"></div>
+      <div
+        className="plant absolute top-[60%] 2xl:top-[45%] left-4 w-[300px] h-[300px] 2xl:w-[500px] 2xl:h-[500px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block z-20"
+        style={{
+          backgroundImage: slice.primary.aside_image_1_desktop_only
+            ? `url(${slice.primary.aside_image_1_desktop_only.url})`
+            : "",
+        }}
+      ></div>
+      <div
+        className="plant-with-flowers absolute top-[55%] 2xl:top-[40%] right-4 w-[300px] h-[300px] 2xl:w-[450px] 2xl:h-[450px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block rotate-90 z-20"
+        style={{
+          backgroundImage: slice.primary.aside_image_2_desktop_only
+            ? `url(${slice.primary.aside_image_2_desktop_only.url})`
+            : "",
+        }}
+      ></div>
       <div className="relative flex flex-col items-center w-full justify-center">
         <div className="lg:w-2/3">
           <SlideIn>
@@ -146,11 +177,30 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
             </SlideIn>
           </div>
         </div>
+
+        {/* Song Selection Buttons */}
+        <div className="flex flex-wrap gap-4 mb-8 justify-center font-sans">
+          {items.map((item, index) => (
+            <button
+              key={index}
+              onClick={() => handleSongSelect(item.mp3_file.url)}
+              disabled={isChangingSong}
+              className={`px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 cursor-pointer ${
+                currentSong === item.mp3_file.url
+                  ? "bg-yellow-100 text-black shadow-lg"
+                  : "bg-amber-950 text-yellow-100 border border-yellow-100 hover:bg-yellow-100/10 hover:border-yellow-500"
+              } ${isChangingSong ? "opacity-50 cursor-not-allowed" : ""}`}
+            >
+              {item.song}
+            </button>
+          ))}
+        </div>
+
         <div className="w-[150%] md:w-[100%] lg:w-[80%]">
-          <VinylPlayer song={songUrl} />
+          <VinylPlayer song={currentSong} isChangingSong={isChangingSong} />
         </div>
       </div>
-      <div className="relative w-[100vw] overflow-hidden mt-6">
+      <div className="relative w-[100vw] overflow-hidden mt-6 hidden">
         <div
           className="flex items-start py-6 md:hidden"
           ref={containerRef}

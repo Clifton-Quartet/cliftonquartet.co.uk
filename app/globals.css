@@ -177,6 +177,14 @@ svg#main {
   border: 2px solid rgba(255, 255, 255, 0.15);
 }
 
+.glass-button {
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
 /* Songs cards */
 .song-card {
   background-image: url("/images/playing_violin.jpg");
@@ -239,14 +247,12 @@ svg#main {
 }
 
 .plant {
-  background-image: url("/images/plant.png");
   background-size: contain;
   background-position: center;
   filter: drop-shadow(4px 15px 15px rgba(0, 0, 0, 0.75));
 }
 
 .plant-with-flowers {
-  background-image: url("/images/potted_plant.png");
   background-size: cover;
   background-position: center;
   filter: drop-shadow(4px 15px 15px rgba(0, 0, 0, 0.75));

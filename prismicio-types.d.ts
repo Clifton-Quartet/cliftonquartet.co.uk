@@ -1024,6 +1024,16 @@ export interface RepertoireSliceDefaultPrimaryRepertoireCarouselItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   song: prismic.KeyTextField;
+
+  /**
+   * MP3 File field in *VinylPlayer → Default → Primary → Repertoire Carousel*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: repertoire.default.primary.repertoire_carousel[].mp3_file
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  mp3_file: prismic.LinkToMediaField<prismic.FieldState, never>;
 }
 
 /**
@@ -1039,6 +1049,16 @@ export interface RepertoireSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   background_image: prismic.ImageField<never>;
+
+  /**
+   * Background Color field in *VinylPlayer → Default → Primary*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: repertoire.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  background_color: prismic.ColorField;
 
   /**
    * Title field in *VinylPlayer → Default → Primary*
@@ -1101,6 +1121,26 @@ export interface RepertoireSliceDefaultPrimary {
   repertoire_carousel: prismic.GroupField<
     Simplify<RepertoireSliceDefaultPrimaryRepertoireCarouselItem>
   >;
+
+  /**
+   * Aside image 1 desktop only field in *VinylPlayer → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: repertoire.default.primary.aside_image_1_desktop_only
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  aside_image_1_desktop_only: prismic.ImageField<never>;
+
+  /**
+   * Aside image 2 desktop only field in *VinylPlayer → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: repertoire.default.primary.aside_image_2_desktop_only
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  aside_image_2_desktop_only: prismic.ImageField<never>;
 }
 
 /**

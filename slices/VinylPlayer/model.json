@@ -20,6 +20,13 @@
             "thumbnails": []
           }
         },
+        "background_color": {
+          "type": "Color",
+          "config": {
+            "label": "Background Color",
+            "placeholder": ""
+          }
+        },
         "title": {
           "type": "Text",
           "config": {
@@ -80,8 +87,33 @@
                   "label": "Song",
                   "placeholder": ""
                 }
+              },
+              "mp3_file": {
+                "type": "Link",
+                "config": {
+                  "label": "MP3 File",
+                  "placeholder": "",
+                  "select": "media",
+                  "allowText": true
+                }
               }
             }
+          }
+        },
+        "aside_image_1_desktop_only": {
+          "type": "Image",
+          "config": {
+            "label": "Aside image 1 desktop only",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "aside_image_2_desktop_only": {
+          "type": "Image",
+          "config": {
+            "label": "Aside image 2 desktop only",
+            "constraint": {},
+            "thumbnails": []
           }
         }
       },

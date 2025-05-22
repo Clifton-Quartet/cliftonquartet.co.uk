@@ -40,14 +40,6 @@
             "label": "Testimonial",
             "repeat": true,
             "fields": {
-              "background_image": {
-                "type": "Image",
-                "config": {
-                  "label": "Background Image",
-                  "constraint": {},
-                  "thumbnails": []
-                }
-              },
               "testimonial_message": {
                 "type": "StructuredText",
                 "config": {

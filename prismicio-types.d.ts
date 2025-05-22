@@ -1178,16 +1178,6 @@ export type RepertoireSlice = prismic.SharedSlice<
  */
 export interface TestimonialsSliceDefaultPrimaryTestimonialItem {
   /**
-   * Background Image field in *Testimonials → Default → Primary → Testimonial*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.testimonial[].background_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  background_image: prismic.ImageField<never>;
-
-  /**
    * Testimonial message field in *Testimonials → Default → Primary → Testimonial*
    *
    * - **Field Type**: Rich Text

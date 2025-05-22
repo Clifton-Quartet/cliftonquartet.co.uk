@@ -179,6 +179,9 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
         </div>
 
         {/* Song Selection Buttons */}
+        <p className="text-lg text-yellow-100 font-semibold font-sans mb-4">
+          Choose a song to play and press Start on the record player
+        </p>
         <div className="flex flex-wrap gap-4 mb-8 justify-center font-sans">
           {items.map((item, index) => (
             <button

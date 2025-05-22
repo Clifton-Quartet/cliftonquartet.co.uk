@@ -171,7 +171,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
           </SlideIn>
           <div className="glass-bright p-10 mb-12 backdrop-blur-lg">
             <SlideIn>
-              <div className="relative font-sans text-yellow-100 text-center z-10 max-w-4xl text-2xl mx-auto">
+              <div className="relative font-sans text-yellow-100 text-center z-10 max-w-4xl text-xl mx-auto">
                 <PrismicRichText field={slice.primary.text} />
               </div>
             </SlideIn>
@@ -179,7 +179,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
         </div>
 
         {/* Song Selection Buttons */}
-        <p className="text-lg text-yellow-100 font-semibold font-sans mb-4 text-center">
+        <p className="text-2xl text-yellow-100 font-extralight font-sans mb-6 text-center">
           Choose a song to play and press Start on the record player
         </p>
         <div className="flex flex-wrap gap-4 mb-8 justify-center font-sans">

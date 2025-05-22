@@ -410,7 +410,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                 className="ml-auto flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-lg border-2 border-yellow-100 hover:bg-yellow-900 transition-colors cursor-pointer text-yellow-100"
               >
                 <Music size={20} />
-                Playlist ({playlist.length})
+                Favourites ({playlist.length})
               </button>
             </div>
           </div>
@@ -453,8 +453,8 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                   className="w-full flex items-center justify-center gap-1 lg:gap-2 font-semibold bg-yellow-400 text-yellow-900 py-2 rounded-lg hover:bg-yellow-500 transition-colors cursor-pointer px-1"
                 >
                   {playlist.find((s) => s.id === song.id)
-                    ? "Remove from Playlist"
-                    : "Add to Playlist"}
+                    ? "Remove favourite"
+                    : "Add favourite"}
                 </button>
               </div>
             </div>
@@ -596,7 +596,8 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
           {playlist.length === 0 ? (
             <p className="text-gray-500 text-center py-8">
-              No songs in playlist yet. Add songs from the repertoire.
+              You don&apos;t have favourite songs yet. Add your favourite songs
+              from the repertoire.
             </p>
           ) : (
             <>

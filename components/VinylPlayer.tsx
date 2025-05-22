@@ -48,6 +48,7 @@ export function VinylPlayer({
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   console.log(isLoading);
+  console.log(recordScratch);
 
   // Constants
   const NEEDLE_SWINGDOW = 44 - 18; // 18 == outside edge of record, 44 == inside edge of record

@@ -16,7 +16,7 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="font-script bg-cover bg-center bg-no-repeat bg-white text-yellow-100 leading-loose tracking-wide"
+      className="bg-cover bg-center bg-no-repeat bg-white text-yellow-100 leading-loose tracking-wide"
       style={{
         backgroundImage: slice.primary.background_image
           ? `url(${slice.primary.background_image.url})`
@@ -30,7 +30,7 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
             <p>{slice.primary.title}</p>
           </div>
         </SlideIn>
-        <div className="font-script grid grid-cols-1 lg:grid-cols-2 gap-12 w-full justify-center items-start mt-12">
+        <div className="font-sans grid grid-cols-1 lg:grid-cols-2 gap-12 w-full justify-center items-start mt-12">
           {slice.primary.testimonial.map((item, index) => (
             <SlideIn key={index}>
               <div className="text-lg lg:p-4">

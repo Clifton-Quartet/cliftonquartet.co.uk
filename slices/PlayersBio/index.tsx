@@ -23,12 +23,12 @@ const PlayersBio: FC<PlayersBioProps> = ({ slice }) => {
     >
       <div className="p-8 lg:p-16">
         <SlideIn>
-          <div className="font-serif uppercase font-bold tracking-widest text-5xl lg:text-7xl mb-4">
+          <div className="font-serif uppercase font-bold tracking-widest text-3xl lg:text-5xl mb-4">
             <PrismicRichText field={slice.primary.title} />
           </div>
         </SlideIn>
         <SlideIn>
-          <div className="text-2xl lg:text-3xl">
+          <div className="text-xl lg:text-2xl">
             <PrismicRichText field={slice.primary.sub_heading} />
           </div>
         </SlideIn>
@@ -43,8 +43,8 @@ const PlayersBio: FC<PlayersBioProps> = ({ slice }) => {
                   backgroundImage: `url(${item.player_photo.url})`,
                 }}
               ></div>
-              <div className="text-xl">
-                <div className="text-3xl font-bold">
+              <div className="text-lg">
+                <div className="text-2xl font-bold">
                   <PrismicRichText field={item.player_name} />
                 </div>
                 <PrismicRichText field={item.player_bio} />

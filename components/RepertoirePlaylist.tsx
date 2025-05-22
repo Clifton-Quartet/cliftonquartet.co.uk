@@ -10,8 +10,6 @@ import {
   FileText,
   Edit2,
   Check,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 import { Content } from "@prismicio/client";
 
@@ -105,8 +103,6 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
   const [playlistTitle, setPlaylistTitle] = useState("Favourite Songs");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [tempTitle, setTempTitle] = useState(playlistTitle);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 30;
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -157,18 +153,6 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       return matchesSearch && matchesCategory;
     });
   }, [songs, searchTerm, selectedCategory]);
-
-  // Pagination logic
-  const totalPages = Math.ceil(filteredSongs.length / itemsPerPage);
-  const paginatedSongs = filteredSongs.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  // Reset to first page when filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm, selectedCategory]);
 
   const addToPlaylist = (song: Song) => {
     if (!playlist.find((s) => s.id === song.id)) {
@@ -389,7 +373,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               />
             </div>
 
-            <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex flex-wrap gap-4 items-center mx-auto w-full min-md:w-2xl min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl">
               <div className="flex items-center gap-2">
                 <Filter size={20} className="text-yellow-100" />
                 <select
@@ -418,28 +402,28 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       )}
 
       {/* Results Count */}
-      <p className="mb-4 text-yellow-100">
-        Showing {(currentPage - 1) * itemsPerPage + 1}-
-        {Math.min(currentPage * itemsPerPage, filteredSongs.length)} of{" "}
-        {filteredSongs.length} songs
+      <p className="mb-4 text-yellow-100 w-full min-md:w-2xl min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl mx-auto">
+        Showing {filteredSongs.length} of {songs.length} songs
       </p>
 
       {/* Songs Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 3xl:grid-cols-8 gap-2 lg:gap-6 mb-8">
-        {paginatedSongs.map((song) => (
+      <div className="mb-8 flex flex-col items-center">
+        {filteredSongs.map((song) => (
           <div
             key={song.id}
-            className="song-card shadow-md hover:shadow-lg transition-shadow"
+            className="song-card shadow-md hover:shadow-lg w-full min-md:w-2xl min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl transition-shadow mb-2"
           >
-            <div className="song-gradient flex flex-col justify-between p-6">
+            <div className="song-gradient flex justify-between items-center px-3 py-1">
               <div>
-                <h3 className="text-xl text-gray-100 font-semibold mb-2">
-                  {song.title}
-                </h3>
-                <p className="text-gray-100 mb-2">{song.composer}</p>
+                <div className="flex items-center mb-1">
+                  <p className="text-gray-100 mr-3">{song.composer}</p>
+                  <h3 className="text-lg text-gray-100 font-semibold">
+                    {song.title}
+                  </h3>
+                </div>
+                <p className="text-sm text-yellow-100">{song.category}</p>
               </div>
               <div>
-                <p className="text-sm text-yellow-100 mb-4">{song.category}</p>
                 <button
                   onClick={() => {
                     const isInPlaylist =
@@ -450,100 +434,22 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                       addToPlaylist(song);
                     }
                   }}
-                  className="w-full flex items-center justify-center gap-1 lg:gap-2 font-semibold bg-yellow-400 text-yellow-900 py-2 rounded-lg hover:bg-yellow-500 transition-colors cursor-pointer px-1"
+                  className="flex items-center justify-center gap-1 lg:gap-2 font-semibold bg-yellow-400 text-yellow-900 py-2 rounded-lg hover:bg-yellow-500 transition-colors cursor-pointer px-3"
                 >
-                  {playlist.find((s) => s.id === song.id)
-                    ? "Remove favourite"
-                    : "Add favourite"}
+                  <span className="sm:hidden">
+                    {playlist.find((s) => s.id === song.id) ? "Remove" : "Add"}
+                  </span>
+                  <span className="hidden sm:inline">
+                    {playlist.find((s) => s.id === song.id)
+                      ? "Remove from favourites"
+                      : "Add to favourites"}
+                  </span>
                 </button>
               </div>
             </div>
           </div>
         ))}
       </div>
-
-      {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2 mb-8">
-          <button
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="flex items-center gap-1 px-3 py-2 text-slate-900 bg-yellow-100 rounded-lg hover:bg-yellow-200 disabled:bg-yellow-50 disabled:text-slate-400 disabled:cursor-not-allowed cursor-pointer"
-          >
-            <ChevronLeft size={16} />
-            Previous
-          </button>
-
-          <div className="flex gap-1">
-            {/* Always show first page */}
-            {currentPage > 3 && (
-              <>
-                <button
-                  onClick={() => setCurrentPage(1)}
-                  className="px-3 py-2 rounded-lg hover:bg-yellow-100 hover:text-slate-900 text-yellow-100 cursor-pointer"
-                >
-                  1
-                </button>
-                {currentPage > 4 && (
-                  <span className="px-2 py-2 text-yellow-100 cursor-pointer">
-                    ...
-                  </span>
-                )}
-              </>
-            )}
-
-            {/* Show pages around current page */}
-            {Array.from({ length: totalPages }, (_, i) => i + 1)
-              .filter((page) => {
-                return (
-                  page === currentPage ||
-                  page === currentPage - 1 ||
-                  page === currentPage + 1 ||
-                  page === currentPage - 2 ||
-                  page === currentPage + 2
-                );
-              })
-              .filter((page) => page > 0 && page <= totalPages)
-              .map((page) => (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-2 rounded-lg cursor-pointer ${
-                    page === currentPage
-                      ? "bg-yellow-100 text-slate-900"
-                      : "text-yellow-100 hover:bg-yellow-100 hover:text-slate-900"
-                  }`}
-                >
-                  {page}
-                </button>
-              ))}
-
-            {/* Always show last page */}
-            {currentPage < totalPages - 2 && (
-              <>
-                {currentPage < totalPages - 3 && (
-                  <span className="px-2 py-2 text-yellow-100">...</span>
-                )}
-                <button
-                  onClick={() => setCurrentPage(totalPages)}
-                  className="px-3 py-2 rounded-lg text-yellow-100 hover:bg-yellow-100 hover:text-slate-900 cursor-pointer"
-                >
-                  {totalPages}
-                </button>
-              </>
-            )}
-          </div>
-
-          <button
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="flex items-center gap-1 px-3 py-2 bg-yellow-100 text-slate-900 rounded-lg hover:bg-yellow-300 disabled:bg-yellow-50 disabled:text-slate-400 disabled:cursor-not-allowed cursor-pointer"
-          >
-            Next
-            <ChevronRight size={16} />
-          </button>
-        </div>
-      )}
 
       {/* Playlist Sidebar */}
       {showPlaylist && (

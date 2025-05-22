@@ -147,7 +147,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
       }}
     >
       <div
-        className="plant absolute top-[60%] 2xl:top-[45%] left-4 w-[300px] h-[300px] 2xl:w-[500px] 2xl:h-[500px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block z-20"
+        className="plant absolute top-[60%] 2xl:top-[55%] left-4 w-[300px] h-[300px] 2xl:w-[500px] 2xl:h-[500px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block z-20"
         style={{
           backgroundImage: slice.primary.aside_image_1_desktop_only
             ? `url(${slice.primary.aside_image_1_desktop_only.url})`
@@ -155,7 +155,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
         }}
       ></div>
       <div
-        className="plant-with-flowers absolute top-[55%] 2xl:top-[40%] right-4 w-[300px] h-[300px] 2xl:w-[450px] 2xl:h-[450px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block rotate-90 z-20"
+        className="plant-with-flowers absolute top-[55%] 2xl:top-[50%] right-4 w-[300px] h-[300px] 2xl:w-[450px] 2xl:h-[450px] 3xl:w-[700px] 3xl:h-[700px] hidden lg:block rotate-90 z-20"
         style={{
           backgroundImage: slice.primary.aside_image_2_desktop_only
             ? `url(${slice.primary.aside_image_2_desktop_only.url})`

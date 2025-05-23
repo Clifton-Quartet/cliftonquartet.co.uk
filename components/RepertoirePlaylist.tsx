@@ -169,7 +169,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
   const clearPlaylist = () => {
     if (
       window.confirm(
-        `Are you sure you want to clear all ${playlist.length} songs from your playlist?`
+        `Are you sure you want to clear all ${playlist.length} songs from your favourites list?`
       )
     ) {
       setPlaylist([]);

@@ -371,7 +371,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
         <>
           {/* Search and Filter Section */}
           <div className="mb-8 space-y-4">
-            <div className="relative w-full lg:w-1/3 mx-auto">
+            <div className="relative w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl mx-auto">
               <Search
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-100"
                 size={20}
@@ -385,11 +385,11 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               />
             </div>
 
-            <div className="flex flex-wrap gap-4 items-center mx-auto w-full min-md:w-2xl min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col md:flex-row justify-center md:justify-between gap-4 items-center mx-auto w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl">
+              <div className="flex items-center gap-2 w-full md:w-fit">
                 <Filter size={20} className="text-yellow-100" />
                 <select
-                  className="px-4 py-2 border border-yellow-100 text-yellow-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 cursor-pointer"
+                  className="w-full px-4 py-2 border border-yellow-100 text-yellow-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 cursor-pointer"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                 >
@@ -403,10 +403,10 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
               <button
                 onClick={() => setShowPlaylist(!showPlaylist)}
-                className="ml-auto flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-lg border-2 border-yellow-100 hover:bg-yellow-900 transition-colors cursor-pointer text-yellow-100"
+                className="flex items-center gap-2 w-full md:w-fit justify-center px-4 py-2 bg-slate-900 rounded-lg border-2 border-yellow-100 hover:bg-yellow-900 transition-colors cursor-pointer text-yellow-100"
               >
                 <Music size={20} />
-                Favourites ({playlist.length})
+                My favourites ({playlist.length})
               </button>
             </div>
           </div>

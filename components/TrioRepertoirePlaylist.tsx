@@ -367,11 +367,11 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
               />
             </div>
 
-            <div className="flex flex-wrap gap-4 items-center mx-auto w-full min-md:w-2xl min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col md:flex-row justify-center md:justify-between gap-4 items-center mx-auto w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl">
+              <div className="flex items-center gap-2 w-full md:w-fit">
                 <Filter size={20} className="text-yellow-100" />
                 <select
-                  className="px-4 py-2 border border-yellow-100 text-yellow-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 cursor-pointer"
+                  className="w-full px-4 py-2 border border-yellow-100 text-yellow-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 cursor-pointer"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                 >
@@ -385,10 +385,10 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
               <button
                 onClick={() => setShowPlaylist(!showPlaylist)}
-                className="ml-auto flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-lg border-2 border-yellow-100 hover:bg-yellow-900 transition-colors cursor-pointer text-yellow-100"
+                className="flex items-center gap-2 w-full md:w-fit justify-center px-4 py-2 bg-slate-900 rounded-lg border-2 border-yellow-100 hover:bg-yellow-900 transition-colors cursor-pointer text-yellow-100"
               >
                 <Music size={20} />
-                Favourites ({playlist.length})
+                My favourites ({playlist.length})
               </button>
             </div>
           </div>

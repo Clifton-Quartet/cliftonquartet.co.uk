@@ -353,7 +353,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
         <>
           {/* Search and Filter Section */}
           <div className="mb-8 space-y-4">
-            <div className="relative w-full lg:w-1/3 mx-auto">
+            <div className="relative w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl mx-auto">
               <Search
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-100"
                 size={20}

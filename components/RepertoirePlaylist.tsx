@@ -10,6 +10,8 @@ import {
   FileText,
   Edit2,
   Check,
+  Circle,
+  CircleCheck,
 } from "lucide-react";
 import { Content } from "@prismicio/client";
 
@@ -402,16 +404,19 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       )}
 
       {/* Results Count */}
-      <p className="mb-4 text-yellow-100 w-full min-md:w-2xl min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl mx-auto">
-        Showing {filteredSongs.length} of {songs.length} songs
-      </p>
+      <div className="flex justify-between text-yellow-100 w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl mx-auto">
+        <p className="mb-4">
+          Showing {filteredSongs.length} of {songs.length} songs
+        </p>
+        <p>Add to favourites</p>
+      </div>
 
       {/* Songs Grid */}
       <div className="mb-8 flex flex-col items-center">
         {filteredSongs.map((song) => (
           <div
             key={song.id}
-            className="song-card shadow-md hover:shadow-lg w-full min-md:w-2xl min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl transition-shadow mb-2"
+            className="song-card shadow-md hover:shadow-lg w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl transition-shadow mb-2"
           >
             <div className="song-gradient flex justify-between items-center px-3 py-1">
               <div>
@@ -434,15 +439,14 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                       addToPlaylist(song);
                     }
                   }}
-                  className="flex items-center justify-center gap-1 lg:gap-2 font-semibold bg-yellow-200 text-yellow-900 py-2 rounded-lg hover:bg-yellow-100 transition-colors cursor-pointer px-3"
+                  className="flex items-center justify-center font-semibold bg-slate-700 rounded-full transition-colors cursor-pointer"
                 >
-                  <span className="sm:hidden">
-                    {playlist.find((s) => s.id === song.id) ? "Remove" : "Add"}
-                  </span>
-                  <span className="hidden sm:inline">
-                    {playlist.find((s) => s.id === song.id)
-                      ? "Remove from favourites"
-                      : "Add to favourites"}
+                  <span>
+                    {playlist.find((s) => s.id === song.id) ? (
+                      <CircleCheck size={32} className="text-green-400" />
+                    ) : (
+                      <Circle size={32} className="text-slate-500" />
+                    )}
                   </span>
                 </button>
               </div>

@@ -166,6 +166,16 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
     setPlaylist(playlist.filter((s) => s.id !== songId));
   };
 
+  const clearPlaylist = () => {
+    if (
+      window.confirm(
+        `Are you sure you want to clear all ${playlist.length} songs from your playlist?`
+      )
+    ) {
+      setPlaylist([]);
+    }
+  };
+
   const startEditingTitle = () => {
     setIsEditingTitle(true);
     setTempTitle(playlistTitle);
@@ -537,7 +547,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                 ))}
               </div>
 
-              <div className="space-y-3 mx-2 mb-6">
+              <div className="space-y-3 mx-2 mb-8">
                 <button
                   onClick={exportToPDF}
                   className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-lg hover:bg-slate-500 transition-colors cursor-pointer"
@@ -552,6 +562,13 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                 >
                   <FileText size={20} />
                   Export to Word doc
+                </button>
+                <button
+                  onClick={clearPlaylist}
+                  className="w-full flex items-center justify-center gap-2 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
+                >
+                  <X size={20} />
+                  Clear All ({playlist.length})
                 </button>
               </div>
             </>

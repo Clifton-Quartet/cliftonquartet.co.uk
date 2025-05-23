@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import {
   Search,
   Filter,
@@ -87,6 +87,42 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
   const [playlistTitle, setPlaylistTitle] = useState("Favourite Songs");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [tempTitle, setTempTitle] = useState(playlistTitle);
+
+  // Ref for the playlist sidebar
+  const playlistSidebarRef = useRef<HTMLDivElement>(null);
+
+  // Handle click outside to close playlist
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (
+        showPlaylist &&
+        playlistSidebarRef.current &&
+        !playlistSidebarRef.current.contains(event.target as Node)
+      ) {
+        setShowPlaylist(false);
+      }
+    };
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && showPlaylist) {
+        setShowPlaylist(false);
+      }
+    };
+
+    if (showPlaylist) {
+      // Add event listeners when playlist is open
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+      document.addEventListener("keydown", handleEscapeKey);
+    }
+
+    // Cleanup event listeners
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [showPlaylist]);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -302,7 +338,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
           <h1>${playlistTitle}</h1>
           <h2>String Trio Repertoire</h2>
           <div class="info">
-            <p>String Quartet Repertoire Playlist</p>
+            <p>String Trio Repertoire Playlist</p>
             <p>Date: ${new Date().toLocaleDateString()}</p>
             <p>Total Songs: ${playlist.length}</p>
           </div>
@@ -340,7 +376,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
   };
 
   return (
-    <div className="px-4 py-8 min-h-[100dvh]">
+    <div id="trioRepertoire" className="px-4 py-8 min-h-[100dvh]">
       <h1 className="text-2xl my-8 lg:text-5xl uppercase font-serif font-bold text-center text-yellow-100">
         String Trio Repertoire
       </h1>
@@ -385,7 +421,7 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
               <button
                 onClick={() => setShowPlaylist(!showPlaylist)}
-                className="flex items-center gap-2 w-full md:w-fit justify-center px-4 py-2 bg-slate-900 rounded-lg border-2 border-yellow-100 hover:bg-yellow-900 transition-colors cursor-pointer text-yellow-100"
+                className="flex items-center gap-2 w-full md:w-fit justify-center px-4 py-2 bg-slate-900 rounded-lg border-2 border-yellow-100 hover:bg-yellow-100 hover:text-slate-900 transition-colors cursor-pointer text-yellow-100"
               >
                 <Music size={20} />
                 My favourites ({playlist.length})
@@ -451,7 +487,10 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
       {/* Playlist Sidebar */}
       {showPlaylist && (
-        <div className="custom-scroll fixed right-0 top-0 h-full w-96 bg-yellow-50 border-l border-yellow-300 shadow-xl z-50 overflow-y-auto">
+        <div
+          ref={playlistSidebarRef}
+          className="custom-scroll fixed right-0 top-0 h-full w-96 bg-yellow-50 border-l border-yellow-300 shadow-xl z-50 overflow-y-auto"
+        >
           <div className="flex justify-between items-start mb-6 bg-slate-900">
             <div className="flex items-start justify-between gap-2 flex-1 text-yellow-100 p-2 w-8 overflow-hidden overflow-x-auto">
               {isEditingTitle ? (

@@ -413,12 +413,14 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
             <div className="song-gradient flex justify-between items-center px-3 py-1">
               <div>
                 <div className="flex items-center mb-1">
-                  <p className="text-gray-100 mr-3">{song.composer}</p>
-                  <h3 className="text-lg text-gray-100 font-semibold">
+                  <p className={`text-gray-400 ${song.composer ? "mr-3" : ""}`}>
+                    {song.composer}
+                  </p>
+                  <h3 className="text-lg text-gray-300 font-semibold">
                     {song.title}
                   </h3>
                 </div>
-                <p className="text-sm text-yellow-100">{song.category}</p>
+                <p className="text-sm text-yellow-50/70">{song.category}</p>
               </div>
               <div>
                 <button

@@ -301,8 +301,8 @@ Date: ${new Date().toLocaleDateString()}
             </label>
 
             {!hasAnySongs ? (
-              <div className="p-4 bg-slate-700 border border-gray-600 rounded-lg">
-                <p className="text-gray-400 text-sm">
+              <div className="p-4 border border-blue-500 rounded-lg tracking-wider">
+                <p className="text-blue-300 font-extralight text-sm">
                   Add songs to your favourites list and send them to us. Visit
                   the repertoire page to create your favourites list.
                 </p>
@@ -334,8 +334,8 @@ Date: ${new Date().toLocaleDateString()}
             )}
 
             {formData.selectedPlaylist !== "none" && (
-              <div className="mt-3 p-3 bg-blue-900/20 border border-blue-500 rounded-lg">
-                <p className="text-blue-300 text-sm">
+              <div className="mt-3 p-3 border border-blue-500 rounded-lg tracking-wider">
+                <p className="text-blue-300 text-sm font-extralight">
                   ✓ Your favourites will be included with your message
                 </p>
               </div>

@@ -67,31 +67,33 @@ const TheRepertoire: FC<TheRepertoireProps> = ({ slice, context }) => {
         </SlideIn>
       </div>
       <RepertoirePlaylist repertoire={repertoire} />
-      <div className="flex flex-col justify-center items-center font-sans bg-yellow-950 my-10 p-10">
-        <h3 className="text-3xl text-white text-center">
-          {slice.primary.text}
-        </h3>
-        <div
-          className={`flex flex-col md:flex-row ${slice.primary.phone_number.text ? "gap-4 md:gap-8" : ""} mt-6`}
-        >
-          {slice.primary.phone_number.text ? (
+      <SlideIn>
+        <div className="flex flex-col justify-center items-center font-sans bg-yellow-950 my-10 p-10">
+          <h3 className="text-3xl text-white text-center">
+            {slice.primary.text}
+          </h3>
+          <div
+            className={`flex flex-col md:flex-row ${slice.primary.phone_number.text ? "gap-4 md:gap-8" : ""} mt-6`}
+          >
+            {slice.primary.phone_number.text ? (
+              <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
+                <PrismicNextLink
+                  field={slice.primary.phone_number}
+                  className="px-4 py-2 block w-full h-full"
+                />
+              </button>
+            ) : (
+              <div></div>
+            )}
             <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
               <PrismicNextLink
-                field={slice.primary.phone_number}
+                field={slice.primary.email}
                 className="px-4 py-2 block w-full h-full"
               />
             </button>
-          ) : (
-            <div></div>
-          )}
-          <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
-            <PrismicNextLink
-              field={slice.primary.email}
-              className="px-4 py-2 block w-full h-full"
-            />
-          </button>
+          </div>
         </div>
-      </div>
+      </SlideIn>
       <TrioRepertoirePlaylist trioRepertoire={trioRepertoire} />
     </section>
   );

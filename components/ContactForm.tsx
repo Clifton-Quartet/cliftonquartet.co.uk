@@ -171,7 +171,7 @@ Date: ${new Date().toLocaleDateString()}
             Contact Us
           </h2>
           <p className="text-yellow-100 font-extralight">
-            Send us a message and optionally share your favourite songs lists
+            Send us a message and optionally share your favourite songs list
             with us
           </p>
         </div>

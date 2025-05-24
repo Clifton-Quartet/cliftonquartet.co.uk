@@ -467,47 +467,52 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       {/* Songs Grid */}
       <div className="mb-8 flex flex-col items-center">
         {filteredSongs.map((song) => (
-          <SlideIn key={song.id}>
-            <div className="song-card shadow-md hover:shadow-lg w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl transition-shadow mb-2">
-              <div className="song-gradient flex justify-between items-center px-3 py-1">
-                <div>
-                  <div className="flex items-center mb-1">
-                    <p
-                      className={`text-gray-400 ${song.composer ? "mr-3" : ""}`}
-                    >
-                      {song.composer}
-                    </p>
-                    <h3 className="text-lg text-gray-300 font-semibold">
-                      {song.title}
-                    </h3>
+          <div
+            key={song.id}
+            className="w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl"
+          >
+            <SlideIn>
+              <div className="song-card shadow-md hover:shadow-lg transition-shadow mb-2">
+                <div className="song-gradient flex justify-between items-center px-3 py-1">
+                  <div>
+                    <div className="flex items-center mb-1">
+                      <p
+                        className={`text-gray-400 ${song.composer ? "mr-3" : ""}`}
+                      >
+                        {song.composer}
+                      </p>
+                      <h3 className="text-lg text-gray-300 font-semibold">
+                        {song.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm text-yellow-50/70">{song.category}</p>
                   </div>
-                  <p className="text-sm text-yellow-50/70">{song.category}</p>
-                </div>
-                <div>
-                  <button
-                    onClick={() => {
-                      const isInPlaylist =
-                        playlist.find((s) => s.id === song.id) !== undefined;
-                      if (isInPlaylist) {
-                        removeFromPlaylist(song.id);
-                      } else {
-                        addToPlaylist(song);
-                      }
-                    }}
-                    className="flex items-center justify-center font-semibold bg-slate-700 rounded-full transition-colors cursor-pointer"
-                  >
-                    <span>
-                      {playlist.find((s) => s.id === song.id) ? (
-                        <CircleCheck size={32} className="text-green-400" />
-                      ) : (
-                        <Circle size={32} className="text-slate-500" />
-                      )}
-                    </span>
-                  </button>
+                  <div>
+                    <button
+                      onClick={() => {
+                        const isInPlaylist =
+                          playlist.find((s) => s.id === song.id) !== undefined;
+                        if (isInPlaylist) {
+                          removeFromPlaylist(song.id);
+                        } else {
+                          addToPlaylist(song);
+                        }
+                      }}
+                      className="flex items-center justify-center font-semibold bg-slate-700 rounded-full transition-colors cursor-pointer"
+                    >
+                      <span>
+                        {playlist.find((s) => s.id === song.id) ? (
+                          <CircleCheck size={32} className="text-green-400" />
+                        ) : (
+                          <Circle size={32} className="text-slate-500" />
+                        )}
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </SlideIn>
+            </SlideIn>
+          </div>
         ))}
       </div>
 

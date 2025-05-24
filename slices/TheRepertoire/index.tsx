@@ -1,3 +1,5 @@
+"use client";
+
 import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
@@ -24,6 +26,16 @@ const TheRepertoire: FC<TheRepertoireProps> = ({ slice, context }) => {
   const repertoire = context?.repertoire || [];
   const trioRepertoire = context?.trioRepertoire || [];
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -31,12 +43,18 @@ const TheRepertoire: FC<TheRepertoireProps> = ({ slice, context }) => {
       className="bg-slate-900 font-sans"
     >
       <div className="flex flex-col lg:flex-row justify-center items-center gap-8 w-full text-center text-2xl text-slate-900 pt-12 px-4">
-        <div className="border w-full lg:w-fit px-6 py-3 rounded-xl bg-yellow-100 hover:bg-yellow-50">
-          <a href="#quartetRepertoire">String Quartet Repertoire</a>
-        </div>
-        <div className="border w-full lg:w-fit px-6 py-3 rounded-xl bg-yellow-100 hover:bg-yellow-50">
-          <a href="#trioRepertoire">String Trio Repertoire</a>
-        </div>
+        <button
+          className="border w-full lg:w-fit px-6 py-3 rounded-xl bg-yellow-100 hover:bg-yellow-50 transition-colors cursor-pointer"
+          onClick={() => scrollToSection("quartetRepertoire")}
+        >
+          String Quartet Repertoire
+        </button>
+        <button
+          className="border w-full lg:w-fit px-6 py-3 rounded-xl bg-yellow-100 hover:bg-yellow-50 transition-colors cursor-pointer"
+          onClick={() => scrollToSection("trioRepertoire")}
+        >
+          String Trio Repertoire
+        </button>
       </div>
       <RepertoirePlaylist repertoire={repertoire} />
       <div className="flex flex-col justify-center items-center font-sans bg-yellow-950 my-10 p-10">

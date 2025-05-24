@@ -1,7 +1,6 @@
 "use client";
 
 import { Content } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
 import { ArrowBigUp } from "lucide-react";
 
 interface FooterProps {
@@ -19,6 +18,7 @@ export default function Footer({ footerData }: FooterProps) {
 
   return (
     <>
+      {/*
       <div className="flex flex-col justify-center items-center bg-slate-900 p-10 font-sans">
         <h3 className="text-3xl text-white text-center">
           {footerData.contact_us_text}
@@ -44,6 +44,7 @@ export default function Footer({ footerData }: FooterProps) {
           </button>
         </div>
       </div>
+      */}
       <div className="relative grid grid-cols-1 md:grid-cols-3 items-center p-4 bg-slate-900 font-sans">
         <div></div>
         <p className="text-center text-white text-sm">

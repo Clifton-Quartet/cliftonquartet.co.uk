@@ -362,9 +362,23 @@ Date: ${new Date().toLocaleDateString()}
           </button>
         </form>
 
+        <div className="border-t border-yellow-50/60 mt-6 pt-6 flex flex-col items-center">
+          <p className="text-yellow-100 mb-2">
+            Alternatively contact us by sending us an email
+          </p>
+          <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
+            <a
+              href="mailto:cliftonstringquartet@gmail.com"
+              className="p-2 block"
+            >
+              cliftonstringquartet@gmail.com
+            </a>
+          </button>
+        </div>
+
         {/* Form Footer */}
-        <div className="mt-6 pt-6 border-t border-gray-600">
-          <p className="text-gray-400 text-sm text-center">
+        <div className="mt-6 pt-6 border-t border-yellow-50/60">
+          <p className="text-yellow-50/60 text-sm text-center font-extralight tracking-wider">
             We respect your privacy and will only use your information to
             respond to your message.
           </p>

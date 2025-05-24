@@ -167,7 +167,7 @@ Date: ${new Date().toLocaleDateString()}
     <div className="bg-yellow-900">
       <div className="max-w-3xl mx-auto p-6">
         <div className="text-center mb-8">
-          <h2 className="text-5xl font-bold text-yellow-100 mb-2">
+          <h2 className="text-5xl font-bold text-yellow-100 mb-2 font-serif">
             Contact Us
           </h2>
           <p className="text-yellow-100 font-extralight">

@@ -2,10 +2,11 @@
 
 import { FC } from "react";
 import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import RepertoirePlaylist from "@/components/RepertoirePlaylist";
 import TrioRepertoirePlaylist from "@/components/TrioRepertoirePlaylist";
 import { PrismicNextLink } from "@prismicio/next";
+import { SlideIn } from "@/components/SlideIn";
 
 // Define the type for your repertoire documents
 type StringQuartetRepertoire = Content.StringQuartetRepertoireDocument;
@@ -42,19 +43,28 @@ const TheRepertoire: FC<TheRepertoireProps> = ({ slice, context }) => {
       data-slice-variation={slice.variation}
       className="bg-slate-900 font-sans"
     >
+      <SlideIn>
+        <div className="text-yellow-100 font-extralight text-2xl text-center pt-12">
+          <PrismicRichText field={slice.primary.title} />
+        </div>
+      </SlideIn>
       <div className="flex flex-col lg:flex-row justify-center items-center gap-8 w-full text-center text-2xl text-slate-900 pt-12 px-4">
-        <button
-          className="border w-full lg:w-fit px-6 py-3 rounded-xl bg-yellow-100 hover:bg-yellow-50 transition-colors cursor-pointer"
-          onClick={() => scrollToSection("quartetRepertoire")}
-        >
-          String Quartet Repertoire
-        </button>
-        <button
-          className="border w-full lg:w-fit px-6 py-3 rounded-xl bg-yellow-100 hover:bg-yellow-50 transition-colors cursor-pointer"
-          onClick={() => scrollToSection("trioRepertoire")}
-        >
-          String Trio Repertoire
-        </button>
+        <SlideIn>
+          <button
+            className="border w-full lg:w-fit px-6 py-3 rounded-xl bg-yellow-100 hover:bg-yellow-50 transition-colors cursor-pointer"
+            onClick={() => scrollToSection("quartetRepertoire")}
+          >
+            String Quartet Repertoire
+          </button>
+        </SlideIn>
+        <SlideIn>
+          <button
+            className="border w-full lg:w-fit px-6 py-3 rounded-xl bg-yellow-100 hover:bg-yellow-50 transition-colors cursor-pointer"
+            onClick={() => scrollToSection("trioRepertoire")}
+          >
+            String Trio Repertoire
+          </button>
+        </SlideIn>
       </div>
       <RepertoirePlaylist repertoire={repertoire} />
       <div className="flex flex-col justify-center items-center font-sans bg-yellow-950 my-10 p-10">

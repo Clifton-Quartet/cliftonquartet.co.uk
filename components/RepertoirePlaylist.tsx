@@ -14,6 +14,7 @@ import {
   CircleCheck,
 } from "lucide-react";
 import { Content } from "@prismicio/client";
+import { SlideIn } from "./SlideIn";
 
 // Define types for props
 interface RepertoirePlaylistProps {
@@ -395,9 +396,11 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
   return (
     <div id="quartetRepertoire" className="px-4 py-8 min-h-[100dvh] font-sans">
-      <h1 className="text-2xl my-8 lg:text-5xl uppercase font-serif font-bold text-center tracking-widest text-yellow-100">
-        String Quartet Repertoire
-      </h1>
+      <SlideIn>
+        <h1 className="text-2xl my-8 lg:text-5xl uppercase font-serif font-bold text-center tracking-widest text-yellow-100">
+          String Quartet Repertoire
+        </h1>
+      </SlideIn>
 
       {songs.length === 0 ? (
         <div className="text-center py-12">
@@ -406,100 +409,105 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       ) : (
         <>
           {/* Search and Filter Section */}
-          <div className="mb-8 space-y-4">
-            <div className="relative w-full min-lg:w-1/3 mx-auto">
-              <Search
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-100"
-                size={20}
-              />
-              <input
-                type="text"
-                placeholder="Search by title or composer..."
-                className="w-full pl-10 pr-4 py-2 border text-yellow-100 border-yellow-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-
-            <div className="flex flex-col md:flex-row justify-center md:justify-between gap-4 items-center mx-auto w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl">
-              <div className="flex items-center gap-2 w-full md:w-fit">
-                <Filter size={20} className="text-yellow-100" />
-                <select
-                  className="w-full px-4 py-2 border border-yellow-100 text-yellow-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 cursor-pointer"
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                  {categories.map((cat) => (
-                    <option key={cat} value={cat} className="bg-slate-900">
-                      {cat === "all" ? "All Categories" : cat}
-                    </option>
-                  ))}
-                </select>
+          <SlideIn>
+            <div className="mb-8 space-y-4">
+              <div className="relative w-full min-lg:w-1/3 mx-auto">
+                <Search
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-100"
+                  size={20}
+                />
+                <input
+                  type="text"
+                  placeholder="Search by title or composer..."
+                  className="w-full pl-10 pr-4 py-2 border text-yellow-100 border-yellow-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
               </div>
 
-              <button
-                onClick={() => setShowPlaylist(!showPlaylist)}
-                className="flex items-center gap-2 w-full md:w-fit justify-center px-4 py-2 bg-slate-900 rounded-lg border border-yellow-100 hover:bg-yellow-100 hover:text-slate-900 transition-colors cursor-pointer text-yellow-100"
-              >
-                <Music size={20} />
-                My favourites ({playlist.length})
-              </button>
+              <div className="flex flex-col md:flex-row justify-center md:justify-between gap-4 items-center mx-auto w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl">
+                <div className="flex items-center gap-2 w-full md:w-fit">
+                  <Filter size={20} className="text-yellow-100" />
+                  <select
+                    className="w-full px-4 py-2 border border-yellow-100 text-yellow-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 cursor-pointer"
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                  >
+                    {categories.map((cat) => (
+                      <option key={cat} value={cat} className="bg-slate-900">
+                        {cat === "all" ? "All Categories" : cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <button
+                  onClick={() => setShowPlaylist(!showPlaylist)}
+                  className="flex items-center gap-2 w-full md:w-fit justify-center px-4 py-2 bg-slate-900 rounded-lg border border-yellow-100 hover:bg-yellow-100 hover:text-slate-900 transition-colors cursor-pointer text-yellow-100"
+                >
+                  <Music size={20} />
+                  My favourites ({playlist.length})
+                </button>
+              </div>
             </div>
-          </div>
+          </SlideIn>
         </>
       )}
 
       {/* Results Count */}
-      <div className="flex justify-between text-yellow-100 w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl mx-auto">
-        <p className="mb-4">
-          Showing {filteredSongs.length} of {songs.length} songs
-        </p>
-        <p>Add to favourites</p>
-      </div>
+      <SlideIn>
+        <div className="flex justify-between text-yellow-100 w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl mx-auto">
+          <p className="mb-4">
+            Showing {filteredSongs.length} of {songs.length} songs
+          </p>
+          <p>Add to favourites</p>
+        </div>
+      </SlideIn>
 
       {/* Songs Grid */}
       <div className="mb-8 flex flex-col items-center">
         {filteredSongs.map((song) => (
-          <div
-            key={song.id}
-            className="song-card shadow-md hover:shadow-lg w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl transition-shadow mb-2"
-          >
-            <div className="song-gradient flex justify-between items-center px-3 py-1">
-              <div>
-                <div className="flex items-center mb-1">
-                  <p className={`text-gray-400 ${song.composer ? "mr-3" : ""}`}>
-                    {song.composer}
-                  </p>
-                  <h3 className="text-lg text-gray-300 font-semibold">
-                    {song.title}
-                  </h3>
+          <SlideIn key={song.id}>
+            <div className="song-card shadow-md hover:shadow-lg w-full min-lg:w-3xl min-xl:w-4xl min-2xl:w-5xl transition-shadow mb-2">
+              <div className="song-gradient flex justify-between items-center px-3 py-1">
+                <div>
+                  <div className="flex items-center mb-1">
+                    <p
+                      className={`text-gray-400 ${song.composer ? "mr-3" : ""}`}
+                    >
+                      {song.composer}
+                    </p>
+                    <h3 className="text-lg text-gray-300 font-semibold">
+                      {song.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-yellow-50/70">{song.category}</p>
                 </div>
-                <p className="text-sm text-yellow-50/70">{song.category}</p>
-              </div>
-              <div>
-                <button
-                  onClick={() => {
-                    const isInPlaylist =
-                      playlist.find((s) => s.id === song.id) !== undefined;
-                    if (isInPlaylist) {
-                      removeFromPlaylist(song.id);
-                    } else {
-                      addToPlaylist(song);
-                    }
-                  }}
-                  className="flex items-center justify-center font-semibold bg-slate-700 rounded-full transition-colors cursor-pointer"
-                >
-                  <span>
-                    {playlist.find((s) => s.id === song.id) ? (
-                      <CircleCheck size={32} className="text-green-400" />
-                    ) : (
-                      <Circle size={32} className="text-slate-500" />
-                    )}
-                  </span>
-                </button>
+                <div>
+                  <button
+                    onClick={() => {
+                      const isInPlaylist =
+                        playlist.find((s) => s.id === song.id) !== undefined;
+                      if (isInPlaylist) {
+                        removeFromPlaylist(song.id);
+                      } else {
+                        addToPlaylist(song);
+                      }
+                    }}
+                    className="flex items-center justify-center font-semibold bg-slate-700 rounded-full transition-colors cursor-pointer"
+                  >
+                    <span>
+                      {playlist.find((s) => s.id === song.id) ? (
+                        <CircleCheck size={32} className="text-green-400" />
+                      ) : (
+                        <Circle size={32} className="text-slate-500" />
+                      )}
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </SlideIn>
         ))}
       </div>
 

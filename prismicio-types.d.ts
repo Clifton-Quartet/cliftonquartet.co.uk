@@ -1280,6 +1280,16 @@ export type TestimonialsSlice = prismic.SharedSlice<
  */
 export interface TheRepertoireSliceDefaultPrimary {
   /**
+   * Title field in *TheRepertoire → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: the_repertoire.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
    * Text field in *TheRepertoire → Default → Primary*
    *
    * - **Field Type**: Text

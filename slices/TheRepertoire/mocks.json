@@ -18,13 +18,24 @@
 				}
 			},
 			"email": {
-				"__TYPE__": "LinkContent",
 				"key": "242e5c39-732b-4d27-8ab9-20e4fcc9d597",
+				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "ExternalLink",
 					"url": "https://prismic.io",
 					"text": "tight"
 				}
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Determine"
+						}
+					}
+				]
 			}
 		},
 		"items": []

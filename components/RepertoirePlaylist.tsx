@@ -497,7 +497,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                     type="text"
                     value={tempTitle}
                     onChange={(e) => setTempTitle(e.target.value)}
-                    className="flex-1 px-2 py-1 border-1 border-yellow-100 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    className="flex-1 px-2 py-1 border-1 bg-slate-700 border-yellow-100 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     onKeyPress={(e) => e.key === "Enter" && saveTitle()}
                     placeholder="Favourite Songs"
                   />

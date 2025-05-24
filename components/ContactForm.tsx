@@ -377,7 +377,7 @@ Date: ${new Date().toLocaleDateString()}
         </div>
 
         {/* Form Footer */}
-        <div className="mt-6 pt-6 border-t border-yellow-50/60">
+        <div className="mt-8 pt-6 border-t border-yellow-50/60">
           <p className="text-yellow-50/60 text-sm text-center font-extralight tracking-wider">
             We respect your privacy and will only use your information to
             respond to your message.

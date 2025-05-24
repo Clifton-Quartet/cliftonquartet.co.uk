@@ -43,15 +43,6 @@
             "multi": "paragraph,strong,em"
           }
         },
-        "mp3_song": {
-          "type": "Link",
-          "config": {
-            "label": "MP3 Song",
-            "placeholder": "mp3 audio file",
-            "select": "media",
-            "allowText": true
-          }
-        },
         "vinyl_cover": {
           "type": "Image",
           "config": {

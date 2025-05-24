@@ -1081,16 +1081,6 @@ export interface RepertoireSliceDefaultPrimary {
   text: prismic.RichTextField;
 
   /**
-   * MP3 Song field in *VinylPlayer → Default → Primary*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: mp3 audio file
-   * - **API ID Path**: repertoire.default.primary.mp3_song
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  mp3_song: prismic.LinkToMediaField<prismic.FieldState, never>;
-
-  /**
    * Vinyl Cover field in *VinylPlayer → Default → Primary*
    *
    * - **Field Type**: Image

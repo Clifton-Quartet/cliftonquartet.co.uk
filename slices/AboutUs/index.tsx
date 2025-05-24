@@ -37,7 +37,7 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
         </div>
       </div>
       <div className="text-lg">
-        <div className="lg:grid lg:grid-cols-4 leading-loose tracking-wide items-center">
+        <div className="lg:grid lg:grid-cols-4 2xl:grid-cols-5 leading-loose tracking-wide items-center">
           <div className="lg:col-span-3 bg-white text-yellow-900 flex flex-col justify-center p-6 lg:p-16">
             <SlideIn>
               <div className="font-serif uppercase font-bold tracking-widest text-3xl lg:text-5xl mb-4">
@@ -67,7 +67,7 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
             }
           ></div>
         </div>
-        <div className="lg:grid lg:grid-cols-4 leading-loose tracking-wide items-center">
+        <div className="lg:grid lg:grid-cols-4 2xl:grid-cols-5 leading-loose tracking-wide items-center">
           <div className="order-2 lg:col-span-3 bg-white text-yellow-900 flex flex-col justify-center p-6 lg:p-16">
             {slice.primary.paragraph_4 ? (
               <div>
@@ -116,7 +116,7 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
             )}
           </div>
           <div
-            className="order-1 lg:col-span-1 bg-yellow-900 w-full h-full"
+            className="order-1 lg:col-span-1 2xl:col-span-2 bg-yellow-900 w-full h-full"
             style={
               {
                 // backgroundImage: `url(${slice.primary.image_2.url})`,

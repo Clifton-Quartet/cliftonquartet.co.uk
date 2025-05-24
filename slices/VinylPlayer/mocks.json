@@ -84,19 +84,6 @@
 					}
 				]
 			},
-			"mp3_song": {
-				"key": "95d387c7-366e-466e-bad5-2172bd28fd6b",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "FileLink",
-					"id": "mock_Media_link",
-					"kind": "file",
-					"name": "mock_name",
-					"url": "https://source.unsplash.com/daily",
-					"size": "0",
-					"text": "order"
-				}
-			},
 			"vinyl_cover": {
 				"origin": {
 					"id": "main",

@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { SlideIn } from "@/components/SlideIn";
+import { ContactForm } from "@/components/ContactForm";
 
 /**
  * Props for `PlayersBio`.
@@ -53,6 +54,7 @@ const PlayersBio: FC<PlayersBioProps> = ({ slice }) => {
           </SlideIn>
         ))}
       </div>
+      <ContactForm />
     </section>
   );
 };

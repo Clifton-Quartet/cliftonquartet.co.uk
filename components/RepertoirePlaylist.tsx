@@ -15,18 +15,11 @@ import {
 } from "lucide-react";
 import { Content } from "@prismicio/client";
 import { SlideIn } from "./SlideIn";
+import { usePlaylistStore, Song } from "../store/playlistStore";
 
 // Define types for props
 interface RepertoirePlaylistProps {
   repertoire: Content.StringQuartetRepertoireDocument[];
-}
-
-// Define the Song interface
-interface Song {
-  title: string;
-  composer: string;
-  category: string;
-  id: string;
 }
 
 // Define types for the repertoire data structure
@@ -48,6 +41,16 @@ interface RepertoireData {
 const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
   repertoire,
 }) => {
+  // Zustand store
+  const {
+    quartetPlaylist,
+    quartetPlaylistTitle,
+    setQuartetPlaylistTitle,
+    addToQuartetPlaylist,
+    removeFromQuartetPlaylist,
+    clearQuartetPlaylist,
+  } = usePlaylistStore();
+
   // Transform the repertoire documents into the Song format
   const songs = useMemo(() => {
     const allSongs: Song[] = [];
@@ -83,7 +86,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
             songs.forEach((song) => {
               if (song.song_title) {
                 allSongs.push({
-                  id: `${categoryKey}-${idCounter++}`,
+                  id: `quartet-${categoryKey}-${idCounter++}`,
                   title: song.song_title,
                   composer:
                     song.composer || defaultComposers[categoryKey] || "",
@@ -101,14 +104,17 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [playlist, setPlaylist] = useState<Song[]>([]);
   const [showPlaylist, setShowPlaylist] = useState(false);
-  const [playlistTitle, setPlaylistTitle] = useState("Favourite Songs");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
-  const [tempTitle, setTempTitle] = useState(playlistTitle);
+  const [tempTitle, setTempTitle] = useState(quartetPlaylistTitle);
 
   // Ref for the playlist sidebar
   const playlistSidebarRef = useRef<HTMLDivElement>(null);
+
+  // Update temp title when store title changes
+  useEffect(() => {
+    setTempTitle(quartetPlaylistTitle);
+  }, [quartetPlaylistTitle]);
 
   // Handle click outside to close playlist
   useEffect(() => {
@@ -143,34 +149,6 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
     };
   }, [showPlaylist]);
 
-  // Load from localStorage on mount
-  useEffect(() => {
-    const savedPlaylist = localStorage.getItem("stringQuartetPlaylist");
-    const savedTitle = localStorage.getItem("stringQuartetPlaylistTitle");
-
-    if (savedPlaylist) {
-      try {
-        setPlaylist(JSON.parse(savedPlaylist));
-      } catch (e) {
-        console.error("Error loading playlist from localStorage:", e);
-      }
-    }
-
-    if (savedTitle) {
-      setPlaylistTitle(savedTitle);
-      setTempTitle(savedTitle);
-    }
-  }, []);
-
-  // Save to localStorage whenever playlist or title changes
-  useEffect(() => {
-    localStorage.setItem("stringQuartetPlaylist", JSON.stringify(playlist));
-  }, [playlist]);
-
-  useEffect(() => {
-    localStorage.setItem("stringQuartetPlaylistTitle", playlistTitle);
-  }, [playlistTitle]);
-
   const categories = useMemo(() => {
     const cats = ["all", ...new Set(songs.map((song) => song.category))];
     return cats.sort((a, b) => {
@@ -193,38 +171,28 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
     });
   }, [songs, searchTerm, selectedCategory]);
 
-  const addToPlaylist = (song: Song) => {
-    if (!playlist.find((s) => s.id === song.id)) {
-      setPlaylist([...playlist, song]);
-    }
-  };
-
-  const removeFromPlaylist = (songId: string) => {
-    setPlaylist(playlist.filter((s) => s.id !== songId));
-  };
-
-  const clearPlaylist = () => {
+  const handleClearPlaylist = () => {
     if (
       window.confirm(
-        `Are you sure you want to clear all ${playlist.length} songs from your favourites list?`
+        `Are you sure you want to clear all ${quartetPlaylist.length} songs from your favourites list?`
       )
     ) {
-      setPlaylist([]);
+      clearQuartetPlaylist();
     }
   };
 
   const startEditingTitle = () => {
     setIsEditingTitle(true);
-    setTempTitle(playlistTitle);
+    setTempTitle(quartetPlaylistTitle);
   };
 
   const saveTitle = () => {
-    setPlaylistTitle(tempTitle);
+    setQuartetPlaylistTitle(tempTitle);
     setIsEditingTitle(false);
   };
 
   const cancelEditingTitle = () => {
-    setTempTitle(playlistTitle);
+    setTempTitle(quartetPlaylistTitle);
     setIsEditingTitle(false);
   };
 
@@ -233,7 +201,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
     const printContent = `
     <html>
       <head>
-        <title>${playlistTitle}</title>
+        <title>${quartetPlaylistTitle}</title>
         <style>
           body {
             font-family: Arial, sans-serif;
@@ -268,12 +236,12 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
         </style>
       </head>
       <body>
-        <h1>${playlistTitle}</h1>
+        <h1>${quartetPlaylistTitle}</h1>
         <h2>String Quartet Repertoire</h2>
         <p>Date: ${new Date().toLocaleDateString()}</p>
-        <p>Total Songs: ${playlist.length}</p>
+        <p>Total Songs: ${quartetPlaylist.length}</p>
         <hr />
-        ${playlist
+        ${quartetPlaylist
           .map(
             (song, index) => `
           <div class="song">
@@ -309,7 +277,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
             xmlns='http://www.w3.org/TR/REC-html40'>
         <head>
           <meta charset='utf-8'>
-          <title>${playlistTitle}</title>
+          <title>${quartetPlaylistTitle}</title>
           <style>
             body {
               font-family: Arial, sans-serif;
@@ -354,15 +322,15 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
           </style>
         </head>
         <body>
-          <h1>${playlistTitle}</h1>
+          <h1>${quartetPlaylistTitle}</h1>
           <h2>String Quartet Repertoire</h2>
           <div class="info">
             <p>String Quartet Repertoire Playlist</p>
             <p>Date: ${new Date().toLocaleDateString()}</p>
-            <p>Total Songs: ${playlist.length}</p>
+            <p>Total Songs: ${quartetPlaylist.length}</p>
           </div>
           <hr />
-          ${playlist
+          ${quartetPlaylist
             .map(
               (song, index) => `
             <div class="song">
@@ -387,7 +355,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `${playlistTitle.replace(/[^a-z0-9]/gi, "_").toLowerCase()}_playlist.doc`;
+    link.download = `${quartetPlaylistTitle.replace(/[^a-z0-9]/gi, "_").toLowerCase()}_playlist.doc`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -446,7 +414,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                   className="flex items-center gap-2 w-full md:w-fit justify-center px-4 py-2 bg-slate-900 rounded-lg border border-yellow-100 hover:bg-yellow-100 hover:text-slate-900 transition-colors cursor-pointer text-yellow-100"
                 >
                   <Music size={20} />
-                  My favourites ({playlist.length})
+                  My favourites ({quartetPlaylist.length})
                 </button>
               </div>
             </div>
@@ -491,17 +459,18 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                     <button
                       onClick={() => {
                         const isInPlaylist =
-                          playlist.find((s) => s.id === song.id) !== undefined;
+                          quartetPlaylist.find((s) => s.id === song.id) !==
+                          undefined;
                         if (isInPlaylist) {
-                          removeFromPlaylist(song.id);
+                          removeFromQuartetPlaylist(song.id);
                         } else {
-                          addToPlaylist(song);
+                          addToQuartetPlaylist(song);
                         }
                       }}
                       className="flex items-center justify-center font-semibold bg-slate-700 rounded-full transition-colors cursor-pointer"
                     >
                       <span>
-                        {playlist.find((s) => s.id === song.id) ? (
+                        {quartetPlaylist.find((s) => s.id === song.id) ? (
                           <CircleCheck size={32} className="text-green-400" />
                         ) : (
                           <Circle size={32} className="text-slate-500" />
@@ -549,7 +518,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                 </>
               ) : (
                 <>
-                  <h2 className="text-2xl font-bold">{playlistTitle}</h2>
+                  <h2 className="text-2xl font-bold">{quartetPlaylistTitle}</h2>
                   <button
                     onClick={startEditingTitle}
                     className="flex gap-1 text-white hover:text-slate-300 cursor-pointer p-1"
@@ -568,7 +537,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
             </button>
           </div>
 
-          {playlist.length === 0 ? (
+          {quartetPlaylist.length === 0 ? (
             <p className="text-gray-500 text-center py-8">
               You don&apos;t have favourite songs yet. Add your favourite songs
               from the repertoire.
@@ -576,7 +545,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
           ) : (
             <>
               <div className="space-y-3 mb-6">
-                {playlist.map((song, index) => (
+                {quartetPlaylist.map((song, index) => (
                   <div
                     key={song.id}
                     className="flex items-start gap-3 p-3 bg-white border border-yellow-300 rounded-lg mx-2"
@@ -592,7 +561,7 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                       <p className="text-xs text-gray-400">{song.category}</p>
                     </div>
                     <button
-                      onClick={() => removeFromPlaylist(song.id)}
+                      onClick={() => removeFromQuartetPlaylist(song.id)}
                       className="text-slate-500 hover:text-slate-700 cursor-pointer p-1"
                     >
                       <X size={20} />
@@ -618,11 +587,11 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
                   Export to Word doc
                 </button>
                 <button
-                  onClick={clearPlaylist}
+                  onClick={handleClearPlaylist}
                   className="w-full flex items-center justify-center gap-2 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
                 >
                   <X size={20} />
-                  Clear All ({playlist.length})
+                  Clear All ({quartetPlaylist.length})
                 </button>
               </div>
             </>

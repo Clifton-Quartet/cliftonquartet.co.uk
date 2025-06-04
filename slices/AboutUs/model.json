@@ -93,35 +93,25 @@
             "multi": "paragraph,strong,em"
           }
         },
-        "background_image": {
-          "type": "Image",
+        "right_empty_section_color": {
+          "type": "Text",
           "config": {
-            "label": "Background Image",
-            "constraint": {},
-            "thumbnails": []
+            "label": "Right empty section color",
+            "placeholder": "yellow-100"
+          }
+        },
+        "left_empty_section_color": {
+          "type": "Text",
+          "config": {
+            "label": "Left empty section color",
+            "placeholder": "yellow-900"
           }
         },
         "background_color": {
-          "type": "Color",
+          "type": "Text",
           "config": {
             "label": "Background Color",
-            "placeholder": ""
-          }
-        },
-        "image_1": {
-          "type": "Image",
-          "config": {
-            "label": "Image 1",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "image_2": {
-          "type": "Image",
-          "config": {
-            "label": "Image 2",
-            "constraint": {},
-            "thumbnails": []
+            "placeholder": "white"
           }
         }
       },

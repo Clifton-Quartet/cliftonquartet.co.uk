@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type CliftonQuartetHomepageDocumentDataSlicesSlice =
+  | ImagesSectionSlice
   | TestimonialsSlice
   | WeddingsSlice
   | RepertoireSlice
@@ -567,6 +568,7 @@ export type StringTrioRepertoireDocument<Lang extends string = string> =
   >;
 
 type ThePlayersDocumentDataSlicesSlice =
+  | ImagesSectionSlice
   | PlayersBioSlice
   | TestimonialsSlice
   | WeddingsSlice
@@ -636,6 +638,7 @@ export type ThePlayersDocument<Lang extends string = string> =
   >;
 
 type TheRepertoireDocumentDataSlicesSlice =
+  | ImagesSectionSlice
   | RepertoireSlice
   | TestimonialsSlice
   | WeddingsSlice
@@ -706,6 +709,7 @@ export type TheRepertoireDocument<Lang extends string = string> =
   >;
 
 type WeddingsAndEventsDocumentDataSlicesSlice =
+  | ImagesSectionSlice
   | TestimonialsSlice
   | WeddingsSlice
   | HeroSlice;
@@ -878,6 +882,61 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Primary content in *ImagesSection → Default → Primary*
+ */
+export interface ImagesSectionSliceDefaultPrimary {
+  /**
+   * Image 1 field in *ImagesSection → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: images_section.default.primary.image_1
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_1: prismic.ImageField<never>;
+
+  /**
+   * Image 2 field in *ImagesSection → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: images_section.default.primary.image_2
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_2: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for ImagesSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImagesSectionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImagesSectionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ImagesSection*
+ */
+type ImagesSectionSliceVariation = ImagesSectionSliceDefault;
+
+/**
+ * ImagesSection Shared Slice
+ *
+ * - **API ID**: `images_section`
+ * - **Description**: ImagesSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImagesSectionSlice = prismic.SharedSlice<
+  "images_section",
+  ImagesSectionSliceVariation
+>;
 
 /**
  * Item in *PlayersBio → Default → Primary → Player bio*
@@ -1441,44 +1500,34 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_8: prismic.RichTextField;
 
   /**
-   * Background Image field in *AboutUs → Default → Primary*
+   * Right empty section color field in *AboutUs → Default → Primary*
    *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.default.primary.background_image
-   * - **Documentation**: https://prismic.io/docs/field#image
+   * - **Field Type**: Text
+   * - **Placeholder**: yellow-100
+   * - **API ID Path**: weddings.default.primary.right_empty_section_color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  background_image: prismic.ImageField<never>;
+  right_empty_section_color: prismic.KeyTextField;
+
+  /**
+   * Left empty section color field in *AboutUs → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: yellow-900
+   * - **API ID Path**: weddings.default.primary.left_empty_section_color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  left_empty_section_color: prismic.KeyTextField;
 
   /**
    * Background Color field in *AboutUs → Default → Primary*
    *
-   * - **Field Type**: Color
-   * - **Placeholder**: *None*
+   * - **Field Type**: Text
+   * - **Placeholder**: white
    * - **API ID Path**: weddings.default.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  background_color: prismic.ColorField;
-
-  /**
-   * Image 1 field in *AboutUs → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.default.primary.image_1
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image_1: prismic.ImageField<never>;
-
-  /**
-   * Image 2 field in *AboutUs → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: weddings.default.primary.image_2
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image_2: prismic.ImageField<never>;
+  background_color: prismic.KeyTextField;
 }
 
 /**
@@ -1570,6 +1619,10 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      ImagesSectionSlice,
+      ImagesSectionSliceDefaultPrimary,
+      ImagesSectionSliceVariation,
+      ImagesSectionSliceDefault,
       PlayersBioSlice,
       PlayersBioSliceDefaultPrimaryPlayerBioItem,
       PlayersBioSliceDefaultPrimary,

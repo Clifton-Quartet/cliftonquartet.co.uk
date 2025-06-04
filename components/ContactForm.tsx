@@ -364,7 +364,7 @@ Date: ${new Date().toLocaleDateString()}
 
         <div className="border-t border-yellow-50/60 mt-6 pt-6 flex flex-col items-center">
           <p className="text-yellow-100 mb-2">
-            Alternatively contact us by sending us an email
+            Alternatively contact us by sending an email
           </p>
           <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
             <a

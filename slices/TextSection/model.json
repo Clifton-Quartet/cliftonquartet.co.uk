@@ -1,7 +1,7 @@
 {
   "id": "weddings",
   "type": "SharedSlice",
-  "name": "AboutUs",
+  "name": "TextSection",
   "description": "Weddings",
   "variations": [
     {

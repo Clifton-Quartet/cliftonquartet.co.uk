@@ -908,7 +908,7 @@ export interface ImagesSectionSliceDefaultPrimary {
   image_2: prismic.ImageField<never>;
 
   /**
-   * Image 3 field in *ImagesSection → Default → Primary*
+   * Image 3 Desktop Only field in *ImagesSection → Default → Primary*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -1140,6 +1140,16 @@ export interface RepertoireSliceDefaultPrimary {
   background_color: prismic.KeyTextField;
 
   /**
+   * Text Color field in *VinylPlayer → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: eg: "yellow-100"
+   * - **API ID Path**: repertoire.default.primary.text_color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text_color: prismic.KeyTextField;
+
+  /**
    * Title field in *VinylPlayer → Default → Primary*
    *
    * - **Field Type**: Text
@@ -1158,26 +1168,6 @@ export interface RepertoireSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text: prismic.RichTextField;
-
-  /**
-   * Vinyl Cover field in *VinylPlayer → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: repertoire.default.primary.vinyl_cover
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  vinyl_cover: prismic.ImageField<never>;
-
-  /**
-   * Vinyl Back field in *VinylPlayer → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: repertoire.default.primary.vinyl_back
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  vinyl_back: prismic.ImageField<never>;
 
   /**
    * Repertoire Carousel field in *VinylPlayer → Default → Primary*
@@ -1426,11 +1416,11 @@ export type TheRepertoireSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *AboutUs → Default → Primary*
+ * Primary content in *TextSection → Default → Primary*
  */
 export interface WeddingsSliceDefaultPrimary {
   /**
-   * Title field in *AboutUs → Default → Primary*
+   * Title field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1440,7 +1430,7 @@ export interface WeddingsSliceDefaultPrimary {
   title: prismic.RichTextField;
 
   /**
-   * Paragraph 1 field in *AboutUs → Default → Primary*
+   * Paragraph 1 field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1450,7 +1440,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_1: prismic.RichTextField;
 
   /**
-   * Paragraph 2 field in *AboutUs → Default → Primary*
+   * Paragraph 2 field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1460,7 +1450,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_2: prismic.RichTextField;
 
   /**
-   * Paragraph 3 field in *AboutUs → Default → Primary*
+   * Paragraph 3 field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1470,7 +1460,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_3: prismic.RichTextField;
 
   /**
-   * Paragraph 4 field in *AboutUs → Default → Primary*
+   * Paragraph 4 field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1480,7 +1470,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_4: prismic.RichTextField;
 
   /**
-   * Paragraph 5 field in *AboutUs → Default → Primary*
+   * Paragraph 5 field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1490,7 +1480,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_5: prismic.RichTextField;
 
   /**
-   * Paragraph 6 field in *AboutUs → Default → Primary*
+   * Paragraph 6 field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1500,7 +1490,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_6: prismic.RichTextField;
 
   /**
-   * Paragraph 7 field in *AboutUs → Default → Primary*
+   * Paragraph 7 field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1510,7 +1500,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_7: prismic.RichTextField;
 
   /**
-   * Paragraph 8 field in *AboutUs → Default → Primary*
+   * Paragraph 8 field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -1520,7 +1510,7 @@ export interface WeddingsSliceDefaultPrimary {
   paragraph_8: prismic.RichTextField;
 
   /**
-   * Right empty section color field in *AboutUs → Default → Primary*
+   * Right empty section color field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: eg: "yellow-100"
@@ -1530,7 +1520,7 @@ export interface WeddingsSliceDefaultPrimary {
   right_empty_section_color: prismic.KeyTextField;
 
   /**
-   * Left empty section color field in *AboutUs → Default → Primary*
+   * Left empty section color field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: eg: "yellow-900"
@@ -1540,7 +1530,7 @@ export interface WeddingsSliceDefaultPrimary {
   left_empty_section_color: prismic.KeyTextField;
 
   /**
-   * Background Color field in *AboutUs → Default → Primary*
+   * Background Color field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: eg: "white" or "yellow-100"
@@ -1550,7 +1540,7 @@ export interface WeddingsSliceDefaultPrimary {
   background_color: prismic.KeyTextField;
 
   /**
-   * Text Color field in *AboutUs → Default → Primary*
+   * Text Color field in *TextSection → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: eg: "yellow-900" or "black"
@@ -1561,7 +1551,7 @@ export interface WeddingsSliceDefaultPrimary {
 }
 
 /**
- * Default variation for AboutUs Slice
+ * Default variation for TextSection Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -1574,12 +1564,12 @@ export type WeddingsSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *AboutUs*
+ * Slice variation for *TextSection*
  */
 type WeddingsSliceVariation = WeddingsSliceDefault;
 
 /**
- * AboutUs Shared Slice
+ * TextSection Shared Slice
  *
  * - **API ID**: `weddings`
  * - **Description**: Weddings

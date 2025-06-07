@@ -10,5 +10,5 @@ export const components = {
   repertoire: dynamic(() => import("./VinylPlayer")),
   testimonials: dynamic(() => import("./Testimonials")),
   the_repertoire: dynamic(() => import("./TheRepertoire")),
-  weddings: dynamic(() => import("./AboutUs")),
+  weddings: dynamic(() => import("./TextSection")),
 };

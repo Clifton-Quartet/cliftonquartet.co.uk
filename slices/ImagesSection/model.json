@@ -31,7 +31,7 @@
         "image_3": {
           "type": "Image",
           "config": {
-            "label": "Image 3",
+            "label": "Image 3 Desktop Only",
             "constraint": {},
             "thumbnails": []
           }

@@ -39,7 +39,6 @@ export type RepertoireProps = SliceComponentProps<Content.RepertoireSlice>;
 const Repertoire: FC<RepertoireProps> = ({ slice }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Timeline | null>(null);
-  const [isFlipped, setIsFlipped] = useState(false);
   const [currentSong, setCurrentSong] = useState<string | null>(null);
   const [isChangingSong, setIsChangingSong] = useState(false);
 
@@ -136,13 +135,10 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="relative min-h-[100vh] w-full overflow-hidden bg-cover bg-center flex flex-col justify-center items-center p-8 md:p-20"
+      className={`relative min-h-[100vh] w-full overflow-hidden bg-${slice.primary.background_color} bg-cover bg-center flex flex-col justify-center items-center p-8 md:p-20`}
       style={{
         backgroundImage: slice.primary.background_image
           ? `url(${slice.primary.background_image.url})`
-          : "",
-        backgroundColor: slice.primary.background_color
-          ? `${slice.primary.background_color}`
           : "",
       }}
     >
@@ -165,13 +161,17 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
       <div className="relative flex flex-col items-center w-full justify-center">
         <div className="lg:w-2/3">
           <SlideIn>
-            <h2 className="relative uppercase font-bold tracking-widest text-yellow-100 text-center text-4xl lg:text-6xl mb-6">
+            <h2
+              className={`relative uppercase font-bold tracking-widest text-${slice.primary.text_color} text-center text-4xl lg:text-6xl mb-6`}
+            >
               {slice.primary.title}
             </h2>
           </SlideIn>
           <div className="glass-bright p-10 mb-12 backdrop-blur-lg">
             <SlideIn>
-              <div className="relative font-sans text-yellow-100 text-center z-10 max-w-4xl text-xl mx-auto">
+              <div
+                className={`relative font-sans text-${slice.primary.text_color} text-center z-10 max-w-4xl text-xl mx-auto`}
+              >
                 <PrismicRichText field={slice.primary.text} />
               </div>
             </SlideIn>
@@ -179,7 +179,9 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
         </div>
 
         {/* Song Selection Buttons */}
-        <p className="text-2xl text-yellow-100 font-extralight font-sans mb-6 text-center">
+        <p
+          className={`text-2xl text-${slice.primary.text_color} font-extralight font-sans mb-6 text-center`}
+        >
           Select a song and press Start on the record player to play it
         </p>
         <div className="flex flex-wrap gap-4 mb-8 justify-center font-sans">
@@ -217,54 +219,6 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
               song={item.song}
             />
           ))}
-        </div>
-        <div
-          className="vinyl-container hidden md:block w-[26%] p-6 lg:p-20 lg:w-[30%] aspect-square mx-auto perspective-1000 cursor-pointer"
-          onMouseEnter={() => setIsFlipped(true)}
-          onMouseLeave={() => setIsFlipped(false)}
-        >
-          <div
-            className={
-              "relative w-full h-full transition-transform duration-700"
-            }
-            style={{
-              transformStyle: "preserve-3d",
-              transform: `rotateY(${isFlipped ? 180 : 0}deg) rotateZ(${isFlipped ? 3 : -12}deg)`,
-            }}
-          >
-            <div
-              className="vinyl-shadow absolute w-full h-full backface-hidden shadow-xl rounded-lg overflow-hidden bg-cover"
-              style={{
-                backgroundImage: `url(${slice.primary.vinyl_cover.url})`,
-                transform: "translateZ(6px)",
-                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.9)",
-              }}
-            ></div>
-
-            <div
-              className="vinyl-shadow absolute w-full h-full backface-hidden shadow-lg rounded-lg bg-cover text-white rotate-y-180 p-2 overflow-y-auto"
-              style={{
-                backgroundImage: `url(${slice.primary.vinyl_back.url})`,
-                transform: "rotateY(180deg) translateZ(6px)",
-                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.9)",
-              }}
-            >
-              <div className="p-1">
-                <p>Side A</p>
-                {items.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex text-sm xl:text-base w-1/2 font-sans"
-                  >
-                    <p className="mr-1">{index + 1}.</p>
-                    <p>
-                      {item.artist} {item.artist ? "-" : ""} {item.song}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

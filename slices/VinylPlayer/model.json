@@ -27,6 +27,13 @@
             "placeholder": "eg: \"yellow-900\""
           }
         },
+        "text_color": {
+          "type": "Text",
+          "config": {
+            "label": "Text Color",
+            "placeholder": "eg: \"yellow-100\""
+          }
+        },
         "title": {
           "type": "Text",
           "config": {
@@ -41,22 +48,6 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph,strong,em"
-          }
-        },
-        "vinyl_cover": {
-          "type": "Image",
-          "config": {
-            "label": "Vinyl Cover",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "vinyl_back": {
-          "type": "Image",
-          "config": {
-            "label": "Vinyl Back",
-            "constraint": {},
-            "thumbnails": []
           }
         },
         "repertoire_carousel": {

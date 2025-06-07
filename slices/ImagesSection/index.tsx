@@ -46,7 +46,7 @@ const ImagesSection: FC<ImagesSectionProps> = ({ slice }) => {
           <div></div>
         )}
         {slice.primary.image_3 ? (
-          <div className="w-full h-full">
+          <div className="w-full h-full hidden sm:block">
             <SlideIn>
               <PrismicNextImage
                 field={slice.primary.image_3}

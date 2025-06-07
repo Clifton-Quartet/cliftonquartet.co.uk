@@ -888,6 +888,16 @@ export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
  */
 export interface ImagesSectionSliceDefaultPrimary {
   /**
+   * Background Color field in *ImagesSection → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: eg: "yellow-900"
+   * - **API ID Path**: images_section.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  background_color: prismic.KeyTextField;
+
+  /**
    * Image 1 field in *ImagesSection → Default → Primary*
    *
    * - **Field Type**: Image
@@ -916,16 +926,6 @@ export interface ImagesSectionSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image_3: prismic.ImageField<never>;
-
-  /**
-   * Background Color field in *ImagesSection → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: eg: "yellow-900"
-   * - **API ID Path**: images_section.default.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  background_color: prismic.KeyTextField;
 }
 
 /**
@@ -1272,24 +1272,24 @@ export interface TestimonialsSliceDefaultPrimary {
   title: prismic.KeyTextField;
 
   /**
-   * Background Image field in *Testimonials → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.background_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  background_image: prismic.ImageField<never>;
-
-  /**
    * Background Color field in *Testimonials → Default → Primary*
    *
-   * - **Field Type**: Color
-   * - **Placeholder**: *None*
+   * - **Field Type**: Text
+   * - **Placeholder**: eg: "yellow-900"
    * - **API ID Path**: testimonials.default.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  background_color: prismic.ColorField;
+  background_color: prismic.KeyTextField;
+
+  /**
+   * Text Color field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: eg: "yellow-100"
+   * - **API ID Path**: testimonials.default.primary.text_color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text_color: prismic.KeyTextField;
 
   /**
    * Testimonial field in *Testimonials → Default → Primary*

@@ -45,18 +45,16 @@ const ImagesSection: FC<ImagesSectionProps> = ({ slice }) => {
         ) : (
           <div></div>
         )}
-        {slice.primary.image_3 ? (
-          <div className="w-full h-full hidden sm:block">
-            <SlideIn>
-              <PrismicNextImage
-                field={slice.primary.image_3}
-                className="aspect-video h-full w-full"
-              />
-            </SlideIn>
-          </div>
-        ) : (
-          <div></div>
-        )}
+        <div
+          className={`w-full h-full hidden ${slice.primary.image_3.url ? "sm:block" : ""}`}
+        >
+          <SlideIn>
+            <PrismicNextImage
+              field={slice.primary.image_3}
+              className="aspect-video h-full w-full"
+            />
+          </SlideIn>
+        </div>
       </div>
     </section>
   );

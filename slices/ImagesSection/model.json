@@ -12,6 +12,13 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Text",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "eg: \"yellow-900\""
+          }
+        },
         "image_1": {
           "type": "Image",
           "config": {
@@ -34,13 +41,6 @@
             "label": "Image 3 Desktop Only",
             "constraint": {},
             "thumbnails": []
-          }
-        },
-        "background_color": {
-          "type": "Text",
-          "config": {
-            "label": "Background Color",
-            "placeholder": "eg: \"yellow-900\""
           }
         }
       },

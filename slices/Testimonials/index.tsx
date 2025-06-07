@@ -16,13 +16,7 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-cover bg-center bg-no-repeat bg-white text-yellow-100 leading-loose tracking-wide min-h-[100vh] flex justify-center items-center"
-      style={{
-        backgroundImage: slice.primary.background_image
-          ? `url(${slice.primary.background_image.url})`
-          : undefined,
-        backgroundColor: slice.primary.background_color || undefined,
-      }}
+      className={`bg-cover bg-center bg-no-repeat bg-${slice.primary.background_color} text-${slice.primary.text_color} leading-loose tracking-wide min-h-[100vh] flex justify-center items-center`}
     >
       <div className="px-6 md:px-12 py-8 flex flex-col justify-center items-center">
         <SlideIn>

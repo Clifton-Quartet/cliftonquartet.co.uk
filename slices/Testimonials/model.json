@@ -19,19 +19,18 @@
             "placeholder": ""
           }
         },
-        "background_image": {
-          "type": "Image",
-          "config": {
-            "label": "Background Image",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
         "background_color": {
-          "type": "Color",
+          "type": "Text",
           "config": {
             "label": "Background Color",
-            "placeholder": ""
+            "placeholder": "eg: \"yellow-900\""
+          }
+        },
+        "text_color": {
+          "type": "Text",
+          "config": {
+            "label": "Text Color",
+            "placeholder": "eg: \"yellow-100\""
           }
         },
         "testimonial": {

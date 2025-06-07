@@ -40,33 +40,15 @@
 				"value": "suppose",
 				"type": "Text"
 			},
-			"background_image": {
-				"origin": {
-					"id": "main",
-					"url": "https://images.unsplash.com/photo-1593642633279-1796119d5482",
-					"width": 4016,
-					"height": 6016
-				},
-				"url": "https://images.unsplash.com/photo-1593642633279-1796119d5482",
-				"width": 4016,
-				"height": 6016,
-				"edit": {
-					"zoom": 1,
-					"crop": {
-						"x": 0,
-						"y": 0
-					},
-					"background": "transparent"
-				},
-				"alt": "poet",
-				"credits": null,
-				"__TYPE__": "ImageContent",
-				"thumbnails": {}
-			},
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "#588b38",
-				"type": "Color"
+				"value": "engineer",
+				"type": "Text"
+			},
+			"text_color": {
+				"__TYPE__": "FieldContent",
+				"value": "cannot",
+				"type": "Text"
 			}
 		},
 		"items": []

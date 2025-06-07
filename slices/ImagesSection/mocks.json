@@ -50,7 +50,6 @@
 				"thumbnails": {}
 			},
 			"image_3": {
-				"__TYPE__": "ImageContent",
 				"origin": {
 					"id": "main",
 					"url": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef",
@@ -69,6 +68,8 @@
 					"background": "transparent"
 				},
 				"alt": "basis",
+				"credits": null,
+				"__TYPE__": "ImageContent",
 				"thumbnails": {}
 			},
 			"background_color": {

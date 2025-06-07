@@ -18,19 +18,37 @@ const ImagesSection: FC<ImagesSectionProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div className="flex">
-        <div className="w-full h-full">
-          <PrismicNextImage
-            field={slice.primary.image_1}
-            className="aspect-video h-full w-full"
-          />
-        </div>
-        <div className="w-full h-full">
-          <PrismicNextImage
-            field={slice.primary.image_2}
-            className="aspect-video h-full w-full"
-          />
-        </div>
+      <div className="flex flex-col sm:flex-row">
+        {slice.primary.image_1 ? (
+          <div className="w-full h-full">
+            <PrismicNextImage
+              field={slice.primary.image_1}
+              className="aspect-video h-full w-full"
+            />
+          </div>
+        ) : (
+          <div></div>
+        )}
+        {slice.primary.image_2 ? (
+          <div className="w-full h-full">
+            <PrismicNextImage
+              field={slice.primary.image_2}
+              className="aspect-video h-full w-full"
+            />
+          </div>
+        ) : (
+          <div></div>
+        )}
+        {slice.primary.image_3 ? (
+          <div className="w-full h-full">
+            <PrismicNextImage
+              field={slice.primary.image_3}
+              className="aspect-video h-full w-full"
+            />
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </section>
   );

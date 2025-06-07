@@ -906,6 +906,16 @@ export interface ImagesSectionSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image_2: prismic.ImageField<never>;
+
+  /**
+   * Image 3 field in *ImagesSection → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: images_section.default.primary.image_3
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_3: prismic.ImageField<never>;
 }
 
 /**

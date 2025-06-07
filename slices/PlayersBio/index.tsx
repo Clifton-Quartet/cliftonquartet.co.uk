@@ -17,10 +17,7 @@ const PlayersBio: FC<PlayersBioProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="overflow-hidden font-sans leading-loose text-yellow-900"
-      style={{
-        backgroundColor: slice.primary.background_color || undefined,
-      }}
+      className={`overflow-hidden font-sans leading-loose bg-${slice.primary.background_color} text-${slice.primary.text_color}`}
     >
       <div className="min-h-[100vh] flex flex-col justify-center">
         <div className="p-8 lg:p-16">

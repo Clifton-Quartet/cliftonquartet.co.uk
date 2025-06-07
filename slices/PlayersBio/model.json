@@ -12,6 +12,20 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Text",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "eg: \"yellow-100\""
+          }
+        },
+        "text_color": {
+          "type": "Text",
+          "config": {
+            "label": "Text Color",
+            "placeholder": "eg: \"yellow-900\""
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {
@@ -28,21 +42,6 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph,strong,em"
-          }
-        },
-        "background_image": {
-          "type": "Image",
-          "config": {
-            "label": "Background Image",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "background_color": {
-          "type": "Color",
-          "config": {
-            "label": "Background Color",
-            "placeholder": ""
           }
         },
         "player_bio": {

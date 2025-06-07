@@ -998,6 +998,26 @@ export interface PlayersBioSliceDefaultPrimaryPlayerBioItem {
  */
 export interface PlayersBioSliceDefaultPrimary {
   /**
+   * Background Color field in *PlayersBio → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: eg: "yellow-100"
+   * - **API ID Path**: players_bio.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  background_color: prismic.KeyTextField;
+
+  /**
+   * Text Color field in *PlayersBio → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: eg: "yellow-900"
+   * - **API ID Path**: players_bio.default.primary.text_color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text_color: prismic.KeyTextField;
+
+  /**
    * Title field in *PlayersBio → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -1016,26 +1036,6 @@ export interface PlayersBioSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   sub_heading: prismic.RichTextField;
-
-  /**
-   * Background Image field in *PlayersBio → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: players_bio.default.primary.background_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  background_image: prismic.ImageField<never>;
-
-  /**
-   * Background Color field in *PlayersBio → Default → Primary*
-   *
-   * - **Field Type**: Color
-   * - **Placeholder**: *None*
-   * - **API ID Path**: players_bio.default.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#color
-   */
-  background_color: prismic.ColorField;
 
   /**
    * Player bio field in *PlayersBio → Default → Primary*

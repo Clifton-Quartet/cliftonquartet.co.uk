@@ -21,10 +21,10 @@
           }
         },
         "background_color": {
-          "type": "Color",
+          "type": "Text",
           "config": {
             "label": "Background Color",
-            "placeholder": ""
+            "placeholder": "eg: \"yellow-900\""
           }
         },
         "title": {

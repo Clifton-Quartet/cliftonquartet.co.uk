@@ -178,8 +178,8 @@
 			},
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "#014c05",
-				"type": "Color"
+				"value": "is",
+				"type": "Text"
 			}
 		},
 		"items": []

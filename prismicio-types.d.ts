@@ -916,6 +916,16 @@ export interface ImagesSectionSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image_3: prismic.ImageField<never>;
+
+  /**
+   * Background Color field in *ImagesSection → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: eg: "yellow-900"
+   * - **API ID Path**: images_section.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  background_color: prismic.KeyTextField;
 }
 
 /**
@@ -1122,12 +1132,12 @@ export interface RepertoireSliceDefaultPrimary {
   /**
    * Background Color field in *VinylPlayer → Default → Primary*
    *
-   * - **Field Type**: Color
-   * - **Placeholder**: *None*
+   * - **Field Type**: Text
+   * - **Placeholder**: eg: "yellow-900"
    * - **API ID Path**: repertoire.default.primary.background_color
-   * - **Documentation**: https://prismic.io/docs/field#color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  background_color: prismic.ColorField;
+  background_color: prismic.KeyTextField;
 
   /**
    * Title field in *VinylPlayer → Default → Primary*
@@ -1513,7 +1523,7 @@ export interface WeddingsSliceDefaultPrimary {
    * Right empty section color field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: yellow-100
+   * - **Placeholder**: eg: "yellow-100"
    * - **API ID Path**: weddings.default.primary.right_empty_section_color
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
@@ -1523,7 +1533,7 @@ export interface WeddingsSliceDefaultPrimary {
    * Left empty section color field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: yellow-900
+   * - **Placeholder**: eg: "yellow-900"
    * - **API ID Path**: weddings.default.primary.left_empty_section_color
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
@@ -1533,11 +1543,21 @@ export interface WeddingsSliceDefaultPrimary {
    * Background Color field in *AboutUs → Default → Primary*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: white
+   * - **Placeholder**: eg: "white" or "yellow-100"
    * - **API ID Path**: weddings.default.primary.background_color
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   background_color: prismic.KeyTextField;
+
+  /**
+   * Text Color field in *AboutUs → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: eg: "yellow-900" or "black"
+   * - **API ID Path**: weddings.default.primary.text_color
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text_color: prismic.KeyTextField;
 }
 
 /**

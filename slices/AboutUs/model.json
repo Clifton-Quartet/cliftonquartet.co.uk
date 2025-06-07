@@ -97,21 +97,28 @@
           "type": "Text",
           "config": {
             "label": "Right empty section color",
-            "placeholder": "yellow-100"
+            "placeholder": "eg: \"yellow-100\""
           }
         },
         "left_empty_section_color": {
           "type": "Text",
           "config": {
             "label": "Left empty section color",
-            "placeholder": "yellow-900"
+            "placeholder": "eg: \"yellow-900\""
           }
         },
         "background_color": {
           "type": "Text",
           "config": {
             "label": "Background Color",
-            "placeholder": "white"
+            "placeholder": "eg: \"white\" or \"yellow-100\""
+          }
+        },
+        "text_color": {
+          "type": "Text",
+          "config": {
+            "label": "Text Color",
+            "placeholder": "eg: \"yellow-900\" or \"black\""
           }
         }
       },

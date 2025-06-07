@@ -104,17 +104,22 @@
 			},
 			"right_empty_section_color": {
 				"__TYPE__": "FieldContent",
-				"value": "accurate",
+				"value": "specific",
 				"type": "Text"
 			},
 			"left_empty_section_color": {
 				"__TYPE__": "FieldContent",
-				"value": "gate",
+				"value": "respect",
 				"type": "Text"
 			},
 			"background_color": {
 				"__TYPE__": "FieldContent",
-				"value": "office",
+				"value": "combination",
+				"type": "Text"
+			},
+			"text_color": {
+				"__TYPE__": "FieldContent",
+				"value": "structure",
 				"type": "Text"
 			}
 		},

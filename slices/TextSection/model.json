@@ -12,6 +12,34 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_color": {
+          "type": "Text",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "eg: \"white\" or \"yellow-100\""
+          }
+        },
+        "text_color": {
+          "type": "Text",
+          "config": {
+            "label": "Text Color",
+            "placeholder": "eg: \"yellow-900\" or \"black\""
+          }
+        },
+        "right_empty_section_color": {
+          "type": "Text",
+          "config": {
+            "label": "Right empty section color",
+            "placeholder": "eg: \"yellow-100\""
+          }
+        },
+        "left_empty_section_color": {
+          "type": "Text",
+          "config": {
+            "label": "Left empty section color",
+            "placeholder": "eg: \"yellow-900\""
+          }
+        },
         "title": {
           "type": "StructuredText",
           "config": {
@@ -91,34 +119,6 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph,strong,em"
-          }
-        },
-        "right_empty_section_color": {
-          "type": "Text",
-          "config": {
-            "label": "Right empty section color",
-            "placeholder": "eg: \"yellow-100\""
-          }
-        },
-        "left_empty_section_color": {
-          "type": "Text",
-          "config": {
-            "label": "Left empty section color",
-            "placeholder": "eg: \"yellow-900\""
-          }
-        },
-        "background_color": {
-          "type": "Text",
-          "config": {
-            "label": "Background Color",
-            "placeholder": "eg: \"white\" or \"yellow-100\""
-          }
-        },
-        "text_color": {
-          "type": "Text",
-          "config": {
-            "label": "Text Color",
-            "placeholder": "eg: \"yellow-900\" or \"black\""
           }
         }
       },

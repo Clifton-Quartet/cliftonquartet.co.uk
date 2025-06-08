@@ -41,6 +41,7 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
   const animationRef = useRef<gsap.core.Timeline | null>(null);
   const [currentSong, setCurrentSong] = useState<string | null>(null);
   const [isChangingSong, setIsChangingSong] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   // Safely access the repertoire items with type assertion
   /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -48,7 +49,11 @@ const Repertoire: FC<RepertoireProps> = ({ slice }) => {
     ((slice.primary as any)?.repertoire_carousel as RepertoireItem[]) || [];
 
   useEffect(() => {
-    if (!containerRef.current || items.length === 0) return;
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted || !containerRef.current || items.length === 0) return;
 
     const container = containerRef.current;
     const itemWidth = 182; // Width of a single carousel item

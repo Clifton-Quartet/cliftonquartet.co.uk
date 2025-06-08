@@ -16,12 +16,12 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={`overflow-hidden min-h-full font-sans bg-${slice.primary.background_color}`}
+      className={`overflow-hidden min-h-full font-sans bg-${slice.primary.background_color} text-${slice.primary.text_color}`}
     >
       <div className="text-lg">
         <div className="lg:grid lg:grid-cols-4 2xl:grid-cols-5 leading-loose tracking-wide items-center">
           <div
-            className={`lg:col-span-3 bg-${slice.primary.background_color} text-${slice.primary.text_color} flex flex-col justify-center p-6 lg:p-16`}
+            className={`lg:col-span-3 bg-${slice.primary.background_color} flex flex-col justify-center p-6 lg:p-16`}
           >
             <SlideIn>
               <div className="font-serif uppercase font-bold tracking-widest text-3xl lg:text-5xl mb-4">
@@ -48,7 +48,7 @@ const Weddings: FC<WeddingsProps> = ({ slice }) => {
         </div>
         <div className="lg:grid lg:grid-cols-4 2xl:grid-cols-5 leading-loose tracking-wide items-center">
           <div
-            className={`order-2 lg:col-span-3 bg-${slice.primary.background_color} text-${slice.primary.text_color} flex flex-col justify-center p-6 lg:p-16`}
+            className={`order-2 lg:col-span-3 bg-${slice.primary.background_color} flex flex-col justify-center p-6 lg:p-16`}
           >
             {slice.primary.paragraph_4 ? (
               <div>

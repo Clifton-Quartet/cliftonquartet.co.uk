@@ -19,6 +19,7 @@ const PlayersBio: FC<PlayersBioProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className={`overflow-hidden font-sans leading-loose bg-${slice.primary.background_color} text-${slice.primary.text_color}`}
     >
+      <ContactForm />
       <div className="min-h-[100vh] flex flex-col justify-center">
         <div className="p-8 lg:p-16">
           <SlideIn>
@@ -53,7 +54,6 @@ const PlayersBio: FC<PlayersBioProps> = ({ slice }) => {
           ))}
         </div>
       </div>
-      <ContactForm />
     </section>
   );
 };

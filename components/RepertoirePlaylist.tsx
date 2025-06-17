@@ -76,6 +76,17 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       film_and_show: "",
     };
 
+    // Category priority order (lower number = higher priority)
+    const categoryPriority: Record<string, number> = {
+      "Rock & Pop": 1,
+      Beatles: 2,
+      "Popular Arrangements": 3,
+      "Jazz Classics": 4,
+      "Film and Show Songs": 5,
+      Rags: 6,
+      Classical: 7,
+    };
+
     if (repertoire) {
       repertoire.forEach((doc) => {
         const data = doc.data as RepertoireData;
@@ -99,7 +110,18 @@ const RepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       });
     }
 
-    return allSongs;
+    // Sort songs by category priority, then by title within each category
+    return allSongs.sort((a, b) => {
+      const priorityA = categoryPriority[a.category] || 999;
+      const priorityB = categoryPriority[b.category] || 999;
+
+      if (priorityA !== priorityB) {
+        return priorityA - priorityB;
+      }
+
+      // If same category, sort by title
+      return a.title.localeCompare(b.title);
+    });
   }, [repertoire]);
 
   const [searchTerm, setSearchTerm] = useState("");

@@ -59,6 +59,13 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       lighter_repertoire: "Lighter Repertoire",
     };
 
+    // Category priority order (lower number = higher priority)
+    const categoryPriority: Record<string, number> = {
+      "Popular Songs": 1,
+      "Lighter Repertoire": 2,
+      Classical: 3,
+    };
+
     if (trioRepertoire) {
       trioRepertoire.forEach((doc) => {
         const data = doc.data as RepertoireData;
@@ -81,7 +88,18 @@ const TrioRepertoirePlaylist: React.FC<RepertoirePlaylistProps> = ({
       });
     }
 
-    return allSongs;
+    // Sort songs by category priority, then by title within each category
+    return allSongs.sort((a, b) => {
+      const priorityA = categoryPriority[a.category] || 999;
+      const priorityB = categoryPriority[b.category] || 999;
+
+      if (priorityA !== priorityB) {
+        return priorityA - priorityB;
+      }
+
+      // If same category, sort by title
+      return a.title.localeCompare(b.title);
+    });
   }, [trioRepertoire]);
 
   const [searchTerm, setSearchTerm] = useState("");

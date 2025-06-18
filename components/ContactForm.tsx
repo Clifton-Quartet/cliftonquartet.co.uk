@@ -176,35 +176,6 @@ Date: ${new Date().toLocaleDateString()}
           </p>
         </div>
 
-        {status.type !== "idle" && (
-          <div
-            className={`mb-6 p-4 rounded-lg border ${
-              status.type === "success"
-                ? "bg-green-900/20 border-green-500 text-green-300"
-                : status.type === "error"
-                  ? "bg-red-900/20 border-red-500 text-red-300"
-                  : "bg-blue-900/20 border-blue-500 text-blue-300"
-            }`}
-          >
-            <div className="flex items-center gap-2">
-              {status.type === "loading" && (
-                <Loader2 className="animate-spin" size={20} />
-              )}
-              {status.type === "success" && <CheckCircle size={20} />}
-              {status.type === "error" && <AlertCircle size={20} />}
-              <span>{status.message}</span>
-            </div>
-            {status.type === "success" && (
-              <button
-                onClick={resetForm}
-                className="mt-2 text-sm underline hover:no-underline"
-              >
-                Send another message
-              </button>
-            )}
-          </div>
-        )}
-
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name Field */}
           <div>
@@ -360,6 +331,35 @@ Date: ${new Date().toLocaleDateString()}
               </>
             )}
           </button>
+
+          {status.type !== "idle" && (
+            <div
+              className={`my-6 p-4 rounded-lg border ${
+                status.type === "success"
+                  ? "bg-green-900/20 border-green-500 text-green-300"
+                  : status.type === "error"
+                    ? "bg-red-900/20 border-red-500 text-red-300"
+                    : "bg-blue-900/20 border-blue-500 text-blue-300"
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                {status.type === "loading" && (
+                  <Loader2 className="animate-spin" size={20} />
+                )}
+                {status.type === "success" && <CheckCircle size={20} />}
+                {status.type === "error" && <AlertCircle size={20} />}
+                <span>{status.message}</span>
+              </div>
+              {status.type === "success" && (
+                <button
+                  onClick={resetForm}
+                  className="mt-2 text-sm underline hover:no-underline"
+                >
+                  Send another message
+                </button>
+              )}
+            </div>
+          )}
         </form>
 
         <div className="border-t border-yellow-50/60 mt-6 pt-6 flex flex-col items-center">

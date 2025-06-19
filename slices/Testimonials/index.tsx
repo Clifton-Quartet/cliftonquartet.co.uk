@@ -24,16 +24,16 @@ const Testimonials: FC<TestimonialsProps> = ({ slice }) => {
             <p>{slice.primary.title}</p>
           </div>
         </SlideIn>
-        <div className="font-sans grid grid-cols-1 lg:grid-cols-2 gap-12 w-full justify-center items-start mt-12">
-          {slice.primary.testimonial.map((item, index) => (
-            <SlideIn key={index}>
-              <div className="text-lg lg:p-4">
+        <SlideIn>
+          <div className="font-sans grid grid-cols-1 lg:grid-cols-2 gap-12 w-full justify-center items-start mt-12">
+            {slice.primary.testimonial.map((item, index) => (
+              <div key={index} className="text-lg lg:p-4">
                 <PrismicRichText field={item.testimonial_message} />
                 <p className="italic text-sm mt-2">{item.author}</p>
               </div>
-            </SlideIn>
-          ))}
-        </div>
+            ))}
+          </div>
+        </SlideIn>
       </div>
     </section>
   );

@@ -120,11 +120,25 @@ body {
 .title-mobile {
   width: 190px;
   text-shadow: #111 1px 1px 25px;
+  font-family: var(--font-instrument-serif), serif;
+  font-size: clamp(4rem, 12vw, 9rem);
+  letter-spacing: -0.02em;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  contain: layout style paint;
+}
+
+@media screen and (min-width: 768px) {
+  .title-mobile {
+    width: 250px;
+  }
 }
 
 @media screen and (min-width: 900px) {
   .title-mobile {
-    width: 100%;
+    width: 90%;
+    line-height: 140px;
   }
 }
 

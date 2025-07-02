@@ -65,6 +65,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="h-dvh overflow-hidden relative"
+      style={{ contain: "layout" }}
     >
       <div
         ref={backgroundRef}

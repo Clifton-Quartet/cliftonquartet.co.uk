@@ -21,11 +21,51 @@ export async function generateMetadata(): Promise<Metadata> {
     .getSingle("weddings_and_events")
     .catch(() => notFound());
 
+  const metaImage = page.data.meta_image;
+  const imageUrl = metaImage ? asImageSrc(metaImage) : null;
+
   return {
     title: page.data.meta_title,
     description: page.data.meta_description,
+    authors: [{ name: "Clifton Quartet" }],
+    creator: "Clifton Quartet",
+    publisher: "Clifton Quartet",
+
     openGraph: {
-      images: [{ url: asImageSrc(page.data.meta_image) ?? "" }],
+      title: page.data.meta_title || undefined,
+      description: page.data.meta_description || undefined,
+      type: "website",
+      locale: "en_GB",
+      siteName: "Clifton Quartet",
+      images: imageUrl
+        ? [
+            {
+              url: imageUrl,
+              width: 1200,
+              height: 630,
+              alt: page.data.meta_title || "Clifton Quartet",
+            },
+          ]
+        : undefined,
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: page.data.meta_title || undefined,
+      description: page.data.meta_description || undefined,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
   };
 }

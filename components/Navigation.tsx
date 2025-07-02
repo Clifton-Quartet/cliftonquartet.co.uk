@@ -131,7 +131,7 @@ export function Navigation() {
   if (!settings) return null;
 
   return (
-    <ul className="" ref={navRef}>
+    <ul className="p-[22px]" ref={navRef}>
       {/* Use type assertion to access navigation array */}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       {(settings.data as any).navigation.map((item: any, index: number) => {

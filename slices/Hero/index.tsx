@@ -3,13 +3,24 @@
 import { FC, useEffect, useRef } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import { Navigation } from "@/components/Navigation";
 import { PrismicNextImage } from "@prismicio/next";
+import dynamic from "next/dynamic";
 
 /**
  * Props for `Hero`.
  */
 export type HeroProps = SliceComponentProps<Content.HeroSlice>;
+
+const DynamicNavigation = dynamic(
+  () =>
+    import("@/components/Navigation").then((mod) => ({
+      default: mod.Navigation,
+    })),
+  {
+    loading: () => null,
+    ssr: false,
+  }
+);
 
 /**
  * Component for "Hero" Slices.
@@ -93,8 +104,11 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       >
         {slice.primary.title}
       </div>
-      <div className="absolute -right-11 top-[30%] min-[440px]:top-[50%] -translate-y-[50%] z-10">
-        <Navigation />
+      <div
+        className="absolute -right-11 top-[30%] min-[440px]:top-[50%] -translate-y-[50%] z-10"
+        style={{ contentVisibility: "auto" }}
+      >
+        <DynamicNavigation />
       </div>
     </section>
   );

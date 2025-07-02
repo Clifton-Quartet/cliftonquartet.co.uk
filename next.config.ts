@@ -15,12 +15,6 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // Experimental features for performance
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ["gsap", "@prismicio/client", "@prismicio/react"],
-  },
-
   // Webpack optimizations
   webpack: (config, { isServer, dev }) => {
     // Only optimize in production

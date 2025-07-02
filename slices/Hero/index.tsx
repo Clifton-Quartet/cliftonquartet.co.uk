@@ -80,10 +80,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     >
       <div
         ref={backgroundRef}
-        className="relative h-full w-full bg-cover bg-no-repeat bg-center opacity-0"
-        style={{
-          backgroundImage: `url(${slice.primary.background_image.url})`,
-        }}
+        className="relative h-full w-full bg-cover bg-no-repeat bg-center"
       >
         <PrismicNextImage
           field={slice.primary.background_image}
@@ -98,9 +95,6 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       <div
         ref={titleRef}
         className="absolute title-mobile bottom-8 left-8 select-none text-yellow-100"
-        style={{
-          opacity: 0,
-        }}
       >
         {slice.primary.title}
       </div>

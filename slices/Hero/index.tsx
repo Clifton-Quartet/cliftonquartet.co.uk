@@ -3,7 +3,6 @@
 import { FC, useEffect, useRef } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import gsap from "gsap";
 import { Navigation } from "@/components/Navigation";
 import { PrismicNextImage } from "@prismicio/next";
 
@@ -21,30 +20,42 @@ const Hero: FC<HeroProps> = ({ slice }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    let tl: gsap.core.Timeline | null = null;
 
-    tl.fromTo(
-      backgroundRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 2 }
-    );
+    const initAnimation = async () => {
+      const { gsap } = await import("gsap/dist/gsap");
 
-    tl.fromTo(
-      titleRef.current,
-      {
-        y: 50,
+      gsap.set([backgroundRef.current, titleRef.current], {
         opacity: 0,
-      },
-      {
-        y: 0,
+        force3D: true,
+      });
+
+      gsap.set(titleRef.current, { y: 50 });
+
+      tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+      tl.to(backgroundRef.current, {
         opacity: 1,
-        duration: 2.5,
-      },
-      "-=0.8"
-    );
+        duration: 1.5,
+      });
+
+      tl.to(
+        titleRef.current,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.8,
+        },
+        "-=0.6"
+      );
+    };
+
+    initAnimation();
 
     return () => {
-      tl.kill();
+      if (tl) {
+        tl.kill();
+      }
     };
   }, []);
 
@@ -66,8 +77,8 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           field={slice.primary.background_image}
           fill
           className="object-cover"
-          priority
-          quality={85}
+          priority={true}
+          quality={75}
           sizes="100vw"
           fallbackAlt=""
         />

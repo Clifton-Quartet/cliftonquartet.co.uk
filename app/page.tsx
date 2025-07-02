@@ -30,6 +30,9 @@ export async function generateMetadata(): Promise<Metadata> {
     authors: [{ name: "Clifton Quartet" }],
     creator: "Clifton Quartet",
     publisher: "Clifton Quartet",
+    verification: {
+      google: "Lhvy3OTu-DeE70yBntLkPIeXP0z5G2LzbrBSllNMdNk",
+    },
 
     openGraph: {
       title: page.data.meta_title || undefined,

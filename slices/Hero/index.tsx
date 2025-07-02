@@ -5,6 +5,7 @@ import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import gsap from "gsap";
 import { Navigation } from "@/components/Navigation";
+import { PrismicNextImage } from "@prismicio/next";
 
 /**
  * Props for `Hero`.
@@ -60,7 +61,17 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         style={{
           backgroundImage: `url(${slice.primary.background_image.url})`,
         }}
-      ></div>
+      >
+        <PrismicNextImage
+          field={slice.primary.background_image}
+          fill
+          className="object-cover"
+          priority
+          quality={85}
+          sizes="100vw"
+          fallbackAlt=""
+        />
+      </div>
       <div
         ref={titleRef}
         className="absolute title-mobile bottom-8 left-8 text-8xl xl:text-9xl select-none text-yellow-100"

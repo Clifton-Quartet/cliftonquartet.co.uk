@@ -3,13 +3,24 @@
 import { FC, useEffect, useRef } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import gsap from "gsap";
-import { Navigation } from "@/components/Navigation";
+import { PrismicNextImage } from "@prismicio/next";
+import dynamic from "next/dynamic";
 
 /**
  * Props for `Hero`.
  */
 export type HeroProps = SliceComponentProps<Content.HeroSlice>;
+
+const DynamicNavigation = dynamic(
+  () =>
+    import("@/components/Navigation").then((mod) => ({
+      default: mod.Navigation,
+    })),
+  {
+    loading: () => null,
+    ssr: false,
+  }
+);
 
 /**
  * Component for "Hero" Slices.
@@ -20,30 +31,42 @@ const Hero: FC<HeroProps> = ({ slice }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    let tl: gsap.core.Timeline | null = null;
 
-    tl.fromTo(
-      backgroundRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 2 }
-    );
+    const initAnimation = async () => {
+      const { gsap } = await import("gsap/dist/gsap");
 
-    tl.fromTo(
-      titleRef.current,
-      {
-        y: 50,
+      gsap.set([backgroundRef.current, titleRef.current], {
         opacity: 0,
-      },
-      {
-        y: 0,
+        force3D: true,
+      });
+
+      gsap.set(titleRef.current, { y: 50 });
+
+      tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+      tl.to(backgroundRef.current, {
         opacity: 1,
-        duration: 2.5,
-      },
-      "-=0.8"
-    );
+        duration: 1.5,
+      });
+
+      tl.to(
+        titleRef.current,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.8,
+        },
+        "-=0.6"
+      );
+    };
+
+    initAnimation();
 
     return () => {
-      tl.kill();
+      if (tl) {
+        tl.kill();
+      }
     };
   }, []);
 
@@ -53,25 +76,33 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="h-dvh overflow-hidden relative"
+      style={{ contain: "layout" }}
     >
       <div
         ref={backgroundRef}
-        className="relative h-full w-full bg-cover bg-no-repeat bg-center opacity-0"
-        style={{
-          backgroundImage: `url(${slice.primary.background_image.url})`,
-        }}
-      ></div>
+        className="relative h-full w-full bg-cover bg-no-repeat bg-center"
+      >
+        <PrismicNextImage
+          field={slice.primary.background_image}
+          fill
+          className="object-cover"
+          priority={true}
+          quality={75}
+          sizes="100vw"
+          fallbackAlt=""
+        />
+      </div>
       <div
         ref={titleRef}
-        className="absolute title-mobile bottom-8 left-8 text-8xl xl:text-9xl select-none text-yellow-100"
-        style={{
-          opacity: 0,
-        }}
+        className="absolute title-mobile bottom-8 left-8 select-none text-yellow-100"
       >
         {slice.primary.title}
       </div>
-      <div className="absolute -right-11 top-[30%] min-[440px]:top-[50%] -translate-y-[50%] z-10">
-        <Navigation />
+      <div
+        className="absolute -right-11 top-[30%] min-[440px]:top-[50%] -translate-y-[50%] z-10"
+        style={{ contentVisibility: "auto" }}
+      >
+        <DynamicNavigation />
       </div>
     </section>
   );

@@ -351,9 +351,10 @@ export function VinylPlayer({
       if (song) {
         newAudio = new Audio(song);
       } else {
-        newAudio = new Audio("/Canon.mp3");
+        return;
       }
 
+      newAudio.preload = "none";
       newAudio.loop = false;
 
       // Set up event listeners for the new audio
@@ -391,6 +392,7 @@ export function VinylPlayer({
   useEffect(() => {
     if (typeof window !== "undefined" && !scratchAudioElement) {
       const scratchAudio = new Audio("/record_scratch.mp3");
+      scratchAudio.preload = "none";
       scratchAudio.loop = true;
       setScratchAudioElement(scratchAudio);
     }

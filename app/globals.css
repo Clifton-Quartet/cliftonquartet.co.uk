@@ -122,7 +122,7 @@ body {
   text-shadow: #111 1px 1px 25px;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 768px) {
   .title-mobile {
     width: 100%;
   }

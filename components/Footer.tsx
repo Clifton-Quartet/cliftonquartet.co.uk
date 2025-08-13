@@ -45,12 +45,12 @@ export default function Footer({ footerData }: FooterProps) {
         </div>
       </div>
       */}
-      <div className="relative grid grid-cols-1 lg:grid-cols-3 items-center p-4 bg-slate-900 font-sans">
+      <div className="relative grid grid-cols-1 lg:grid-cols-3 items-center p-4 bottom-2 bg-slate-900 font-sans">
         <div></div>
         <p className="text-center text-white text-sm">
           &copy; {new Date().getFullYear()} {footerData.footer_copyrights}
         </p>
-        <p className="text-center lg:text-right mt-2 lg:mt-0 text-white text-sm">
+        <p className="text-center lg:text-right my-2 lg:mt-0 text-white text-sm">
           Designed and Developed by{" "}
           <a
             href="https://www.sergiocorreia.dev"

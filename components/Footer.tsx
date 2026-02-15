@@ -18,33 +18,6 @@ export default function Footer({ footerData }: FooterProps) {
 
   return (
     <>
-      {/*
-      <div className="flex flex-col justify-center items-center bg-slate-900 p-10 font-sans">
-        <h3 className="text-3xl text-white text-center">
-          {footerData.contact_us_text}
-        </h3>
-        <div
-          className={`flex flex-col md:flex-row ${footerData.phone_number.text ? "gap-4 md:gap-8" : ""} mt-6`}
-        >
-          {footerData.phone_number.text ? (
-            <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
-              <PrismicNextLink
-                field={footerData.phone_number}
-                className="px-4 py-2 block w-full h-full"
-              />
-            </button>
-          ) : (
-            <div></div>
-          )}
-          <button className="bg-[#fcf2bd] rounded-lg hover:opacity-90 transition-colors cursor-pointer text-slate-900">
-            <PrismicNextLink
-              field={footerData.email}
-              className="px-4 py-2 block w-full h-full"
-            />
-          </button>
-        </div>
-      </div>
-      */}
       <div className="relative grid grid-cols-1 lg:grid-cols-3 items-center p-4 bottom-2 bg-slate-900 font-sans">
         <div></div>
         <p className="text-center text-white text-sm">

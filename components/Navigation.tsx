@@ -74,8 +74,9 @@ export function Navigation() {
       // Store event handler references to remove them later
       const enterHandlers: (() => void)[] = [];
       const leaveHandlers: (() => void)[] = [];
+      const currentNavItems = navItemsRef.current; // Capture ref value
 
-      navItemsRef.current.forEach((item, index) => {
+      currentNavItems.forEach((item, index) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const link = (settings.data as any).navigation[index].navigation_link;
         let itemLinkUrl = "/";
@@ -112,7 +113,7 @@ export function Navigation() {
 
       // Cleanup function
       return () => {
-        navItemsRef.current.forEach((item, index) => {
+        currentNavItems.forEach((item, index) => {
           if (enterHandlers[index])
             item.removeEventListener("mouseenter", enterHandlers[index]);
           if (leaveHandlers[index])

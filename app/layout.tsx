@@ -1,10 +1,21 @@
 import { Instrument_Serif, Inter } from "next/font/google";
+import type { Metadata } from "next";
 import "./globals.css";
 import { ReactLenis } from "@/utils/lenis";
 import Footer from "@/components/Footer";
 import { createClient } from "@/prismicio";
 import { Content } from "@prismicio/client";
 import PageTransitionOverlay from "@/components/PageTransitionOverlay";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Clifton Quartet",
+    default: "Clifton Quartet",
+  },
+  description:
+    "Professional string quartet and trio for weddings, events, and special occasions.",
+  metadataBase: new URL("https://cliftonquartet.co.uk"),
+};
 
 const instrumentSerif = Instrument_Serif({
   weight: "400",

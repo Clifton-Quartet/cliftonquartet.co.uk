@@ -39,16 +39,19 @@ export function VinylPlayer({
   const [needleState, setNeedleState] = useState<number>(0); // 0 = off, 1 = on record, 2 = manual handling
   const [volume, setVolume] = useState<number>(40);
   const [needleDrag, setNeedleDrag] = useState<boolean>(false);
-  const [recordScratch, setRecordScratch] = useState<boolean>(false);
   const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(
     null
   );
   const [scratchAudioElement, setScratchAudioElement] =
     useState<HTMLAudioElement | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  console.log(isLoading);
-  console.log(recordScratch);
+  // Ref to track current audio element for safe cleanup (avoids stale closures)
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Keep the ref in sync with the state
+  useEffect(() => {
+    audioRef.current = audioElement;
+  }, [audioElement]);
 
   // Constants
   const NEEDLE_SWINGDOW = 44 - 18; // 18 == outside edge of record, 44 == inside edge of record
@@ -329,63 +332,46 @@ export function VinylPlayer({
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const loadNewSong = async () => {
-      setIsLoading(true);
+    // Clean up existing audio via ref (avoids stale closure over audioElement state)
+    const previousAudio = audioRef.current;
+    if (previousAudio) {
+      previousAudio.pause();
+      previousAudio.src = "";
+    }
 
-      // Stop current playback
-      if (spinState === 1) {
-        stopPlayer();
-      }
+    if (!song) {
+      setAudioElement(null);
+      return;
+    }
 
-      // Clean up existing audio
-      if (audioElement) {
-        audioElement.pause();
-        audioElement.removeEventListener("loadedmetadata", () => {});
-        audioElement.removeEventListener("error", () => {});
-        audioElement.src = "";
-      }
 
-      // Load new song or default
-      let newAudio: HTMLAudioElement;
 
-      if (song) {
-        newAudio = new Audio(song);
-      } else {
-        return;
-      }
+    const newAudio = new Audio(song);
+    newAudio.preload = "none";
+    newAudio.loop = false;
 
-      newAudio.preload = "none";
-      newAudio.loop = false;
-
-      // Set up event listeners for the new audio
-      const handleLoadedMetadata = () => {
-        setIsLoading(false);
-      };
-
-      const handleError = (e: Event) => {
-        console.error("Audio error:", e);
-        setIsLoading(false);
-      };
-
-      newAudio.addEventListener("loadedmetadata", handleLoadedMetadata);
-      newAudio.addEventListener("error", handleError);
-
-      // Set the new audio element
-      setAudioElement(newAudio);
-
-      // Set volume on new audio
-      newAudio.volume = volume / 100;
+    // Set up event listeners with stored references for proper cleanup
+    const handleLoadedMetadata = () => {
     };
 
-    loadNewSong();
+    const handleError = (e: Event) => {
+      console.error("Audio error:", e);
+    };
 
-    // Cleanup function - clean up the audio when component unmounts or song changes
+    newAudio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    newAudio.addEventListener("error", handleError);
+
+    // Set the new audio element
+    setAudioElement(newAudio);
+    newAudio.volume = volume / 100;
+
     return () => {
-      if (audioElement) {
-        audioElement.pause();
-        audioElement.src = "";
-      }
+      newAudio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      newAudio.removeEventListener("error", handleError);
+      newAudio.pause();
+      newAudio.src = "";
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [song]); // Only depend on song, not audioElement to avoid infinite loops
 
   // Initialize scratch audio (only once)
@@ -404,7 +390,7 @@ export function VinylPlayer({
         scratchAudioElement.src = "";
       }
     };
-  }, []); // Empty dependency array for one-time initialization
+  }, [scratchAudioElement]);
 
   // Setup animations and draggables when component mounts
   useEffect(() => {
@@ -531,7 +517,6 @@ export function VinylPlayer({
         type: "rotation",
         inertia: false, // Disable inertia to avoid conflicts
         onDragStart: function () {
-          setRecordScratch(true);
           // Kill any existing animation instead of pausing it
           if (vinylTweenRef.current) {
             vinylTweenRef.current.kill();
@@ -567,7 +552,6 @@ export function VinylPlayer({
             scratchAudioElement.currentTime = 0;
             audioElement.play();
           }
-          setRecordScratch(false);
         },
       })[0];
     }
